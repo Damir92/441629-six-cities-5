@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дамир Масалимов](https://up.htmlacademy.ru/react/5/user/441629).
-* Наставник: `Неизвестно`.
+* Наставник: [Константин Антонов](https://up.htmlacademy.ru/react/5/user/175216).
 
 ---
 
