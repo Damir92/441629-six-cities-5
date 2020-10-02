@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import {ROUTES} from '../../const/routes';
+import {Routes} from '../../const/routes';
 
 import AuthPage from '../auth-page/auth-page';
 import FavoritesPage from '../favorites-page/favorites-page';
@@ -12,16 +12,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={ROUTES.MAIN}>
+        <Route exact path={Routes.MAIN}>
           <MainPage />
         </Route>
-        <Route exact path={ROUTES.LOGIN}>
+        <Route exact path={Routes.LOGIN}>
           <AuthPage />
         </Route>
-        <Route exact path={ROUTES.FAVORITES}>
+        <Route exact path={Routes.FAVORITES}>
           <FavoritesPage />
         </Route>
-        <Route exact path={ROUTES.OFFER_PAGE}>
+        <Route exact path={Routes.OFFER_PAGE}>
           <OfferPage />
         </Route>
       </Switch>
