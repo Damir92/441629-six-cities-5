@@ -1,7 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const MainPage = ({offersCount}) => {
+const OFFERS_COUNT = 123;
+
+const MainPage = () => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -69,7 +70,7 @@ const MainPage = ({offersCount}) => {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{OFFERS_COUNT} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -267,10 +268,6 @@ const MainPage = ({offersCount}) => {
       </main>
     </div>
   );
-};
-
-MainPage.propTypes = {
-  offersCount: PropTypes.number.isRequired,
 };
 
 export default MainPage;
