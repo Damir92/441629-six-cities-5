@@ -1,14 +1,16 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import {Routes} from '../../const/routes';
+import {offerPropTypes} from '../../prop-types';
 
 import AuthPage from '../auth-page/auth-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import MainPage from '../main-page/main-page';
 import OfferPage from '../offer-page/offer-page';
 
-const App = () => {
+const App = ({offers}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -27,6 +29,12 @@ const App = () => {
       </Switch>
     </BrowserRouter>
   );
+};
+
+App.propTypes = {
+  offers: PropTypes.arrayOf(
+    PropTypes.shape(offerPropTypes).isRequired
+  ).isRequired,
 };
 
 export default App;
