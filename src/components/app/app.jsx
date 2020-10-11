@@ -10,12 +10,6 @@ import MainPage from '../main-page/main-page';
 import OfferPage from '../offer-page/offer-page';
 
 const App = () => {
-  const getOffer = (pathname) => {
-    const id = +pathname.replace(Routes.OFFER_LINK, ``);
-
-    return offers.find((item) => item.id === id);
-  };
-
   return (
     <BrowserRouter>
       <Switch>
@@ -33,9 +27,9 @@ const App = () => {
         <Route
           exact
           path={Routes.OFFER_PAGE}
-          render={({history}) => (
+          render={({match}) => (
             <OfferPage
-              offer={getOffer(history.location.pathname)}
+              offer={offers.find((item) => item.id === +match.params.id)}
             />
           )}
         />

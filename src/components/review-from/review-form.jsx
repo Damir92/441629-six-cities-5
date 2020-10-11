@@ -6,12 +6,12 @@ const ReviewForm = () => {
 
   const handleChangeRating = (evt) => {
     const value = evt.target.value;
-    setRating(() => value);
+    setRating(value);
   };
 
   const handleChangeText = (evt) => {
     const value = evt.target.value;
-    setText(() => value);
+    setText(value);
   };
 
   return (

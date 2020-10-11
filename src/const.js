@@ -1,9 +1,11 @@
+export const PERCENT_PER_POINT_RATING = 20;
+
 export const Routes = {
   MAIN: `/`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   OFFER_PAGE: `/offer/:id`,
-  OFFER_LINK: `/offer/`,
+  OFFER_LINK: `/offer`,
 };
 
 export const Cities = [

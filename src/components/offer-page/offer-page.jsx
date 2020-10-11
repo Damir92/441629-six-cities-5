@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {LivingType} from '../../const';
+import {LivingType, PERCENT_PER_POINT_RATING} from '../../const';
 import {OfferPagePropTypes} from '../../prop-types';
 
 import ReviewForm from '../review-from/review-form';
@@ -22,6 +22,8 @@ const OfferPage = ({offer = {}}) => {
     title,
     type,
   } = offer;
+
+  const convertRatingToPercent = (value) => `${Math.round(value) * PERCENT_PER_POINT_RATING}%`;
 
   return (
     <div className="page">
@@ -93,7 +95,7 @@ const OfferPage = ({offer = {}}) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: Math.round(rating) * 20 + `%`}}></span>
+                  <span style={{width: convertRatingToPercent(rating)}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{rating}</span>

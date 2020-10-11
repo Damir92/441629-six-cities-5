@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {LivingType, Routes} from '../../const';
+import {LivingType, Routes, PERCENT_PER_POINT_RATING} from '../../const';
 import {OfferCardPropTypes} from '../../prop-types';
 
 const OfferCard = ({offer = {}, onMouseEnterCard}) => {
@@ -17,6 +17,8 @@ const OfferCard = ({offer = {}, onMouseEnterCard}) => {
     title,
     type,
   } = offer;
+
+  const convertRatingToPercent = (value) => `${Math.round(value) * PERCENT_PER_POINT_RATING}%`;
 
   const handleMouseEnterCard = () => {
     onMouseEnterCard(offer);
@@ -64,14 +66,14 @@ const OfferCard = ({offer = {}, onMouseEnterCard}) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: Math.round(rating) * 20 + `%`}}></span>
+            <span style={{width: convertRatingToPercent(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
 
           <Link
-            to={Routes.OFFER_LINK + id}
+            to={`${Routes.OFFER_LINK}/${id}`}
           >
             {title}
           </Link>
