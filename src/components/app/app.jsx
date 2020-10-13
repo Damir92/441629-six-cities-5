@@ -1,7 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import {Routes} from '../../const/routes';
+import {Routes} from '../../const';
+import {offers} from '../../mocks/offers';
 
 import AuthPage from '../auth-page/auth-page';
 import FavoritesPage from '../favorites-page/favorites-page';
@@ -13,7 +14,9 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path={Routes.MAIN}>
-          <MainPage />
+          <MainPage
+            offers={offers}
+          />
         </Route>
         <Route exact path={Routes.LOGIN}>
           <AuthPage />
@@ -21,9 +24,11 @@ const App = () => {
         <Route exact path={Routes.FAVORITES}>
           <FavoritesPage />
         </Route>
-        <Route exact path={Routes.OFFER_PAGE}>
-          <OfferPage />
-        </Route>
+        <Route
+          exact
+          path={Routes.OFFER_PAGE}
+          component={OfferPage}
+        />
       </Switch>
     </BrowserRouter>
   );
