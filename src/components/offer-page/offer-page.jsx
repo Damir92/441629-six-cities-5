@@ -1,13 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
+import {Link, useRouteMatch} from 'react-router-dom';
 
-import {LivingType, PERCENT_PER_POINT_RATING} from '../../const';
-import {OfferPagePropTypes} from '../../prop-types';
+import {LivingType, Routes, PERCENT_PER_POINT_RATING} from '../../const';
+import {offers} from '../../mocks/offers';
 
 import ReviewForm from '../review-from/review-form';
 
-const OfferPage = ({offer = {}}) => {
+const OfferPage = () => {
+  const match = useRouteMatch(Routes.OFFER_PAGE);
+  const offer = offers.find((item) => item.id === +match.params.id) || offers[0];
+
   const {
     bedrooms,
     description,
@@ -283,10 +285,6 @@ const OfferPage = ({offer = {}}) => {
       </main>
     </div>
   );
-};
-
-OfferPage.propTypes = {
-  offer: PropTypes.shape(OfferPagePropTypes).isRequired,
 };
 
 export default OfferPage;

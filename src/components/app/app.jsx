@@ -27,11 +27,7 @@ const App = () => {
         <Route
           exact
           path={Routes.OFFER_PAGE}
-          render={({match}) => (
-            <OfferPage
-              offer={offers.find((item) => item.id === +match.params.id)}
-            />
-          )}
+          render={() => (<OfferPage />)}
         />
       </Switch>
     </BrowserRouter>
