@@ -27,7 +27,7 @@ const App = () => {
         <Route
           exact
           path={Routes.OFFER_PAGE}
-          render={() => (<OfferPage />)}
+          component={OfferPage}
         />
       </Switch>
     </BrowserRouter>

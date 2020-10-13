@@ -1,13 +1,12 @@
 import React from 'react';
-import {Link, useRouteMatch} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {LivingType, Routes, PERCENT_PER_POINT_RATING} from '../../const';
 import {offers} from '../../mocks/offers';
 
 import ReviewForm from '../review-from/review-form';
 
-const OfferPage = () => {
-  const match = useRouteMatch(Routes.OFFER_PAGE);
+const OfferPage = ({match}) => {
   const offer = offers.find((item) => item.id === +match.params.id) || offers[0];
 
   const {
