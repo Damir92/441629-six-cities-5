@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {offerPropTypes} from '../../prop-types';
 
 import OffersList from '../offers-list/offers-list';
+import OffersMap from '../offers-map/offers-map';
 
 const MainPage = ({offers = []}) => {
   return (
@@ -102,7 +103,11 @@ const MainPage = ({offers = []}) => {
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <OffersMap
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>
