@@ -60,7 +60,7 @@ const OffersMap = ({offers = []}) => {
       }
     });
 
-  }, []);
+  }, [offers]);
 
   return (
     <div
