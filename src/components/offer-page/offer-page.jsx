@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import {LivingType, Routes, PERCENT_PER_POINT_RATING} from '../../const';
+import {LivingType, PERCENT_PER_POINT_RATING} from '../../const';
 import {offers} from '../../mocks/offers';
 
 import ReviewForm from '../review-from/review-form';
@@ -284,6 +285,10 @@ const OfferPage = ({match}) => {
       </main>
     </div>
   );
+};
+
+OfferPage.propTypes = {
+  match: PropTypes.object.isRequired,
 };
 
 export default OfferPage;
