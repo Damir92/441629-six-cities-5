@@ -5,7 +5,7 @@ import {offerPropTypes} from '../../prop-types';
 
 import OfferCard from '../offer-card/offer-card';
 
-const OffersList = ({offers = []}) => {
+const OffersList = ({offers = [], isMainPage = true}) => {
   // eslint-disable-next-line
   const [activeCard, setActiveCard] = useState(null);
 
@@ -14,10 +14,11 @@ const OffersList = ({offers = []}) => {
   };
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={`places__list ${isMainPage ? `cities__places-list tabs__content` : `near-places__list`}`}>
       {offers.map((offer) => (
         <OfferCard
           key={offer.id}
+          isMainPage={isMainPage}
           offer={offer}
           onMouseEnterCard={handleMouseEnterCard}
         />
@@ -30,6 +31,7 @@ OffersList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
+  isMainPage: PropTypes.bool.isRequired,
 };
 
 export default OffersList;

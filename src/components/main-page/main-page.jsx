@@ -99,6 +99,7 @@ const MainPage = ({offers = []}) => {
 
               <OffersList
                 offers={offers}
+                isMainPage={true}
               />
 
             </section>

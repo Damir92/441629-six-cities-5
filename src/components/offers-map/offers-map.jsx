@@ -60,6 +60,11 @@ const OffersMap = ({offers = []}) => {
       }
     });
 
+    return () => {
+      map.off();
+      map.remove();
+      map = null;
+    };
   }, [offers]);
 
   return (

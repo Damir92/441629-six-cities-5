@@ -2,10 +2,11 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {LivingType, Routes, PERCENT_PER_POINT_RATING} from '../../const';
+import {LivingType, Routes} from '../../const';
 import {OfferCardPropTypes} from '../../prop-types';
+import {convertRatingToPercent} from '../../functions';
 
-const OfferCard = ({offer = {}, onMouseEnterCard}) => {
+const OfferCard = ({offer = {}, onMouseEnterCard, isMainPage = true}) => {
 
   const {
     id,
@@ -18,8 +19,6 @@ const OfferCard = ({offer = {}, onMouseEnterCard}) => {
     type,
   } = offer;
 
-  const convertRatingToPercent = (value) => `${Math.round(value) * PERCENT_PER_POINT_RATING}%`;
-
   const handleMouseEnterCard = () => {
     onMouseEnterCard(offer);
   };
@@ -30,7 +29,7 @@ const OfferCard = ({offer = {}, onMouseEnterCard}) => {
 
   return (
     <article
-      className="cities__place-card place-card"
+      className={`place-card ${isMainPage ? `cities__place-card` : `near-places__card`}`}
       onMouseEnter={handleMouseEnterCard}
       onMouseLeave={handleMouseLeaveCard}
     >
@@ -41,7 +40,7 @@ const OfferCard = ({offer = {}, onMouseEnterCard}) => {
           <span>Premium</span>
         </div>
       }
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`place-card__image-wrapper ${isMainPage ? `cities__image-wrapper` : `near-places__image-wrapper`}`}>
         <a href="#">
           <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
         </a>
@@ -87,6 +86,7 @@ const OfferCard = ({offer = {}, onMouseEnterCard}) => {
 OfferCard.propTypes = {
   offer: PropTypes.shape(OfferCardPropTypes).isRequired,
   onMouseEnterCard: PropTypes.func.isRequired,
+  isMainPage: PropTypes.bool.isRequired,
 };
 
 export default OfferCard;
