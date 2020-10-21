@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {ReviewPropTypes} from '../../prop-types';
-import {convertRatingToPercent} from '../../functions';
+import {convertRatingToPercent} from '../../utils';
 
 const ReviewItem = ({review = {}}) => {
   const {

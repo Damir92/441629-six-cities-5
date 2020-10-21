@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {LivingType} from '../../const';
-import {convertRatingToPercent} from '../../functions';
+import {convertRatingToPercent} from '../../utils';
 
 import {offers} from '../../mocks/offers';
 import {reviews} from '../../mocks/reviews';

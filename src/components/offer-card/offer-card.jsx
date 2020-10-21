@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import {LivingType, Routes} from '../../const';
 import {OfferCardPropTypes} from '../../prop-types';
-import {convertRatingToPercent} from '../../functions';
+import {convertRatingToPercent} from '../../utils';
 
 const OfferCard = ({offer = {}, onMouseEnterCard, isMainPage = true}) => {
 
