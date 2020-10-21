@@ -6,8 +6,6 @@ import {offerPropTypes} from '../../prop-types';
 import 'leaflet/dist/leaflet.css';
 
 const OffersMap = ({offers = []}) => {
-  let map = null;
-
   const LeafletIcon = leaflet.Icon.extend({
     options: {
       iconSize: [27, 39],
@@ -22,7 +20,39 @@ const OffersMap = ({offers = []}) => {
   //   iconUrl: `img/pin-active.svg`,
   // });
 
+  const mapElementRef = useRef(null);
   const mapRef = useRef(null);
+  const mapPinsRef = useRef([]);
+
+  const removePins = () => {
+    if (mapPinsRef.current.length) {
+      mapPinsRef.current.forEach((marker) => {
+        mapRef.current.removeLayer(marker);
+      });
+      mapPinsRef.current = [];
+    }
+  };
+
+  React.useEffect(() => {
+    mapRef.current = leaflet.map(`map`, {
+      center: [0, 0],
+      zoom: 0,
+      zoomControl: false,
+      marker: true,
+    });
+
+    leaflet
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      })
+      .addTo(mapRef.current);
+
+    return () => {
+      mapRef.current.off();
+      mapRef.current.remove();
+      mapRef.current = null;
+    };
+  }, []);
 
   useEffect(() => {
     if (!offers.length) {
@@ -37,35 +67,25 @@ const OffersMap = ({offers = []}) => {
 
     const cityCoordinates = [cityLocation.latitude, cityLocation.longitude];
 
-    map = leaflet.map(`map`, {
-      center: cityCoordinates,
-      zoom: cityLocation.zoom,
-      zoomControl: false,
-      marker: true,
-    });
+    mapRef.current.setView(cityCoordinates, cityLocation.zoom);
 
-    map.setView(cityCoordinates, cityLocation.zoom);
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(map);
+    removePins();
 
     offers.forEach((offer) => {
       if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
-        leaflet
-          .marker([offer.location.latitude, offer.location.longitude], {icon: regularIcon})
-          .addTo(map);
+        mapPinsRef.current.push(
+            leaflet
+            .marker([offer.location.latitude, offer.location.longitude], {icon: regularIcon})
+            .addTo(mapRef.current)
+        );
       }
     });
-
   }, [offers]);
 
   return (
     <div
       id="map"
-      ref={mapRef}
+      ref={mapElementRef}
       style={{height: `100%`}}
     ></div>
   );

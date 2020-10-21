@@ -67,3 +67,13 @@ export const OfferPagePropTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.keys(LivingType)).isRequired,
 };
+
+export const ReviewPropTypes = {
+  id: PropTypes.number.isRequired,
+  avatar: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  dateHuman: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+};
