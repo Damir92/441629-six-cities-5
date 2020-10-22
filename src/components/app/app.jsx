@@ -2,7 +2,6 @@ import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import {Routes} from '../../const';
-import {offers} from '../../mocks/offers';
 
 import AuthPage from '../auth-page/auth-page';
 import FavoritesPage from '../favorites-page/favorites-page';
@@ -14,9 +13,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path={Routes.MAIN}>
-          <MainPage
-            offers={offers}
-          />
+          <MainPage />
         </Route>
         <Route exact path={Routes.LOGIN}>
           <AuthPage />
