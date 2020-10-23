@@ -1,6 +1,7 @@
 import {offers} from '../mocks/offers';
 import {ActionType} from './action';
 import {Cities} from '../const';
+import {updateObject} from '../utils';
 
 const initialState = {
   city: Cities[0],
@@ -10,17 +11,15 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.SET_CITY:
-      return {
-        ...state,
+      return updateObject(state, {
         city: action.payload,
         offers: offers[action.payload],
-      };
+      });
 
     case ActionType.GET_OFFERS:
-      return {
-        ...state,
+      return updateObject(state, {
         offers: offers[state.city],
-      };
+      });
   }
 
   return state;
