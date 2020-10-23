@@ -31,7 +31,7 @@ OffersList.propTypes = {
   offers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
-  isMainPage: PropTypes.bool.isRequired,
+  isMainPage: PropTypes.bool,
 };
 
 export default OffersList;

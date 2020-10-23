@@ -1,11 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {offerPropTypes} from '../../prop-types';
 import {LivingType} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
-import {offers} from '../../mocks/offers';
 import {reviews} from '../../mocks/reviews';
 
 import ReviewsList from '../reviews-list/reviews-list';
@@ -13,7 +14,7 @@ import ReviewForm from '../review-from/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match}) => {
+const OfferPage = ({match, offers}) => {
   const offer = offers.find((item) => item.id === +match.params.id) || offers[0];
   const nearestOffers = offers.slice(0, 3);
 
@@ -189,6 +190,12 @@ const OfferPage = ({match}) => {
 
 OfferPage.propTypes = {
   match: PropTypes.object.isRequired,
+  offers: PropTypes.arrayOf(
+      PropTypes.shape(offerPropTypes).isRequired
+  ).isRequired,
 };
 
-export default OfferPage;
+const mapStateToProps = ({offers}) => ({offers});
+
+export {OfferPage};
+export default connect(mapStateToProps)(OfferPage);
