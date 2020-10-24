@@ -1,11 +1,12 @@
 import React, {useEffect, useRef} from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 import {offerPropTypes} from '../../prop-types';
 import 'leaflet/dist/leaflet.css';
 
-const OffersMap = ({offers = []}) => {
+const OffersMap = ({offers = [], activeCard}) => {
   const LeafletIcon = leaflet.Icon.extend({
     options: {
       iconSize: [27, 39],
@@ -16,9 +17,9 @@ const OffersMap = ({offers = []}) => {
     iconUrl: `img/pin.svg`,
   });
 
-  // const activeIcon = new LeafletIcon({
-  //   iconUrl: `img/pin-active.svg`,
-  // });
+  const activeIcon = new LeafletIcon({
+    iconUrl: `img/pin-active.svg`,
+  });
 
   const mapElementRef = useRef(null);
   const mapRef = useRef(null);
@@ -82,6 +83,20 @@ const OffersMap = ({offers = []}) => {
     });
   }, [offers]);
 
+  useEffect(() => {
+    removePins();
+
+    offers.forEach((offer) => {
+      if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
+        mapPinsRef.current.push(
+            leaflet
+            .marker([offer.location.latitude, offer.location.longitude], {icon: offer.id === activeCard ? activeIcon : regularIcon})
+            .addTo(mapRef.current)
+        );
+      }
+    });
+  }, [activeCard]);
+
   return (
     <div
       id="map"
@@ -92,9 +107,13 @@ const OffersMap = ({offers = []}) => {
 };
 
 OffersMap.propTypes = {
+  activeCard: PropTypes.number,
   offers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
 };
 
-export default OffersMap;
+const mapStateToProps = ({activeCard}) => ({activeCard});
+
+export {OffersMap};
+export default connect(mapStateToProps)(OffersMap);

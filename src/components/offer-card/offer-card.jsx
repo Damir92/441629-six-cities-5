@@ -1,12 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+
+import {setActiveCard} from '../../store/action';
+import {convertRatingToPercent} from '../../utils';
 
 import {LivingType, Routes} from '../../const';
 import {OfferCardPropTypes} from '../../prop-types';
-import {convertRatingToPercent} from '../../utils';
 
-const OfferCard = ({offer = {}, onMouseEnterCard, isMainPage = true}) => {
+const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
 
   const {
     id,
@@ -20,11 +23,11 @@ const OfferCard = ({offer = {}, onMouseEnterCard, isMainPage = true}) => {
   } = offer;
 
   const handleMouseEnterCard = () => {
-    onMouseEnterCard(offer);
+    onCardEnterMouse(offer.id);
   };
 
   const handleMouseLeaveCard = () => {
-    onMouseEnterCard(null);
+    onCardEnterMouse(null);
   };
 
   return (
@@ -84,9 +87,16 @@ const OfferCard = ({offer = {}, onMouseEnterCard, isMainPage = true}) => {
 };
 
 OfferCard.propTypes = {
-  offer: PropTypes.shape(OfferCardPropTypes).isRequired,
-  onMouseEnterCard: PropTypes.func.isRequired,
   isMainPage: PropTypes.bool.isRequired,
+  offer: PropTypes.shape(OfferCardPropTypes).isRequired,
+  onCardEnterMouse: PropTypes.func.isRequired,
 };
 
-export default OfferCard;
+const mapStateToProps = ({}) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCardEnterMouse: (id) => dispatch(setActiveCard(id)),
+});
+
+export {OfferCard};
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
