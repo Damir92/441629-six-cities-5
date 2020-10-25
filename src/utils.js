@@ -7,13 +7,13 @@ export const updateObject = (a, b) => Object.assign({}, a, b);
 export const sortOffers = (offers, type) => {
   switch (type) {
     case Sorting.PRICE_TO_HIGH:
-      return offers.slice().sort((a, b) => (a.price - b.price));
+      return [...offers.sort((a, b) => (a.price - b.price))];
 
     case Sorting.PRICE_TO_LOW:
-      return offers.slice().sort((a, b) => (b.price - a.price));
+      return [...offers.sort((a, b) => (b.price - a.price))];
 
     case Sorting.TOP_RATED:
-      return offers.slice().sort((a, b) => (b.rating - b.rating));
+      return [...offers.sort((a, b) => (b.rating - a.rating))];
 
     default:
       return offers;
