@@ -1,22 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {setSortingTypeAction} from '../../store/action';
-
 import {SortingTypes, SortingTitles} from '../../const';
 
-const OffersSorting = ({sortingType, onSortingClick}) => {
-  const [openedList, setOpenedList] = useState(false);
+const OffersSorting = ({openedList, onOptionClick, onOpenList, sortingType}) => {
+  // const [openedList, setOpenedList] = useState(false);
 
-  const handleStartSorting = () => {
-    setOpenedList((prev) => !prev);
-  };
+  // const handleOpenList = () => {
+  //   setOpenedList((prev) => !prev);
+  // };
 
-  const handleSortingTypeClick = (value) => {
-    onSortingClick(value);
-    setOpenedList(false);
-  };
+  // const handleSortingTypeClick = (value) => {
+  //   onSortingClick(value);
+  //   setOpenedList(false);
+  // };
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -24,7 +22,7 @@ const OffersSorting = ({sortingType, onSortingClick}) => {
       <span
         className="places__sorting-type"
         tabIndex="0"
-        onClick={handleStartSorting}
+        onClick={onOpenList}
       >
         {SortingTitles[sortingType]}
         <svg className="places__sorting-arrow" width="7" height="4">
@@ -37,7 +35,7 @@ const OffersSorting = ({sortingType, onSortingClick}) => {
             key={item}
             className={`places__option ${item === sortingType ? `places__option--active` : ``}`}
             tabIndex="0"
-            onClick={() => handleSortingTypeClick(item)}
+            onClick={() => onOptionClick(item)}
           >
             {SortingTitles[item]}
           </li>
@@ -64,15 +62,17 @@ const OffersSorting = ({sortingType, onSortingClick}) => {
 };
 
 OffersSorting.propTypes = {
+  openedList: PropTypes.bool.isRequired,
+  onOptionClick: PropTypes.func.isRequired,
+  onOpenList: PropTypes.func.isRequired,
   sortingType: PropTypes.string.isRequired,
-  onSortingClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({sortingType}) => ({sortingType});
 
-const mapDispatchToProps = (dispatch) => ({
-  onSortingClick: (sortingType) => dispatch(setSortingTypeAction(sortingType)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onSortingClick: (sortingType) => dispatch(setSortingTypeAction(sortingType)),
+// });
 
 export {OffersSorting};
-export default connect(mapStateToProps, mapDispatchToProps)(OffersSorting);
+export default connect(mapStateToProps)(OffersSorting);

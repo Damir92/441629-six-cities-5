@@ -1,19 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const ReviewForm = () => {
-  const [rating, setRating] = useState(``);
-  const [text, setText] = useState(``);
-
-  const handleChangeRating = (evt) => {
-    const value = evt.target.value;
-    setRating(value);
-  };
-
-  const handleChangeText = (evt) => {
-    const value = evt.target.value;
-    setText(value);
-  };
-
+const ReviewForm = ({rating, text, onRatingChange, onTextChange}) => {
   return (
     <form
       className="reviews__form form"
@@ -28,7 +16,7 @@ const ReviewForm = () => {
           value="5"
           id="5-stars"
           type="radio"
-          onChange={handleChangeRating}
+          onChange={onRatingChange}
           checked={rating === `5`}
         />
         <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
@@ -43,7 +31,7 @@ const ReviewForm = () => {
           value="4"
           id="4-stars"
           type="radio"
-          onChange={handleChangeRating}
+          onChange={onRatingChange}
           checked={rating === `4`}
         />
         <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
@@ -58,7 +46,7 @@ const ReviewForm = () => {
           value="3"
           id="3-stars"
           type="radio"
-          onChange={handleChangeRating}
+          onChange={onRatingChange}
           checked={rating === `3`}
         />
         <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
@@ -73,7 +61,7 @@ const ReviewForm = () => {
           value="2"
           id="2-stars"
           type="radio"
-          onChange={handleChangeRating}
+          onChange={onRatingChange}
           checked={rating === `2`}
         />
         <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
@@ -88,7 +76,7 @@ const ReviewForm = () => {
           value="1"
           id="1-star"
           type="radio"
-          onChange={handleChangeRating}
+          onChange={onRatingChange}
           checked={rating === `1`}
         />
         <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
@@ -103,7 +91,7 @@ const ReviewForm = () => {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        onChange={handleChangeText}
+        onChange={onTextChange}
         value={text}
       ></textarea>
       <div className="reviews__button-wrapper">
@@ -114,6 +102,13 @@ const ReviewForm = () => {
       </div>
     </form>
   );
+};
+
+ReviewForm.propTypes = {
+  rating: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  onRatingChange: PropTypes.func.isRequired,
+  onTextChange: PropTypes.func.isRequired,
 };
 
 export default ReviewForm;
