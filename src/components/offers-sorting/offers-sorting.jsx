@@ -4,17 +4,14 @@ import PropTypes from 'prop-types';
 
 import {SortingTypes, SortingTitles} from '../../const';
 
-const OffersSorting = ({openedList, onOptionClick, onOpenList, sortingType}) => {
-  // const [openedList, setOpenedList] = useState(false);
+import withToggle from '../../hocs/with-toggle/with-toggle';
 
-  // const handleOpenList = () => {
-  //   setOpenedList((prev) => !prev);
-  // };
+const OffersSorting = ({toggle, onOptionClick, onToggleClick, sortingType}) => {
 
-  // const handleSortingTypeClick = (value) => {
-  //   onSortingClick(value);
-  //   setOpenedList(false);
-  // };
+  const handleOptionClick = (value) => {
+    onOptionClick(value);
+    onToggleClick();
+  };
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -22,20 +19,20 @@ const OffersSorting = ({openedList, onOptionClick, onOpenList, sortingType}) => 
       <span
         className="places__sorting-type"
         tabIndex="0"
-        onClick={onOpenList}
+        onClick={onToggleClick}
       >
         {SortingTitles[sortingType]}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${openedList ? `places__options--opened` : ``}`}>
+      <ul className={`places__options places__options--custom ${toggle ? `places__options--opened` : ``}`}>
         {SortingTypes.map((item) => (
           <li
             key={item}
             className={`places__option ${item === sortingType ? `places__option--active` : ``}`}
             tabIndex="0"
-            onClick={() => onOptionClick(item)}
+            onClick={() => handleOptionClick(item)}
           >
             {SortingTitles[item]}
           </li>
@@ -62,17 +59,13 @@ const OffersSorting = ({openedList, onOptionClick, onOpenList, sortingType}) => 
 };
 
 OffersSorting.propTypes = {
-  openedList: PropTypes.bool.isRequired,
+  toggle: PropTypes.bool.isRequired,
   onOptionClick: PropTypes.func.isRequired,
-  onOpenList: PropTypes.func.isRequired,
+  onToggleClick: PropTypes.func.isRequired,
   sortingType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = ({sortingType}) => ({sortingType});
 
-// const mapDispatchToProps = (dispatch) => ({
-//   onSortingClick: (sortingType) => dispatch(setSortingTypeAction(sortingType)),
-// });
-
 export {OffersSorting};
-export default connect(mapStateToProps)(OffersSorting);
+export default connect(mapStateToProps)(withToggle(OffersSorting));

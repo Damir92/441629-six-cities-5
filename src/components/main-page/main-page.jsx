@@ -12,10 +12,6 @@ import OffersMap from '../offers-map/offers-map';
 import CitiesList from '../cities-list/cities-list';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
-import withSelectList from '../../hocs/with-select-list/with-select-list';
-
-const OffersSortingWrapped = withSelectList(OffersSorting);
-
 const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
   return (
     <div className="page page--gray page--main">
@@ -60,7 +56,7 @@ const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {city}</b>
 
-              <OffersSortingWrapped
+              <OffersSorting
                 onOptionClick={onOptionClick}
               />
 

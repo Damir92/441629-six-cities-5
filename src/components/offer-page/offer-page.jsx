@@ -14,10 +14,6 @@ import ReviewForm from '../review-from/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-import withReviewForm from '../../hocs/with-review-form/with-review-form';
-
-const ReviewFormWrapped = withReviewForm(ReviewForm);
-
 const OfferPage = ({match, offers}) => {
   const offer = offers.find((item) => item.id === +match.params.id) || offers[0];
   const nearestOffers = offers.slice(0, 3);
@@ -163,7 +159,7 @@ const OfferPage = ({match, offers}) => {
                   reviews={reviews}
                 />
 
-                <ReviewFormWrapped />
+                <ReviewForm />
 
               </section>
             </div>

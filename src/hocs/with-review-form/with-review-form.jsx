@@ -1,29 +1,37 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+
+import {updateObject} from '../../utils';
 
 const withReviewForm = (Component) => {
   const WithReviewForm = (props) => {
-    const [rating, setRating] = useState(``);
-    const [text, setText] = useState(``);
+    const {
+      rating = ``,
+      review = ``,
+    } = props;
 
-    const handleChangeRating = (evt) => {
-      const value = evt.target.value;
-      setRating(value);
-    };
+    const [formInput, setFormInput] = useState({rating, review});
 
-    const handleChangeText = (evt) => {
-      const value = evt.target.value;
-      setText(value);
+    const handleChange = (evt) => {
+      evt.persist();
+      setFormInput((prevState) => updateObject(prevState, {
+        [evt.target.name]: evt.target.value,
+      }));
     };
 
     return (
       <Component
         {...props}
-        onRatingChange={handleChangeRating}
-        onTextChange={handleChangeText}
-        rating={rating}
-        text={text}
+        onChange={handleChange}
+        rating={formInput.rating}
+        review={formInput.review}
       />
     );
+  };
+
+  WithReviewForm.propTypes = {
+    rating: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+    review: PropTypes.string,
   };
 
   return WithReviewForm;
