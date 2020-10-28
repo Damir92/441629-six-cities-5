@@ -159,7 +159,7 @@ const OfferPage = ({match, offers}) => {
                   reviews={reviews}
                 />
 
-                <ReviewForm/>
+                <ReviewForm />
 
               </section>
             </div>

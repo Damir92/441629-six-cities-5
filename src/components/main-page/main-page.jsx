@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {changeCityAction} from '../../store/action';
+import {changeCityAction, setSortingTypeAction} from '../../store/action';
 
 import {offerPropTypes} from '../../prop-types';
 import {Cities} from '../../const';
@@ -12,7 +12,7 @@ import OffersMap from '../offers-map/offers-map';
 import CitiesList from '../cities-list/cities-list';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
-const MainPage = ({city, offers = [], onCityClick}) => {
+const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -56,7 +56,9 @@ const MainPage = ({city, offers = [], onCityClick}) => {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {city}</b>
 
-              <OffersSorting />
+              <OffersSorting
+                onOptionClick={onOptionClick}
+              />
 
               <OffersList
                 offers={offers}
@@ -83,12 +85,14 @@ MainPage.propTypes = {
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   onCityClick: PropTypes.func.isRequired,
+  onOptionClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({city, offers}) => ({city, offers});
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(changeCityAction(city)),
+  onOptionClick: (type) => dispatch(setSortingTypeAction(type)),
 });
 
 export {MainPage};
