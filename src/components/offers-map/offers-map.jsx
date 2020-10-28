@@ -35,23 +35,12 @@ const OffersMap = ({offers = [], activeCard}) => {
   };
 
   React.useEffect(() => {
-    mapRef.current = leaflet.map(`map`, {
-      center: [0, 0],
-      zoom: 0,
-      zoomControl: false,
-      marker: true,
-    });
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(mapRef.current);
-
     return () => {
-      mapRef.current.off();
-      mapRef.current.remove();
-      mapRef.current = null;
+      if (mapRef.current) {
+        mapRef.current.off();
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
     };
   }, []);
 
@@ -67,6 +56,21 @@ const OffersMap = ({offers = [], activeCard}) => {
     }
 
     const cityCoordinates = [cityLocation.latitude, cityLocation.longitude];
+
+    if (!mapRef.current) {
+      mapRef.current = leaflet.map(`map`, {
+        center: cityCoordinates,
+        zoom: cityCoordinates.zoom,
+        zoomControl: false,
+        marker: true,
+      });
+
+      leaflet
+        .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+          attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+        })
+        .addTo(mapRef.current);
+    }
 
     mapRef.current.setView(cityCoordinates, cityLocation.zoom);
 

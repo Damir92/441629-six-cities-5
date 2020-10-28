@@ -51,20 +51,32 @@ const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {city}</b>
+          <div className={`cities__places-container container ${offers.length === 0 ? `cities__places-container--empty` : ``}`}>
 
-              <OffersSorting
-                onOptionClick={onOptionClick}
-              />
+            {offers.length === 0
+              ?
+              <section className="cities__no-places">
+                <div className="cities__status-wrapper tabs__content">
+                  <b className="cities__status">No places to stay available</b>
+                  <p className="cities__status-description">We could not find any property available at the moment in {city}</p>
+                </div>
+              </section>
+              :
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{offers.length} places to stay in {city}</b>
 
-              <OffersList
-                offers={offers}
-              />
+                <OffersSorting
+                  onOptionClick={onOptionClick}
+                />
 
-            </section>
+                <OffersList
+                  offers={offers}
+                />
+
+              </section>
+            }
+
             <div className="cities__right-section">
               <section className="cities__map map">
                 <OffersMap
