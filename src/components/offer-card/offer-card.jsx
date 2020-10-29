@@ -92,11 +92,9 @@ OfferCard.propTypes = {
   onCardEnterMouse: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({}) => ({});
-
 const mapDispatchToProps = (dispatch) => ({
   onCardEnterMouse: (id) => dispatch(setActiveCard(id)),
 });
 
 export {OfferCard};
-export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
+export default connect(null, mapDispatchToProps)(OfferCard);

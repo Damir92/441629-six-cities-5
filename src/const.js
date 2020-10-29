@@ -8,6 +8,10 @@ export const Routes = {
   OFFER_LINK: `/offer`,
 };
 
+export const APIRoutes = {
+  OFFERS: `/HOTELS`,
+};
+
 export const Cities = [
   `Paris`,
   `Cologne`,

@@ -1,9 +1,10 @@
 export const ActionType = {
-  SET_CITY: `SET_CITY`,
   GET_OFFERS: `GET_OFFERS`,
-  SET_SORTING_TYPE: `SET_SORTING_TYPE`,
   GET_SORTED_OFFERS: `GET_SORTED_OFFERS`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
   SET_ACTIVE_CARD: `SET_ACTIVE_CARD`,
+  SET_CITY: `SET_CITY`,
+  SET_SORTING_TYPE: `SET_SORTING_TYPE`,
 };
 
 export const changeCityAction = (city) => ({
@@ -23,4 +24,9 @@ export const setSortingTypeAction = (sortingType) => ({
 export const setActiveCard = (id) => ({
   type: ActionType.SET_ACTIVE_CARD,
   payload: id,
+});
+
+export const loadOffersAction = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
 });

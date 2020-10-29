@@ -14,9 +14,9 @@ import ReviewForm from '../review-from/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, offers}) => {
-  const offer = offers.find((item) => item.id === +match.params.id) || offers[0];
-  const nearestOffers = offers.slice(0, 3);
+const OfferPage = ({match, cityOffers}) => {
+  const offer = cityOffers.find((item) => item.id === +match.params.id) || cityOffers[0];
+  const nearestOffers = cityOffers.slice(0, 3);
 
   const {
     bedrooms,
@@ -167,7 +167,7 @@ const OfferPage = ({match, offers}) => {
 
           <section className="property__map map">
             <OffersMap
-              offers={nearestOffers}
+              cityOffers={nearestOffers}
             />
           </section>
 
@@ -177,7 +177,7 @@ const OfferPage = ({match, offers}) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
             <OffersList
-              offers={nearestOffers}
+              cityOffers={nearestOffers}
               isMainPage={false}
             />
 
@@ -190,12 +190,14 @@ const OfferPage = ({match, offers}) => {
 
 OfferPage.propTypes = {
   match: PropTypes.object.isRequired,
-  offers: PropTypes.arrayOf(
+  cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
 };
 
-const mapStateToProps = ({offers}) => ({offers});
+const mapStateToProps = ({STORE_OFFERS}) => ({
+  cityOffers: STORE_OFFERS.cityOffers,
+});
 
 export {OfferPage};
 export default connect(mapStateToProps)(OfferPage);

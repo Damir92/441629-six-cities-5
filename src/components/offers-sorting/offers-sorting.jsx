@@ -65,7 +65,9 @@ OffersSorting.propTypes = {
   sortingType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({sortingType}) => ({sortingType});
+const mapStateToProps = ({STORE_OFFERS}) => ({
+  sortingType: STORE_OFFERS.sortingType,
+});
 
 export {OffersSorting};
 export default connect(mapStateToProps)(withToggle(OffersSorting));

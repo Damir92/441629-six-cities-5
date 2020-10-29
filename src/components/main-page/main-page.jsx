@@ -12,7 +12,7 @@ import OffersMap from '../offers-map/offers-map';
 import CitiesList from '../cities-list/cities-list';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
-const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
+const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) => {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -51,9 +51,9 @@ const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
           </section>
         </div>
         <div className="cities">
-          <div className={`cities__places-container container ${offers.length === 0 ? `cities__places-container--empty` : ``}`}>
+          <div className={`cities__places-container container ${cityOffers.length === 0 ? `cities__places-container--empty` : ``}`}>
 
-            {offers.length === 0
+            {cityOffers.length === 0
               ?
               <section className="cities__no-places">
                 <div className="cities__status-wrapper tabs__content">
@@ -64,14 +64,14 @@ const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
               :
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offers.length} places to stay in {city}</b>
+                <b className="places__found">{cityOffers.length} places to stay in {city}</b>
 
                 <OffersSorting
                   onOptionClick={onOptionClick}
                 />
 
                 <OffersList
-                  offers={offers}
+                  cityOffers={cityOffers}
                 />
 
               </section>
@@ -80,7 +80,7 @@ const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <OffersMap
-                  offers={offers}
+                  cityOffers={cityOffers}
                 />
               </section>
             </div>
@@ -93,14 +93,17 @@ const MainPage = ({city, offers = [], onCityClick, onOptionClick}) => {
 
 MainPage.propTypes = {
   city: PropTypes.oneOf(Cities).isRequired,
-  offers: PropTypes.arrayOf(
+  cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({city, offers}) => ({city, offers});
+const mapStateToProps = ({STORE_OFFERS}) => ({
+  city: STORE_OFFERS.city,
+  cityOffers: STORE_OFFERS.cityOffers,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(changeCityAction(city)),
