@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {changeCityAction, setSortingTypeAction} from '../../store/action';
+import {getCity, getSortedOffers} from '../../store/reducers/site-data/selectors';
 
 import {offerPropTypes} from '../../prop-types';
 import {Cities} from '../../const';
@@ -100,9 +101,9 @@ MainPage.propTypes = {
   onOptionClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({STORE_OFFERS}) => ({
-  city: STORE_OFFERS.city,
-  cityOffers: STORE_OFFERS.cityOffers,
+const mapStateToProps = (state) => ({
+  city: getCity(state),
+  cityOffers: getSortedOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

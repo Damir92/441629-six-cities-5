@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
+import {getActiveCard} from '../../store/reducers/site-data/selectors';
+
 import {offerPropTypes} from '../../prop-types';
 import 'leaflet/dist/leaflet.css';
 
@@ -117,8 +119,8 @@ OffersMap.propTypes = {
   ).isRequired,
 };
 
-const mapStateToProps = ({STORE_OFFERS}) => ({
-  activeCard: STORE_OFFERS.activeCard,
+const mapStateToProps = (state) => ({
+  activeCard: getActiveCard(state),
 });
 
 export {OffersMap};

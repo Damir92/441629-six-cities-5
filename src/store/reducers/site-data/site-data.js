@@ -37,7 +37,7 @@ export const siteData = (state = initialState, action) => {
     case ActionType.SET_SORTING_TYPE:
       return updateObject(state, {
         sortingType: action.payload,
-        cityOffers: sortOffers(state.offers[state.city], action.payload),
+        cityOffers: sortOffers(state.cityOffers, action.payload),
       });
   }
 

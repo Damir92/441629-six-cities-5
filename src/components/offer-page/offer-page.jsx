@@ -7,6 +7,8 @@ import {offerPropTypes} from '../../prop-types';
 import {LivingType} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
+import {getCityOffers} from '../../store/reducers/site-data/selectors';
+
 import {reviews} from '../../mocks/reviews';
 
 import ReviewsList from '../reviews-list/reviews-list';
@@ -195,8 +197,8 @@ OfferPage.propTypes = {
   ).isRequired,
 };
 
-const mapStateToProps = ({STORE_OFFERS}) => ({
-  cityOffers: STORE_OFFERS.cityOffers,
+const mapStateToProps = (state) => ({
+  cityOffers: getCityOffers(state),
 });
 
 export {OfferPage};

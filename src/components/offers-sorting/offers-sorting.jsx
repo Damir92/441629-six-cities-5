@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {getSortingType} from '../../store/reducers/site-data/selectors';
+
 import {SortingTypes, SortingTitles} from '../../const';
 
 import withToggle from '../../hocs/with-toggle/with-toggle';
@@ -65,8 +67,8 @@ OffersSorting.propTypes = {
   sortingType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({STORE_OFFERS}) => ({
-  sortingType: STORE_OFFERS.sortingType,
+const mapStateToProps = (state) => ({
+  sortingType: getSortingType(state),
 });
 
 export {OffersSorting};
