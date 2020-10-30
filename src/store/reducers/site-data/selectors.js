@@ -1,27 +1,27 @@
 import {createSelector} from 'reselect';
 
-import {NameSpace} from '../../reducer';
+import {ReducerType} from '../../reducer';
 import {sortOffers} from '../../../utils';
 
-const NAME_SPACE = NameSpace.STORE_OFFERS;
+const REDUCER_DATA = ReducerType.STORE_OFFERS;
 
-export const getOffers = (state) => state[NAME_SPACE].offers;
+export const getOffers = (state) => state[REDUCER_DATA].offers;
 
-export const getCity = (state) => state[NAME_SPACE].city;
+export const getCity = (state) => state[REDUCER_DATA].city;
 
-export const getActiveCard = (state) => state[NAME_SPACE].activeCard;
+export const getActiveCard = (state) => state[REDUCER_DATA].activeCard;
 
-export const getSortingType = (state) => state[NAME_SPACE].sortingType;
+export const getSortingType = (state) => state[REDUCER_DATA].sortingType;
 
 export const getCityOffers = createSelector(
     getOffers,
     getCity,
-    (resultOne, resultTwo) => resultOne.filter((it) => it.city.name === resultTwo)
+    (offers, city) => offers.filter((it) => it.city.name === city)
 );
 
 export const getSortedOffers = createSelector(
     getOffers,
     getCity,
     getSortingType,
-    (resultOne, resultTwo, resultThree) => sortOffers(resultOne.filter((it) => it.city.name === resultTwo), resultThree)
+    (offers, city, sortingType) => sortOffers(offers.filter((it) => it.city.name === city), sortingType)
 );
