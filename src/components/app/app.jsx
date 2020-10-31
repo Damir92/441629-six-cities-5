@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import {Switch, Route, Router} from 'react-router-dom';
 
 import {Routes} from '../../const';
 
@@ -7,10 +7,13 @@ import AuthPage from '../auth-page/auth-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import MainPage from '../main-page/main-page';
 import OfferPage from '../offer-page/offer-page';
+import PrivateRoute from '../private-route/private-route';
+
+import browserHistory from '../../browser-history';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router history={browserHistory}>
       <Switch>
         <Route exact path={Routes.MAIN}>
           <MainPage />
@@ -18,6 +21,10 @@ const App = () => {
         <Route exact path={Routes.LOGIN}>
           <AuthPage />
         </Route>
+        <PrivateRoute
+          path={Routes.FAVORITES}
+          render={(props) => <FavoritesPage {...props} />}
+        />
         <Route exact path={Routes.FAVORITES}>
           <FavoritesPage />
         </Route>
@@ -27,7 +34,7 @@ const App = () => {
           component={OfferPage}
         />
       </Switch>
-    </BrowserRouter>
+    </Router>
   );
 };
 

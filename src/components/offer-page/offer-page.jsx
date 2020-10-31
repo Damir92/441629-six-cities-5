@@ -4,19 +4,20 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {offerPropTypes} from '../../prop-types';
-import {LivingType} from '../../const';
+import {AuthorizationStatus, LivingType, Routes} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
 import {getCityOffers} from '../../store/reducers/site-data/selectors';
+import {getAuthorizationStatus, getUserData} from '../../store/reducers/user/selectors';
 
 import {reviews} from '../../mocks/reviews';
 
 import ReviewsList from '../reviews-list/reviews-list';
-import ReviewForm from '../review-from/review-form';
+import ReviewForm from '../review-form/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, cityOffers}) => {
+const OfferPage = ({match, cityOffers, logged, userData}) => {
   const offer = cityOffers.find((item) => item.id === +match.params.id) || cityOffers[0];
   const nearestOffers = cityOffers.slice(0, 3);
 
@@ -53,10 +54,25 @@ const OfferPage = ({match, cityOffers}) => {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link
+                    className="header__nav-link header__nav-link--profile"
+                    to={logged === AuthorizationStatus.AUTH
+                      ?
+                      Routes.FAVORITES
+                      :
+                      Routes.LOGIN
+                    }
+                  >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
+                    {logged === AuthorizationStatus.AUTH
+                      ?
+                      <span className="header__user-name user__name">
+                        {userData.email}
+                      </span>
+                      :
+                      <span className="header__login">Sign in</span>
+                    }
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -195,10 +211,16 @@ OfferPage.propTypes = {
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
+  logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
+  userData: PropTypes.shape({
+    email: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({
   cityOffers: getCityOffers(state),
+  logged: getAuthorizationStatus(state),
+  userData: getUserData(state),
 });
 
 export {OfferPage};
