@@ -5,10 +5,10 @@ import {offerPropTypes} from '../../prop-types';
 
 import OfferCard from '../offer-card/offer-card';
 
-const OffersList = ({offers = [], isMainPage = true}) => {
+const OffersList = ({cityOffers = [], isMainPage = true}) => {
   return (
     <div className={`places__list ${isMainPage ? `cities__places-list tabs__content` : `near-places__list`}`}>
-      {offers.map((offer) => (
+      {cityOffers.map((offer) => (
         <OfferCard
           key={offer.id}
           isMainPage={isMainPage}
@@ -20,7 +20,7 @@ const OffersList = ({offers = [], isMainPage = true}) => {
 };
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(
+  cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   isMainPage: PropTypes.bool,

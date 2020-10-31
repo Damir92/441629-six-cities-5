@@ -3,10 +3,12 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
+import {getActiveCard} from '../../store/reducers/site-data/selectors';
+
 import {offerPropTypes} from '../../prop-types';
 import 'leaflet/dist/leaflet.css';
 
-const OffersMap = ({offers = [], activeCard}) => {
+const OffersMap = ({cityOffers = [], activeCard}) => {
   const LeafletIcon = leaflet.Icon.extend({
     options: {
       iconSize: [27, 39],
@@ -45,11 +47,11 @@ const OffersMap = ({offers = [], activeCard}) => {
   }, []);
 
   useEffect(() => {
-    if (!offers.length) {
+    if (!cityOffers.length) {
       return;
     }
 
-    const cityLocation = offers[0].city.location || null;
+    const cityLocation = cityOffers[0].city.location || null;
 
     if (!cityLocation) {
       return;
@@ -76,7 +78,7 @@ const OffersMap = ({offers = [], activeCard}) => {
 
     removePins();
 
-    offers.forEach((offer) => {
+    cityOffers.forEach((offer) => {
       if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
         mapPinsRef.current.push(
             leaflet
@@ -85,12 +87,12 @@ const OffersMap = ({offers = [], activeCard}) => {
         );
       }
     });
-  }, [offers]);
+  }, [cityOffers]);
 
   useEffect(() => {
     removePins();
 
-    offers.forEach((offer) => {
+    cityOffers.forEach((offer) => {
       if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
         mapPinsRef.current.push(
             leaflet
@@ -112,12 +114,14 @@ const OffersMap = ({offers = [], activeCard}) => {
 
 OffersMap.propTypes = {
   activeCard: PropTypes.number,
-  offers: PropTypes.arrayOf(
+  cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
 };
 
-const mapStateToProps = ({activeCard}) => ({activeCard});
+const mapStateToProps = (state) => ({
+  activeCard: getActiveCard(state),
+});
 
 export {OffersMap};
 export default connect(mapStateToProps)(OffersMap);
