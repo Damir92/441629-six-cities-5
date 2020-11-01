@@ -1,14 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {offerPropTypes} from '../../prop-types';
+import {offerPropTypes, OfferPagePropTypes} from '../../prop-types';
 import {AuthorizationStatus, LivingType, Routes} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
-import {getCityOffers} from '../../store/reducers/site-data/selectors';
+import {getCityOffers, getActiveOffer} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../store/reducers/user/selectors';
+import {loadActiveOfferAction} from '../../store/action';
+import {fetchActiveOffer} from '../../store/api-actions';
 
 import {reviews} from '../../mocks/reviews';
 
@@ -17,9 +19,12 @@ import ReviewForm from '../review-form/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, cityOffers, logged, userData}) => {
-  const offer = cityOffers.find((item) => item.id === +match.params.id) || cityOffers[0];
+const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOffer, offer = {}}) => {
   const nearestOffers = cityOffers.slice(0, 3);
+
+  useEffect(() => {
+    onLoad(+match.params.id);
+  }, []);
 
   const {
     bedrooms,
@@ -46,6 +51,7 @@ const OfferPage = ({match, cityOffers, logged, userData}) => {
               <Link
                 className="header__logo-link"
                 to="/"
+                onClick={unloadActiveOffer}
               >
                 <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </Link>
@@ -84,7 +90,7 @@ const OfferPage = ({match, cityOffers, logged, userData}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image) => (
+              {images && images.map((image) => (
                 <div
                   key={image}
                   className="property__image-wrapper"
@@ -144,7 +150,7 @@ const OfferPage = ({match, cityOffers, logged, userData}) => {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((item) => (
+                  {goods && goods.map((item) => (
                     <li
                       key={item}
                       className="property__inside-item"
@@ -157,11 +163,11 @@ const OfferPage = ({match, cityOffers, logged, userData}) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host.isPro ? `property__avatar-wrapper--pro` : ``}`}>
-                    <img className="property__avatar user__avatar" src={host.avatar} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.isPro ? `property__avatar-wrapper--pro` : ``}`}>
+                    <img className="property__avatar user__avatar" src={host && host.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    {host.name}
+                    {host && host.name}
                   </span>
                 </div>
                 <div className="property__description">
@@ -207,21 +213,30 @@ const OfferPage = ({match, cityOffers, logged, userData}) => {
 };
 
 OfferPage.propTypes = {
+  offer: PropTypes.oneOfType([PropTypes.shape(OfferPagePropTypes), PropTypes.object]).isRequired,
   match: PropTypes.object.isRequired,
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  userData: PropTypes.shape({
+  userData: PropTypes.oneOf([PropTypes.shape({
     email: PropTypes.string,
-  }),
+  }), ``]),
+  onLoad: PropTypes.func.isRequired,
+  unloadActiveOffer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   cityOffers: getCityOffers(state),
   logged: getAuthorizationStatus(state),
+  offer: getActiveOffer(state),
   userData: getUserData(state),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onLoad: (id) => dispatch(fetchActiveOffer(id)),
+  unloadActiveOffer: () => dispatch(loadActiveOfferAction({})),
+});
+
 export {OfferPage};
-export default connect(mapStateToProps)(OfferPage);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferPage);

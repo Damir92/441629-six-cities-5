@@ -4,6 +4,7 @@ import {updateObject} from '../../../utils';
 
 const initialState = {
   activeCard: null,
+  activeOffer: {},
   city: Cities[0],
   cityOffers: [],
   offers: [],
@@ -20,6 +21,11 @@ export const siteData = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return updateObject(state, {
         offers: action.payload,
+      });
+
+    case ActionType.LOAD_ACTIVE_OFFER:
+      return updateObject(state, {
+        activeOffer: action.payload,
       });
 
     case ActionType.SET_ACTIVE_CARD:

@@ -11,6 +11,8 @@ export const getCity = (state) => state[REDUCER_DATA].city;
 
 export const getActiveCard = (state) => state[REDUCER_DATA].activeCard;
 
+export const getActiveOffer = (state) => state[REDUCER_DATA].activeOffer;
+
 export const getSortingType = (state) => state[REDUCER_DATA].sortingType;
 
 export const getCityOffers = createSelector(

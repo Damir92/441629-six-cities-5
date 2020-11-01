@@ -114,9 +114,9 @@ MainPage.propTypes = {
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  userData: PropTypes.shape({
+  userData: PropTypes.oneOf([PropTypes.shape({
     email: PropTypes.string,
-  }),
+  }), ``]),
   onCityClick: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
 };

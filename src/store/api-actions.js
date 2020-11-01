@@ -1,4 +1,10 @@
-import {loadOffersAction, requireAuthorization, redirectToRoute, setLoggedUser} from './action';
+import {
+  loadOffersAction,
+  loadActiveOfferAction,
+  requireAuthorization,
+  redirectToRoute,
+  setLoggedUser
+} from './action';
 
 import {offersAdapter} from '../utils';
 import {APIRoutes, AuthorizationStatus, Routes} from '../const';
@@ -6,6 +12,11 @@ import {APIRoutes, AuthorizationStatus, Routes} from '../const';
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.OFFERS)
     .then(({data}) => dispatch(loadOffersAction(offersAdapter(data))))
+);
+
+export const fetchActiveOffer = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.OFFERS}/${id}`)
+    .then(({data}) => dispatch(loadActiveOfferAction(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -25,3 +36,5 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
       dispatch(redirectToRoute(Routes.MAIN));
     })
 );
+
+// export const fetchComments = ()
