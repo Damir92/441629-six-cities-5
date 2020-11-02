@@ -19,9 +19,10 @@ import OffersMap from '../offers-map/offers-map';
 
 const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOffer, offer = {}, reviews = []}) => {
   const nearestOffers = cityOffers.slice(0, 3);
+  const offerId = +match.params.id;
 
   useEffect(() => {
-    onLoad(+match.params.id);
+    onLoad(offerId);
   }, []);
 
   const {
@@ -183,7 +184,9 @@ const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOff
 
                 {logged === AuthorizationStatus.AUTH
                   ?
-                  <ReviewForm />
+                  <ReviewForm
+                    id={offerId}
+                  />
                   :
                   ``
                 }
@@ -222,7 +225,7 @@ OfferPage.propTypes = {
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  userData: PropTypes.oneOf([PropTypes.shape({
+  userData: PropTypes.oneOfType([PropTypes.shape({
     email: PropTypes.string,
   }), ``]),
   onLoad: PropTypes.func.isRequired,

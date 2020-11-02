@@ -43,4 +43,7 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadReviewsAction(reviewAdapter(data))))
 );
 
-// export const postReview = ()
+export const postReview = ({id, comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoutes.REVIEWS}/${id}`, {comment, rating})
+    .then(({data}) => dispatch(loadReviewsAction(reviewAdapter(data))))
+);

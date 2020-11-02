@@ -63,7 +63,3 @@ export const reviewAdapter = (data) => {
     };
   });
 };
-
-// export const reverseReviewAdapter = (data) => {
-
-// };
