@@ -7,24 +7,28 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 
 import reducer from './store/reducer';
 import {createAPI} from './services/api';
-import {fetchOffersList} from './store/api-actions';
-import {getOffersAction} from './store/action';
+import {checkAuth, fetchOffersList} from './store/api-actions';
+import {getOffersAction, requireAuthorization} from './store/action';
+import {AuthorizationStatus} from './const';
+import {redirect} from './store/middlewares/redirect';
 
 import App from './components/app/app';
 
 const api = createAPI(
-    () => store.dispatch()
+    () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))
 );
 
 const store = createStore(
     reducer,
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api))
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
     )
 );
 
 Promise.all([
   store.dispatch(fetchOffersList()),
+  store.dispatch(checkAuth()),
 ])
 .then([
   store.dispatch(getOffersAction()),
