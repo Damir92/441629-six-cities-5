@@ -25,6 +25,10 @@ const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOff
     onLoad(offerId);
   }, []);
 
+  useEffect(() => {
+    onLoad(offerId);
+  }, [match]);
+
   const {
     bedrooms,
     description,
