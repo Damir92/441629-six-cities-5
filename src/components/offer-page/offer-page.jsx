@@ -3,23 +3,21 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {offerPropTypes, OfferPagePropTypes} from '../../prop-types';
+import {offerPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-types';
 import {AuthorizationStatus, LivingType, Routes} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
-import {getCityOffers, getActiveOffer} from '../../store/reducers/site-data/selectors';
+import {getCityOffers, getActiveOffer, getReviews} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../store/reducers/user/selectors';
 import {loadActiveOfferAction} from '../../store/action';
-import {fetchActiveOffer} from '../../store/api-actions';
-
-import {reviews} from '../../mocks/reviews';
+import {fetchActiveOffer, fetchReviews} from '../../store/api-actions';
 
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOffer, offer = {}}) => {
+const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOffer, offer = {}, reviews = []}) => {
   const nearestOffers = cityOffers.slice(0, 3);
 
   useEffect(() => {
@@ -163,8 +161,8 @@ const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOff
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.isPro ? `property__avatar-wrapper--pro` : ``}`}>
-                    <img className="property__avatar user__avatar" src={host && host.avatar} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.is_pro ? `property__avatar-wrapper--pro` : ``}`}>
+                    <img className="property__avatar user__avatar" src={host && host.avatar_url} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {host && host.name}
@@ -183,7 +181,12 @@ const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOff
                   reviews={reviews}
                 />
 
-                <ReviewForm />
+                {logged === AuthorizationStatus.AUTH
+                  ?
+                  <ReviewForm />
+                  :
+                  ``
+                }
 
               </section>
             </div>
@@ -213,7 +216,7 @@ const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOff
 };
 
 OfferPage.propTypes = {
-  offer: PropTypes.oneOfType([PropTypes.shape(OfferPagePropTypes), PropTypes.object]).isRequired,
+  offer: PropTypes.oneOfType([PropTypes.shape(OfferPagePropTypes).isRequired, PropTypes.shape({}).isRequired]).isRequired,
   match: PropTypes.object.isRequired,
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
@@ -223,6 +226,9 @@ OfferPage.propTypes = {
     email: PropTypes.string,
   }), ``]),
   onLoad: PropTypes.func.isRequired,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape(ReviewPropTypes)
+  ).isRequired,
   unloadActiveOffer: PropTypes.func.isRequired,
 };
 
@@ -230,11 +236,15 @@ const mapStateToProps = (state) => ({
   cityOffers: getCityOffers(state),
   logged: getAuthorizationStatus(state),
   offer: getActiveOffer(state),
+  reviews: getReviews(state),
   userData: getUserData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoad: (id) => dispatch(fetchActiveOffer(id)),
+  onLoad: (id) => {
+    dispatch(fetchActiveOffer(id));
+    dispatch(fetchReviews(id));
+  },
   unloadActiveOffer: () => dispatch(loadActiveOfferAction({})),
 });
 

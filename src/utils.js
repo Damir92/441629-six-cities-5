@@ -1,4 +1,4 @@
-import {PERCENT_PER_POINT_RATING, Sorting} from './const';
+import {PERCENT_PER_POINT_RATING, Sorting, MonthNames} from './const';
 
 export const convertRatingToPercent = (value) => `${Math.round(value) * PERCENT_PER_POINT_RATING}%`;
 
@@ -47,3 +47,23 @@ export const offersAdapter = (data) => {
     };
   });
 };
+
+export const reviewAdapter = (data) => {
+  return data.map((item) => {
+    const date = new Date(item.date);
+
+    return {
+      id: item.id,
+      avatar: item.user.avatar_url,
+      date: item.date,
+      dateHuman: `${MonthNames[date.getMonth()]} ${date.getFullYear()}`,
+      name: item.user.name,
+      rating: item.rating,
+      text: item.comment,
+    };
+  });
+};
+
+// export const reverseReviewAdapter = (data) => {
+
+// };

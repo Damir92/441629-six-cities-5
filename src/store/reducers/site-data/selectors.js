@@ -13,6 +13,8 @@ export const getActiveCard = (state) => state[REDUCER_DATA].activeCard;
 
 export const getActiveOffer = (state) => state[REDUCER_DATA].activeOffer;
 
+export const getReviews = (state) => state[REDUCER_DATA].reviews.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
 export const getSortingType = (state) => state[REDUCER_DATA].sortingType;
 
 export const getCityOffers = createSelector(

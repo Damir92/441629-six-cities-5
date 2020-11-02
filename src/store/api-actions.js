@@ -3,10 +3,11 @@ import {
   loadActiveOfferAction,
   requireAuthorization,
   redirectToRoute,
-  setLoggedUser
+  setLoggedUser,
+  loadReviewsAction,
 } from './action';
 
-import {offersAdapter} from '../utils';
+import {offersAdapter, reviewAdapter} from '../utils';
 import {APIRoutes, AuthorizationStatus, Routes} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -37,4 +38,9 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
     })
 );
 
-// export const fetchComments = ()
+export const fetchReviews = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.REVIEWS}/${id}`)
+    .then(({data}) => dispatch(loadReviewsAction(reviewAdapter(data))))
+);
+
+// export const postReview = ()

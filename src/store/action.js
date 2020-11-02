@@ -3,6 +3,7 @@ export const ActionType = {
   GET_SORTED_OFFERS: `GET_SORTED_OFFERS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_ACTIVE_OFFER: `LOAD_ACTIVE_OFFER`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_ACTIVE_CARD: `SET_ACTIVE_CARD`,
@@ -28,6 +29,11 @@ export const loadOffersAction = (offers) => ({
 export const loadActiveOfferAction = (offer) => ({
   type: ActionType.LOAD_ACTIVE_OFFER,
   payload: offer,
+});
+
+export const loadReviewsAction = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
 });
 
 export const requireAuthorization = (status) => ({
