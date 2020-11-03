@@ -6,6 +6,8 @@ import {updateObject} from '../../utils';
 const withReviewForm = (Component) => {
   const WithReviewForm = (props) => {
     const {
+      id,
+      onSubmit,
       rating = ``,
       review = ``,
     } = props;
@@ -19,10 +21,26 @@ const withReviewForm = (Component) => {
       }));
     };
 
+    const handleSubmit = (evt) => {
+      evt.preventDefault();
+
+      onSubmit({
+        id,
+        comment: formInput.review,
+        rating: formInput.rating,
+      });
+
+      setFormInput({
+        rating: ``,
+        review: ``,
+      });
+    };
+
     return (
       <Component
         {...props}
         onChange={handleChange}
+        onSubmit={handleSubmit}
         rating={formInput.rating}
         review={formInput.review}
       />
@@ -30,7 +48,9 @@ const withReviewForm = (Component) => {
   };
 
   WithReviewForm.propTypes = {
-    rating: PropTypes.oneOf([PropTypes.number, PropTypes.string]),
+    id: PropTypes.number.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    rating: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     review: PropTypes.string,
   };
 

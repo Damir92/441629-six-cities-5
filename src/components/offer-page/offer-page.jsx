@@ -10,24 +10,20 @@ import {convertRatingToPercent} from '../../utils';
 import {getCityOffers, getActiveOffer, getReviews} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus, getUserData} from '../../store/reducers/user/selectors';
 import {loadActiveOfferAction} from '../../store/action';
-import {fetchActiveOffer, fetchReviews} from '../../store/api-actions';
+import {fetchActiveOffer, fetchReviews, postReview} from '../../store/api-actions';
 
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOffer, offer = {}, reviews = []}) => {
+const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unloadActiveOffer, offer = {}, reviews = []}) => {
   const nearestOffers = cityOffers.slice(0, 3);
   const offerId = +match.params.id;
 
   useEffect(() => {
     onLoad(offerId);
-  }, []);
-
-  useEffect(() => {
-    onLoad(offerId);
-  }, [match]);
+  }, [match.params.id]);
 
   const {
     bedrooms,
@@ -190,9 +186,10 @@ const OfferPage = ({match, cityOffers, logged, userData, onLoad, unloadActiveOff
                   ?
                   <ReviewForm
                     id={offerId}
+                    onSubmit={onSendForm}
                   />
                   :
-                  ``
+                  null
                 }
 
               </section>
@@ -231,8 +228,9 @@ OfferPage.propTypes = {
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   userData: PropTypes.oneOfType([PropTypes.shape({
     email: PropTypes.string,
-  }), ``]),
+  }), null]),
   onLoad: PropTypes.func.isRequired,
+  onSendForm: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape(ReviewPropTypes)
   ).isRequired,
@@ -253,6 +251,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviews(id));
   },
   unloadActiveOffer: () => dispatch(loadActiveOfferAction({})),
+  onSendForm: (reviewData) => dispatch(postReview(reviewData)),
 });
 
 export {OfferPage};

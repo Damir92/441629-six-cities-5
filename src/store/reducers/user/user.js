@@ -4,7 +4,7 @@ import {updateObject} from '../../../utils';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  userData: ``,
+  userData: null,
 };
 
 const user = (state = initialState, action) => {

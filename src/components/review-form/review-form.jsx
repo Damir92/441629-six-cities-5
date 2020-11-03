@@ -1,29 +1,17 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {postReview} from '../../store/api-actions';
 import {ReviewLength} from '../../const';
 
 import withReviewForm from '../../hocs/with-review-form/with-review-form';
 
-const ReviewForm = ({id, rating, review, onChange, onSubmit}) => {
-  const handleSubmitForm = (evt) => {
-    evt.preventDefault();
-
-    onSubmit({
-      id,
-      comment: review,
-      rating,
-    });
-  };
-
+const ReviewForm = ({rating, review, onChange, onSubmit}) => {
   return (
     <form
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={handleSubmitForm}
+      onSubmit={onSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -131,16 +119,11 @@ const ReviewForm = ({id, rating, review, onChange, onSubmit}) => {
 };
 
 ReviewForm.propTypes = {
-  id: PropTypes.number.isRequired,
   rating: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (reviewData) => dispatch(postReview(reviewData)),
-});
-
 export {ReviewForm};
-export default connect(null, mapDispatchToProps)(withReviewForm(ReviewForm));
+export default withReviewForm(ReviewForm);
