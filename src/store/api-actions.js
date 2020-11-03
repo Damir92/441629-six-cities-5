@@ -1,11 +1,23 @@
-import {loadOffersAction, requireAuthorization, redirectToRoute, setLoggedUser} from './action';
+import {
+  loadOffersAction,
+  loadActiveOfferAction,
+  requireAuthorization,
+  redirectToRoute,
+  setLoggedUser,
+  loadReviewsAction,
+} from './action';
 
-import {offersAdapter} from '../utils';
+import {offersAdapter, reviewAdapter} from '../utils';
 import {APIRoutes, AuthorizationStatus, Routes} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.OFFERS)
     .then(({data}) => dispatch(loadOffersAction(offersAdapter(data))))
+);
+
+export const fetchActiveOffer = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.OFFERS}/${id}`)
+    .then(({data}) => dispatch(loadActiveOfferAction(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -24,4 +36,14 @@ export const login = ({email, password}) => (dispatch, _getState, api) => (
       dispatch(setLoggedUser(data));
       dispatch(redirectToRoute(Routes.MAIN));
     })
+);
+
+export const fetchReviews = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.REVIEWS}/${id}`)
+    .then(({data}) => dispatch(loadReviewsAction(reviewAdapter(data))))
+);
+
+export const postReview = ({id, comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoutes.REVIEWS}/${id}`, {comment, rating})
+    .then(({data}) => dispatch(loadReviewsAction(reviewAdapter(data))))
 );

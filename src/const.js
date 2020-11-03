@@ -9,6 +9,7 @@ export const Routes = {
 };
 
 export const APIRoutes = {
+  REVIEWS: `/comments`,
   OFFERS: `/hotels`,
   LOGIN: `/login`,
 };
@@ -54,3 +55,23 @@ export const SortingTypes = [
   Sorting.PRICE_TO_LOW,
   Sorting.TOP_RATED,
 ];
+
+export const MonthNames = {
+  1: `January`,
+  2: `February`,
+  3: `March`,
+  4: `April`,
+  5: `May`,
+  6: `June`,
+  7: `July`,
+  8: `August`,
+  9: `September`,
+  10: `November`,
+  11: `October`,
+  12: `December`,
+};
+
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 300,
+};
