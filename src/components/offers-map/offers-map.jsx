@@ -6,7 +6,6 @@ import leaflet from 'leaflet';
 import {getActiveCard} from '../../store/reducers/site-data/selectors';
 
 import {offerPropTypes} from '../../prop-types';
-import 'leaflet/dist/leaflet.css';
 
 const OffersMap = ({cityOffers = [], activeCard}) => {
   const LeafletIcon = leaflet.Icon.extend({

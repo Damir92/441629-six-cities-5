@@ -15,9 +15,7 @@ const App = () => {
   return (
     <Router history={browserHistory}>
       <Switch>
-        <Route exact path={Routes.MAIN}>
-          <MainPage />
-        </Route>
+        <Route exact path={Routes.MAIN} component={MainPage} />
         <Route exact path={Routes.LOGIN}>
           <AuthPage />
         </Route>

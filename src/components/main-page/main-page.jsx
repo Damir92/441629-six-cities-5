@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -15,7 +14,17 @@ import OffersMap from '../offers-map/offers-map';
 import CitiesList from '../cities-list/cities-list';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
-const MainPage = ({city, cityOffers = [], logged, userData, onCityClick, onOptionClick}) => {
+const MainPage = ({city, cityOffers = [], history, logged, userData, onCityClick, onOptionClick}) => {
+  const handleProfileClick = (evt) => {
+    evt.preventDefault();
+
+    if (logged === AuthorizationStatus.AUTH) {
+      history.push(Routes.FAVORITES);
+    } else {
+      history.push(Routes.LOGIN);
+    }
+  };
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -29,14 +38,10 @@ const MainPage = ({city, cityOffers = [], logged, userData, onCityClick, onOptio
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link
+                  <a
                     className="header__nav-link header__nav-link--profile"
-                    to={logged === AuthorizationStatus.AUTH
-                      ?
-                      Routes.FAVORITES
-                      :
-                      Routes.LOGIN
-                    }
+                    href="#"
+                    onClick={handleProfileClick}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     {logged === AuthorizationStatus.AUTH
@@ -47,7 +52,7 @@ const MainPage = ({city, cityOffers = [], logged, userData, onCityClick, onOptio
                       :
                       <span className="header__login">Sign in</span>
                     }
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -113,10 +118,13 @@ MainPage.propTypes = {
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  userData: PropTypes.oneOfType([PropTypes.shape({
+  userData: PropTypes.shape({
     email: PropTypes.string,
-  }), null]),
+  }),
   onCityClick: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
 };
