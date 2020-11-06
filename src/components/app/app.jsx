@@ -16,9 +16,7 @@ const App = () => {
     <Router history={browserHistory}>
       <Switch>
         <Route exact path={Routes.MAIN} component={MainPage} />
-        <Route exact path={Routes.LOGIN}>
-          <AuthPage />
-        </Route>
+        <Route exact path={Routes.LOGIN} component={AuthPage} />
         <PrivateRoute
           path={Routes.FAVORITES}
           render={(props) => <FavoritesPage {...props} />}

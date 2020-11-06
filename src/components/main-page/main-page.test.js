@@ -1,12 +1,15 @@
 import React from 'react';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
 
-import {cityOffers} from '../../mocks/tests-data';
+import {cityOffers, noop} from '../../mocks/tests-data';
 import {Cities, AuthorizationStatus} from '../../const';
+import reducer from '../../store/reducer';
 
-import {MainPage} from './main-page';
+import MainPage from './main-page';
 
-const noop = () => {};
+const store = createStore(reducer);
 
 const history = {
   push: noop,
@@ -14,17 +17,19 @@ const history = {
 
 it(`MainPage rendered correctly`, () => {
   const tree = renderer
-    .create(<MainPage
-      city={Cities[0]}
-      cityOffers={cityOffers}
-      history={history}
-      logged={AuthorizationStatus.NO_AUTH}
-      userData={null}
-      onCityClick={noop}
-      onOptionClick={noop}
-    />, {
-      createNodeMock: () => ({})
-    })
+    .create(
+        <Provider store={store}>
+          <MainPage
+            city={Cities[0]}
+            cityOffers={cityOffers}
+            history={history}
+            logged={AuthorizationStatus.NO_AUTH}
+            userData={null}
+            onCityClick={noop}
+            onOptionClick={noop}
+          />
+        </Provider>
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

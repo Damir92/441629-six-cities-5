@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with-auth-form hoc rendered correctly withReviewForm with all props rendered correctly 1`] = `null`;
+
+exports[`with-auth-form hoc rendered correctly withReviewForm without additional props rendered correctly 1`] = `null`;

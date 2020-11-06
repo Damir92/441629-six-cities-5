@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -17,7 +16,20 @@ import ReviewForm from '../review-form/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unloadActiveOffer, offer = {}, reviews = []}) => {
+const OfferPage = (props) => {
+  const {
+    cityOffers,
+    history,
+    logged,
+    match,
+    offer = {},
+    onLoad,
+    onSendForm,
+    reviews = [],
+    unloadActiveOffer,
+    userData,
+  } = props;
+
   const nearestOffers = cityOffers.slice(0, 3);
   const offerId = +match.params.id;
 
@@ -40,6 +52,23 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
     type,
   } = offer;
 
+  const handleToMainClick = (evt) => {
+    evt.preventDefault();
+
+    unloadActiveOffer();
+    history.push(Routes.MAIN);
+  };
+
+  const handleLinkClick = (evt) => {
+    evt.preventDefault();
+
+    if (logged === AuthorizationStatus.AUTH) {
+      history.push(Routes.FAVORITES);
+    } else {
+      history.push(Routes.LOGIN);
+    }
+  };
+
   return (
     <div className="page">
       <header className="header">
@@ -47,26 +76,22 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
           <div className="header__wrapper">
             <div className="header__left">
 
-              <Link
+              <a
                 className="header__logo-link"
-                to="/"
-                onClick={unloadActiveOffer}
+                href={Routes.MAIN}
+                onClick={handleToMainClick}
               >
                 <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
+              </a>
 
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link
+                  <a
                     className="header__nav-link header__nav-link--profile"
-                    to={logged === AuthorizationStatus.AUTH
-                      ?
-                      Routes.FAVORITES
-                      :
-                      Routes.LOGIN
-                    }
+                    href={Routes.MAIN}
+                    onClick={handleLinkClick}
                   >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     {logged === AuthorizationStatus.AUTH
@@ -77,7 +102,7 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
                       :
                       <span className="header__login">Sign in</span>
                     }
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -220,15 +245,21 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
 };
 
 OfferPage.propTypes = {
-  offer: PropTypes.oneOfType([PropTypes.shape(OfferPagePropTypes).isRequired, PropTypes.shape({}).isRequired]).isRequired,
+  offer: PropTypes.oneOfType([
+    PropTypes.shape(OfferPagePropTypes).isRequired,
+    PropTypes.shape({}).isRequired
+  ]).isRequired,
   match: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  userData: PropTypes.oneOfType([PropTypes.shape({
+  userData: PropTypes.shape({
     email: PropTypes.string,
-  }), null]),
+  }),
   onLoad: PropTypes.func.isRequired,
   onSendForm: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(

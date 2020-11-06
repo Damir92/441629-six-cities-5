@@ -64,7 +64,7 @@ OffersSorting.propTypes = {
   toggle: PropTypes.bool.isRequired,
   onOptionClick: PropTypes.func.isRequired,
   onToggleClick: PropTypes.func.isRequired,
-  sortingType: PropTypes.string.isRequired,
+  sortingType: PropTypes.oneOf(SortingTypes).isRequired,
 };
 
 const mapStateToProps = (state) => ({

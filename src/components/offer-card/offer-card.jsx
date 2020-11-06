@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -22,12 +22,20 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
     type,
   } = offer;
 
+  const history = useHistory();
+
   const handleMouseEnterCard = () => {
     onCardEnterMouse(offer.id);
   };
 
   const handleMouseLeaveCard = () => {
     onCardEnterMouse(null);
+  };
+
+  const handleLinkClick = (evt) => {
+    evt.preventDefault();
+
+    history.push(`${Routes.OFFER_LINK}/${id}`);
   };
 
   return (
@@ -74,11 +82,12 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
         </div>
         <h2 className="place-card__name">
 
-          <Link
-            to={`${Routes.OFFER_LINK}/${id}`}
+          <a
+            href={`${Routes.OFFER_LINK}/${id}`}
+            onClick={handleLinkClick}
           >
             {title}
-          </Link>
+          </a>
         </h2>
         <p className="place-card__type">{LivingType[type]}</p>
       </div>

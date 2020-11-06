@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with-select-list hoc rendered correctly withSelectList rendered correctly 1`] = `null`;

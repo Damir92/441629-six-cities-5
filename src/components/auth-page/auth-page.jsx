@@ -1,13 +1,13 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {Routes} from '../../const';
 import {login} from '../../store/api-actions';
 
 import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
-const AuthPage = ({email, password, onChange, onSubmit}) => {
+const AuthPage = ({history, email, password, onChange, onSubmit}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -17,18 +17,25 @@ const AuthPage = ({email, password, onChange, onSubmit}) => {
     });
   };
 
+  const handleToMainClick = (evt) => {
+    evt.preventDefault();
+
+    history.push(Routes.MAIN);
+  };
+
   return (
     <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link
+              <a
                 className="header__logo-link"
-                to="/"
+                href={Routes.MAIN}
+                onClick={handleToMainClick}
               >
                 <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
+              </a>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -97,6 +104,9 @@ const AuthPage = ({email, password, onChange, onSubmit}) => {
 };
 
 AuthPage.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

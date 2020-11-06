@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with-auth-form hoc rendered correctly withToggle rendered correctly 1`] = `null`;
