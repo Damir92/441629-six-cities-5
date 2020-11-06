@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CitiesList rendered correctly Render cities list component 1`] = `
+exports[`CitiesList renders correctly CitiesList renders correctly 1`] = `
 <ul
   className="locations__list tabs__list"
 >
   <li
     className="locations__item"
+    key="Paris"
   >
     <a
       className="locations__item-link tabs__item tabs__item--active"
@@ -19,6 +20,7 @@ exports[`CitiesList rendered correctly Render cities list component 1`] = `
   </li>
   <li
     className="locations__item"
+    key="Cologne"
   >
     <a
       className="locations__item-link tabs__item "
@@ -32,6 +34,7 @@ exports[`CitiesList rendered correctly Render cities list component 1`] = `
   </li>
   <li
     className="locations__item"
+    key="Brussels"
   >
     <a
       className="locations__item-link tabs__item "
@@ -45,6 +48,7 @@ exports[`CitiesList rendered correctly Render cities list component 1`] = `
   </li>
   <li
     className="locations__item"
+    key="Amsterdam"
   >
     <a
       className="locations__item-link tabs__item "
@@ -58,6 +62,7 @@ exports[`CitiesList rendered correctly Render cities list component 1`] = `
   </li>
   <li
     className="locations__item"
+    key="Hamburg"
   >
     <a
       className="locations__item-link tabs__item "
@@ -71,6 +76,7 @@ exports[`CitiesList rendered correctly Render cities list component 1`] = `
   </li>
   <li
     className="locations__item"
+    key="Dusseldorf"
   >
     <a
       className="locations__item-link tabs__item "

@@ -1,20 +1,18 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {reviews} from '../../mocks/tests-data';
 
 import ReviewsList from './reviews-list';
 
-describe(`ReviewsList rendered correctly`, () => {
-  it(`Render reviews list component`, () => {
-    const tree = renderer
-      .create(
-          <ReviewsList
-            reviews={reviews}
-          />
-      )
-      .toJSON();
+describe(`ReviewsList renders correctly`, () => {
+  it(`ReviewList component renders`, () => {
+    const component = shallow(
+        <ReviewsList
+          reviews={reviews}
+        />
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });

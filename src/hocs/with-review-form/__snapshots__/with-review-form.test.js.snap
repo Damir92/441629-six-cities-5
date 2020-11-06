@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with-auth-form hoc rendered correctly withReviewForm with all props rendered correctly 1`] = `null`;
+exports[`with-review-form hoc renders correctly withReviewForm with all props renders correctly 1`] = `
+<MockComponent
+  id={0}
+  onChange={[Function]}
+  onSubmit={[Function]}
+  rating={3}
+  review="test"
+/>
+`;
 
-exports[`with-auth-form hoc rendered correctly withReviewForm without additional props rendered correctly 1`] = `null`;
+exports[`with-review-form hoc renders correctly withReviewForm without additional props renders correctly 1`] = `
+<MockComponent
+  id={0}
+  onChange={[Function]}
+  onSubmit={[Function]}
+  rating=""
+  review=""
+/>
+`;

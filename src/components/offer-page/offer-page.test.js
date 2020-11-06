@@ -1,14 +1,10 @@
 import React from 'react';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {cityOffers, offer, noop, reviews} from '../../mocks/tests-data';
-import reducer from '../../store/reducer';
+import {AuthorizationStatus} from '../../const';
 
-import OfferPage from './offer-page';
-
-const store = createStore(reducer);
+import {OfferPage} from './offer-page';
 
 const history = {
   push: noop,
@@ -20,26 +16,22 @@ const match = {
   },
 };
 
-describe(`Offer page rendered correctly`, () => {
-  it(`It is main page`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <OfferPage
-              cityOffers={cityOffers}
-              history={history}
-              logged={false}
-              match={match}
-              offer={offer}
-              onLoad={noop}
-              onSendForm={noop}
-              reviews={reviews}
-              unloadActiveOffer={noop}
-              userData={null}
-            />
-          </Provider>
-      )
-      .toJSON();
+describe(`Offer page renders correctly`, () => {
+  it(`It is not main page`, () => {
+    const tree = shallow(
+        <OfferPage
+          cityOffers={cityOffers}
+          history={history}
+          logged={AuthorizationStatus.NO_AUTH}
+          match={match}
+          offer={offer}
+          onLoad={noop}
+          onSendForm={noop}
+          reviews={reviews}
+          unloadActiveOffer={noop}
+          userData={null}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });

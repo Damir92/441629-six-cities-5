@@ -1,22 +1,20 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {noop} from '../../mocks/tests-data';
 
 import {ReviewForm} from './review-form';
 
-describe(`ReviewForm rendered correctly`, () => {
-  it(`Render review form component`, () => {
-    const tree = renderer
-      .create(
-          <ReviewForm
-            rating={``}
-            review={``}
-            onChange={noop}
-            onSubmit={noop}
-          />
-      )
-      .toJSON();
+describe(`ReviewForm renders correctly`, () => {
+  it(`ReviewForm renders correctly`, () => {
+    const tree = shallow(
+        <ReviewForm
+          rating={``}
+          review={``}
+          onChange={noop}
+          onSubmit={noop}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });

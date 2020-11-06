@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with-select-list hoc rendered correctly withSelectList rendered correctly 1`] = `null`;
+exports[`with-select-list hoc renders correctly withSelectList renders correctly 1`] = `
+<MockComponent
+  onOpenList={[Function]}
+  onOptionClick={[Function]}
+  openedList={false}
+/>
+`;

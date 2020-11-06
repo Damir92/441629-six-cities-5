@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OfferCard rendered correctly It is NOT main page 1`] = `
+exports[`OfferCard renders correctly It is from main page 1`] = `
 <article
-  className="place-card near-places__card"
+  className="place-card cities__place-card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
   <div
-    className="place-card__image-wrapper near-places__image-wrapper"
+    className="place-card__image-wrapper cities__image-wrapper"
   >
     <a
       href="#"
@@ -101,14 +101,14 @@ exports[`OfferCard rendered correctly It is NOT main page 1`] = `
 </article>
 `;
 
-exports[`OfferCard rendered correctly It is main page 1`] = `
+exports[`OfferCard renders correctly It is not from main page 1`] = `
 <article
-  className="place-card cities__place-card"
+  className="place-card near-places__card"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
   <div
-    className="place-card__image-wrapper cities__image-wrapper"
+    className="place-card__image-wrapper near-places__image-wrapper"
   >
     <a
       href="#"

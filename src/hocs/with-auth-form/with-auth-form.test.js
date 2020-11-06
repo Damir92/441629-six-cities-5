@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 import PropTypes from 'prop-types';
 
 import withAuthForm from './with-auth-form';
@@ -23,27 +23,27 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withAuthForm(MockComponent);
 
-describe(`with-auth-form hoc rendered correctly`, () => {
-  it(`withAuthForm without props rendered correctly`, () => {
-    const tree = renderer.create((
-      <MockComponentWrapped>
-        <Fragment />
-      </MockComponentWrapped>
-    )).toJSON();
+describe(`with-auth-form hoc renders correctly`, () => {
+  it(`withAuthForm without props renders correctly`, () => {
+    const component = shallow(
+        <MockComponentWrapped>
+          <Fragment />
+        </MockComponentWrapped>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 
-  it(`withAuthForm with props rendered correctly`, () => {
-    const tree = renderer.create((
-      <MockComponentWrapped
-        email={`test@test.js`}
-        password={`123`}
-      >
-        <Fragment />
-      </MockComponentWrapped>
-    )).toJSON();
+  it(`withAuthForm with props renders correctly`, () => {
+    const component = shallow(
+        <MockComponentWrapped
+          email={`test@test.js`}
+          password={`123`}
+        >
+          <Fragment />
+        </MockComponentWrapped>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });

@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with-auth-form hoc rendered correctly withAuthForm with props rendered correctly 1`] = `null`;
+exports[`with-auth-form hoc renders correctly withAuthForm with props renders correctly 1`] = `
+<MockComponent
+  email="test@test.js"
+  onChange={[Function]}
+  password="123"
+/>
+`;
 
-exports[`with-auth-form hoc rendered correctly withAuthForm without props rendered correctly 1`] = `null`;
+exports[`with-auth-form hoc renders correctly withAuthForm without props renders correctly 1`] = `
+<MockComponent
+  email=""
+  onChange={[Function]}
+  password=""
+/>
+`;

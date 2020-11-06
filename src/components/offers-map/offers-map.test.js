@@ -1,19 +1,17 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {cityOffers} from '../../mocks/tests-data';
 
 import {OffersMap} from './offers-map';
 
-describe(`OffersMap rendered correctly`, () => {
-  it(`Render offers map component`, () => {
-    const tree = renderer
-      .create(
-          <OffersMap
-            cityOffers={cityOffers}
-          />
-      )
-      .toJSON();
+describe(`OffersMap renders correctly`, () => {
+  it(`OffersMap renders correctly`, () => {
+    const tree = shallow(
+        <OffersMap
+          cityOffers={cityOffers}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });

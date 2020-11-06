@@ -1,14 +1,9 @@
 import React from 'react';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {cityOffers} from '../../mocks/tests-data';
-import reducer from '../../store/reducer';
 
 import OffersList from './offers-list';
-
-const store = createStore(reducer);
 
 jest.mock(`react-router-dom`, () => ({
   useHistory: () => ({
@@ -16,33 +11,25 @@ jest.mock(`react-router-dom`, () => ({
   }),
 }));
 
-describe(`Offers list rendered correctly`, () => {
-  it(`It is main page`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <OffersList
-              cityOffers={cityOffers}
-              isMainPage={true}
-            />
-          </Provider>
-      )
-      .toJSON();
+describe(`Offers list renders correctly`, () => {
+  it(`It is from main page`, () => {
+    const tree = shallow(
+        <OffersList
+          cityOffers={cityOffers}
+          isMainPage={true}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });
 
-  it(`It is not main page`, () => {
-    const tree = renderer
-      .create(
-          <Provider store={store}>
-            <OffersList
-              cityOffers={cityOffers}
-              isMainPage={false}
-            />
-          </Provider>
-      )
-      .toJSON();
+  it(`It is not from main page`, () => {
+    const tree = shallow(
+        <OffersList
+          cityOffers={cityOffers}
+          isMainPage={false}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });

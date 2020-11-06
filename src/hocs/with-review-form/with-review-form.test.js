@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 import PropTypes from 'prop-types';
 
 import {noop} from '../../mocks/tests-data';
@@ -25,32 +25,32 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withReviewForm(MockComponent);
 
-describe(`with-review-form hoc rendered correctly`, () => {
-  it(`withReviewForm without additional props rendered correctly`, () => {
-    const tree = renderer.create((
-      <MockComponentWrapped
-        id={0}
-        onSubmit={noop}
-      >
-        <Fragment />
-      </MockComponentWrapped>
-    )).toJSON();
+describe(`with-review-form hoc renders correctly`, () => {
+  it(`withReviewForm without additional props renders correctly`, () => {
+    const component = shallow(
+        <MockComponentWrapped
+          id={0}
+          onSubmit={noop}
+        >
+          <Fragment />
+        </MockComponentWrapped>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 
-  it(`withReviewForm with all props rendered correctly`, () => {
-    const tree = renderer.create((
-      <MockComponentWrapped
-        id={0}
-        onSubmit={noop}
-        rating={3}
-        review={'test'}
-      >
-        <Fragment />
-      </MockComponentWrapped>
-    )).toJSON();
+  it(`withReviewForm with all props renders correctly`, () => {
+    const component = shallow(
+        <MockComponentWrapped
+          id={0}
+          onSubmit={noop}
+          rating={3}
+          review={`test`}
+        >
+          <Fragment />
+        </MockComponentWrapped>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });

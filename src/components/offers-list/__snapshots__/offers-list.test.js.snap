@@ -1,603 +1,327 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Offers list rendered correctly It is main page 1`] = `
+exports[`Offers list renders correctly It is from main page 1`] = `
 <div
   className="places__list cities__places-list tabs__content"
 >
-  <article
-    className="place-card cities__place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="place-card__image-wrapper cities__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="previewURL"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            111
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button "
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            To bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "60%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/2"
-          onClick={[Function]}
-        >
-          Wood and stone place
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        Private Room
-      </p>
-    </div>
-  </article>
-  <article
-    className="place-card cities__place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="place-card__image-wrapper cities__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="previewURL"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            294
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button place-card__bookmark-button--active"
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            In bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "80%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/4"
-          onClick={[Function]}
-        >
-          Loft Studio in the Central Area
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        Hotel
-      </p>
-    </div>
-  </article>
-  <article
-    className="place-card cities__place-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="place-card__image-wrapper cities__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="previewURL"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            406
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button "
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            To bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "40%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/9"
-          onClick={[Function]}
-        >
-          Loft Studio in the Central Area
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        Hotel
-      </p>
-    </div>
-  </article>
+  <Connect(OfferCard)
+    isMainPage={true}
+    key="2"
+    offer={
+      Object {
+        "bedrooms": 1,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!",
+        "goods": Array [
+          "Fridge",
+          "Washer",
+          "Coffee machine",
+          "Washing machine",
+          "Dishwasher",
+          "Laptop friendly workspace",
+          "Cable TV",
+          "Air conditioning",
+          "Baby seat",
+          "Towels",
+          "Breakfast",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 2,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.37454,
+          "longitude": 4.881976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 111,
+        "rating": 3.3,
+        "title": "Wood and stone place",
+        "type": "room",
+        "volume": 1,
+      }
+    }
+  />
+  <Connect(OfferCard)
+    isMainPage={true}
+    key="4"
+    offer={
+      Object {
+        "bedrooms": 1,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.",
+        "goods": Array [
+          "Laptop friendly workspace",
+          "Baby seat",
+          "Towels",
+          "Air conditioning",
+          "Breakfast",
+          "Washer",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 4,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": true,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.35054,
+          "longitude": 4.908976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 294,
+        "rating": 3.8,
+        "title": "Loft Studio in the Central Area",
+        "type": "hotel",
+        "volume": 2,
+      }
+    }
+  />
+  <Connect(OfferCard)
+    isMainPage={true}
+    key="9"
+    offer={
+      Object {
+        "bedrooms": 4,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "This is a place for dreamers to reset, reflect, and create. Designed with a \\"slow\\" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+        "goods": Array [
+          "Air conditioning",
+          "Baby seat",
+          "Fridge",
+          "Towels",
+          "Breakfast",
+          "Washer",
+          "Laptop friendly workspace",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 9,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.37854,
+          "longitude": 4.894976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 406,
+        "rating": 2.2,
+        "title": "Loft Studio in the Central Area",
+        "type": "hotel",
+        "volume": 10,
+      }
+    }
+  />
 </div>
 `;
 
-exports[`Offers list rendered correctly It is not main page 1`] = `
+exports[`Offers list renders correctly It is not from main page 1`] = `
 <div
   className="places__list near-places__list"
 >
-  <article
-    className="place-card near-places__card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="place-card__image-wrapper near-places__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="previewURL"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            111
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button "
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            To bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "60%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/2"
-          onClick={[Function]}
-        >
-          Wood and stone place
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        Private Room
-      </p>
-    </div>
-  </article>
-  <article
-    className="place-card near-places__card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="place-card__image-wrapper near-places__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="previewURL"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            294
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button place-card__bookmark-button--active"
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            In bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "80%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/4"
-          onClick={[Function]}
-        >
-          Loft Studio in the Central Area
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        Hotel
-      </p>
-    </div>
-  </article>
-  <article
-    className="place-card near-places__card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="place-card__image-wrapper near-places__image-wrapper"
-    >
-      <a
-        href="#"
-      >
-        <img
-          alt="Place image"
-          className="place-card__image"
-          height="200"
-          src="previewURL"
-          width="260"
-        />
-      </a>
-    </div>
-    <div
-      className="place-card__info"
-    >
-      <div
-        className="place-card__price-wrapper"
-      >
-        <div
-          className="place-card__price"
-        >
-          <b
-            className="place-card__price-value"
-          >
-            €
-            406
-          </b>
-          <span
-            className="place-card__price-text"
-          >
-            / night
-          </span>
-        </div>
-        <button
-          className="place-card__bookmark-button button "
-          type="button"
-        >
-          <svg
-            className="place-card__bookmark-icon"
-            height="19"
-            width="18"
-          >
-            <use
-              xlinkHref="#icon-bookmark"
-            />
-          </svg>
-          <span
-            className="visually-hidden"
-          >
-            To bookmarks
-          </span>
-        </button>
-      </div>
-      <div
-        className="place-card__rating rating"
-      >
-        <div
-          className="place-card__stars rating__stars"
-        >
-          <span
-            style={
-              Object {
-                "width": "40%",
-              }
-            }
-          />
-          <span
-            className="visually-hidden"
-          >
-            Rating
-          </span>
-        </div>
-      </div>
-      <h2
-        className="place-card__name"
-      >
-        <a
-          href="/offer/9"
-          onClick={[Function]}
-        >
-          Loft Studio in the Central Area
-        </a>
-      </h2>
-      <p
-        className="place-card__type"
-      >
-        Hotel
-      </p>
-    </div>
-  </article>
+  <Connect(OfferCard)
+    isMainPage={false}
+    key="2"
+    offer={
+      Object {
+        "bedrooms": 1,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!",
+        "goods": Array [
+          "Fridge",
+          "Washer",
+          "Coffee machine",
+          "Washing machine",
+          "Dishwasher",
+          "Laptop friendly workspace",
+          "Cable TV",
+          "Air conditioning",
+          "Baby seat",
+          "Towels",
+          "Breakfast",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 2,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.37454,
+          "longitude": 4.881976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 111,
+        "rating": 3.3,
+        "title": "Wood and stone place",
+        "type": "room",
+        "volume": 1,
+      }
+    }
+  />
+  <Connect(OfferCard)
+    isMainPage={false}
+    key="4"
+    offer={
+      Object {
+        "bedrooms": 1,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.",
+        "goods": Array [
+          "Laptop friendly workspace",
+          "Baby seat",
+          "Towels",
+          "Air conditioning",
+          "Breakfast",
+          "Washer",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 4,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": true,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.35054,
+          "longitude": 4.908976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 294,
+        "rating": 3.8,
+        "title": "Loft Studio in the Central Area",
+        "type": "hotel",
+        "volume": 2,
+      }
+    }
+  />
+  <Connect(OfferCard)
+    isMainPage={false}
+    key="9"
+    offer={
+      Object {
+        "bedrooms": 4,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "This is a place for dreamers to reset, reflect, and create. Designed with a \\"slow\\" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+        "goods": Array [
+          "Air conditioning",
+          "Baby seat",
+          "Fridge",
+          "Towels",
+          "Breakfast",
+          "Washer",
+          "Laptop friendly workspace",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 9,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.37854,
+          "longitude": 4.894976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 406,
+        "rating": 2.2,
+        "title": "Loft Studio in the Central Area",
+        "type": "hotel",
+        "volume": 10,
+      }
+    }
+  />
 </div>
 `;

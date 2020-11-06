@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with-auth-form hoc rendered correctly withToggle rendered correctly 1`] = `null`;
+exports[`with-auth-form hoc renders correctly withToggle renders correctly 1`] = `
+<MockComponent
+  onToggleClick={[Function]}
+  toggle={false}
+  toggleState={false}
+/>
+`;

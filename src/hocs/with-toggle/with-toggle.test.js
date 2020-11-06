@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 import PropTypes from 'prop-types';
 
 import withToggle from './with-toggle';
@@ -23,16 +23,16 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withToggle(MockComponent);
 
-describe(`with-auth-form hoc rendered correctly`, () => {
-  it(`withToggle rendered correctly`, () => {
-    const tree = renderer.create((
-      <MockComponentWrapped
-        toggleState={false}
-      >
-        <Fragment />
-      </MockComponentWrapped>
-    )).toJSON();
+describe(`with-auth-form hoc renders correctly`, () => {
+  it(`withToggle renders correctly`, () => {
+    const component = shallow(
+        <MockComponentWrapped
+          toggleState={false}
+        >
+          <Fragment />
+        </MockComponentWrapped>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });

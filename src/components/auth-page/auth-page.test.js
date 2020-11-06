@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {noop} from '../../mocks/tests-data';
 
@@ -9,19 +9,17 @@ const history = {
   push: noop,
 };
 
-describe(`AuthPage rendered correctly`, () => {
-  it(`Render auth-page component`, () => {
-    const tree = renderer
-      .create(
-          <AuthPage
-            history={history}
-            email={``}
-            password={``}
-            onChange={noop}
-            onSubmit={noop}
-          />
-      )
-      .toJSON();
+describe(`AuthPage renders correctly`, () => {
+  it(`AuthPage renders correctly`, () => {
+    const tree = shallow(
+        <AuthPage
+          history={history}
+          email={``}
+          password={``}
+          onChange={noop}
+          onSubmit={noop}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });

@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 
 import {offer, noop} from '../../mocks/tests-data';
 
@@ -11,31 +11,27 @@ jest.mock(`react-router-dom`, () => ({
   }),
 }));
 
-describe(`OfferCard rendered correctly`, () => {
-  it(`It is main page`, () => {
-    const tree = renderer
-      .create(
-          <OfferCard
-            isMainPage={true}
-            offer={offer}
-            onCardEnterMouse={noop}
-          />
-      )
-      .toJSON();
+describe(`OfferCard renders correctly`, () => {
+  it(`It is from main page`, () => {
+    const tree = shallow(
+        <OfferCard
+          isMainPage={true}
+          offer={offer}
+          onCardEnterMouse={noop}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });
 
-  it(`It is NOT main page`, () => {
-    const tree = renderer
-      .create(
-          <OfferCard
-            isMainPage={false}
-            offer={offer}
-            onCardEnterMouse={noop}
-          />
-      )
-      .toJSON();
+  it(`It is not from main page`, () => {
+    const tree = shallow(
+        <OfferCard
+          isMainPage={false}
+          offer={offer}
+          onCardEnterMouse={noop}
+        />
+    );
 
     expect(tree).toMatchSnapshot();
   });

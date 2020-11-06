@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainPage rendered correctly 1`] = `
+exports[`MainPage renders correctly MainPage renders correctly 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -71,114 +71,180 @@ exports[`MainPage rendered correctly 1`] = `
       <section
         className="locations container"
       >
-        <ul
-          className="locations__list tabs__list"
-        >
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item tabs__item--active"
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item "
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item "
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item "
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Amsterdam
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item "
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Hamburg
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item "
-              href="#"
-              onClick={[Function]}
-            >
-              <span>
-                Dusseldorf
-              </span>
-            </a>
-          </li>
-        </ul>
+        <CitiesList
+          city="Paris"
+          onCityClick={[Function]}
+        />
       </section>
     </div>
     <div
       className="cities"
     >
       <div
-        className="cities__places-container container cities__places-container--empty"
+        className="cities__places-container container "
       >
         <section
-          className="cities__no-places"
+          className="cities__places places"
         >
-          <div
-            className="cities__status-wrapper tabs__content"
+          <h2
+            className="visually-hidden"
           >
-            <b
-              className="cities__status"
-            >
-              No places to stay available
-            </b>
-            <p
-              className="cities__status-description"
-            >
-              We could not find any property available at the moment in 
-              Paris
-            </p>
-          </div>
+            Places
+          </h2>
+          <b
+            className="places__found"
+          >
+            3
+             places to stay in 
+            Paris
+          </b>
+          <Connect(WithToggle)
+            onOptionClick={[Function]}
+          />
+          <OffersList
+            cityOffers={
+              Array [
+                Object {
+                  "bedrooms": 1,
+                  "city": Object {
+                    "location": Object {
+                      "latitude": 52.37454,
+                      "longitude": 4.897976,
+                      "zoom": 13,
+                    },
+                    "name": "Amsterdam",
+                  },
+                  "description": "I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!",
+                  "goods": Array [
+                    "Fridge",
+                    "Washer",
+                    "Coffee machine",
+                    "Washing machine",
+                    "Dishwasher",
+                    "Laptop friendly workspace",
+                    "Cable TV",
+                    "Air conditioning",
+                    "Baby seat",
+                    "Towels",
+                    "Breakfast",
+                  ],
+                  "host": Object {
+                    "avatar": "img/avatar-angelina.jpg",
+                    "id": 25,
+                    "isPro": true,
+                    "name": "Angelina",
+                  },
+                  "id": 2,
+                  "images": Array [
+                    "imgURL-1",
+                    "imgURL-2",
+                  ],
+                  "isFavorite": false,
+                  "isPremium": false,
+                  "location": Object {
+                    "latitude": 52.37454,
+                    "longitude": 4.881976,
+                    "zoom": 16,
+                  },
+                  "preview": "previewURL",
+                  "price": 111,
+                  "rating": 3.3,
+                  "title": "Wood and stone place",
+                  "type": "room",
+                  "volume": 1,
+                },
+                Object {
+                  "bedrooms": 1,
+                  "city": Object {
+                    "location": Object {
+                      "latitude": 52.37454,
+                      "longitude": 4.897976,
+                      "zoom": 13,
+                    },
+                    "name": "Amsterdam",
+                  },
+                  "description": "A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.",
+                  "goods": Array [
+                    "Laptop friendly workspace",
+                    "Baby seat",
+                    "Towels",
+                    "Air conditioning",
+                    "Breakfast",
+                    "Washer",
+                  ],
+                  "host": Object {
+                    "avatar": "img/avatar-angelina.jpg",
+                    "id": 25,
+                    "isPro": true,
+                    "name": "Angelina",
+                  },
+                  "id": 4,
+                  "images": Array [
+                    "imgURL-1",
+                    "imgURL-2",
+                  ],
+                  "isFavorite": true,
+                  "isPremium": false,
+                  "location": Object {
+                    "latitude": 52.35054,
+                    "longitude": 4.908976,
+                    "zoom": 16,
+                  },
+                  "preview": "previewURL",
+                  "price": 294,
+                  "rating": 3.8,
+                  "title": "Loft Studio in the Central Area",
+                  "type": "hotel",
+                  "volume": 2,
+                },
+                Object {
+                  "bedrooms": 4,
+                  "city": Object {
+                    "location": Object {
+                      "latitude": 52.37454,
+                      "longitude": 4.897976,
+                      "zoom": 13,
+                    },
+                    "name": "Amsterdam",
+                  },
+                  "description": "This is a place for dreamers to reset, reflect, and create. Designed with a \\"slow\\" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+                  "goods": Array [
+                    "Air conditioning",
+                    "Baby seat",
+                    "Fridge",
+                    "Towels",
+                    "Breakfast",
+                    "Washer",
+                    "Laptop friendly workspace",
+                  ],
+                  "host": Object {
+                    "avatar": "img/avatar-angelina.jpg",
+                    "id": 25,
+                    "isPro": true,
+                    "name": "Angelina",
+                  },
+                  "id": 9,
+                  "images": Array [
+                    "imgURL-1",
+                    "imgURL-2",
+                  ],
+                  "isFavorite": false,
+                  "isPremium": false,
+                  "location": Object {
+                    "latitude": 52.37854,
+                    "longitude": 4.894976,
+                    "zoom": 16,
+                  },
+                  "preview": "previewURL",
+                  "price": 406,
+                  "rating": 2.2,
+                  "title": "Loft Studio in the Central Area",
+                  "type": "hotel",
+                  "volume": 10,
+                },
+              ]
+            }
+          />
         </section>
         <div
           className="cities__right-section"
@@ -186,12 +252,148 @@ exports[`MainPage rendered correctly 1`] = `
           <section
             className="cities__map map"
           >
-            <div
-              id="map"
-              style={
-                Object {
-                  "height": "100%",
-                }
+            <Connect(OffersMap)
+              cityOffers={
+                Array [
+                  Object {
+                    "bedrooms": 1,
+                    "city": Object {
+                      "location": Object {
+                        "latitude": 52.37454,
+                        "longitude": 4.897976,
+                        "zoom": 13,
+                      },
+                      "name": "Amsterdam",
+                    },
+                    "description": "I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!",
+                    "goods": Array [
+                      "Fridge",
+                      "Washer",
+                      "Coffee machine",
+                      "Washing machine",
+                      "Dishwasher",
+                      "Laptop friendly workspace",
+                      "Cable TV",
+                      "Air conditioning",
+                      "Baby seat",
+                      "Towels",
+                      "Breakfast",
+                    ],
+                    "host": Object {
+                      "avatar": "img/avatar-angelina.jpg",
+                      "id": 25,
+                      "isPro": true,
+                      "name": "Angelina",
+                    },
+                    "id": 2,
+                    "images": Array [
+                      "imgURL-1",
+                      "imgURL-2",
+                    ],
+                    "isFavorite": false,
+                    "isPremium": false,
+                    "location": Object {
+                      "latitude": 52.37454,
+                      "longitude": 4.881976,
+                      "zoom": 16,
+                    },
+                    "preview": "previewURL",
+                    "price": 111,
+                    "rating": 3.3,
+                    "title": "Wood and stone place",
+                    "type": "room",
+                    "volume": 1,
+                  },
+                  Object {
+                    "bedrooms": 1,
+                    "city": Object {
+                      "location": Object {
+                        "latitude": 52.37454,
+                        "longitude": 4.897976,
+                        "zoom": 13,
+                      },
+                      "name": "Amsterdam",
+                    },
+                    "description": "A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.",
+                    "goods": Array [
+                      "Laptop friendly workspace",
+                      "Baby seat",
+                      "Towels",
+                      "Air conditioning",
+                      "Breakfast",
+                      "Washer",
+                    ],
+                    "host": Object {
+                      "avatar": "img/avatar-angelina.jpg",
+                      "id": 25,
+                      "isPro": true,
+                      "name": "Angelina",
+                    },
+                    "id": 4,
+                    "images": Array [
+                      "imgURL-1",
+                      "imgURL-2",
+                    ],
+                    "isFavorite": true,
+                    "isPremium": false,
+                    "location": Object {
+                      "latitude": 52.35054,
+                      "longitude": 4.908976,
+                      "zoom": 16,
+                    },
+                    "preview": "previewURL",
+                    "price": 294,
+                    "rating": 3.8,
+                    "title": "Loft Studio in the Central Area",
+                    "type": "hotel",
+                    "volume": 2,
+                  },
+                  Object {
+                    "bedrooms": 4,
+                    "city": Object {
+                      "location": Object {
+                        "latitude": 52.37454,
+                        "longitude": 4.897976,
+                        "zoom": 13,
+                      },
+                      "name": "Amsterdam",
+                    },
+                    "description": "This is a place for dreamers to reset, reflect, and create. Designed with a \\"slow\\" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+                    "goods": Array [
+                      "Air conditioning",
+                      "Baby seat",
+                      "Fridge",
+                      "Towels",
+                      "Breakfast",
+                      "Washer",
+                      "Laptop friendly workspace",
+                    ],
+                    "host": Object {
+                      "avatar": "img/avatar-angelina.jpg",
+                      "id": 25,
+                      "isPro": true,
+                      "name": "Angelina",
+                    },
+                    "id": 9,
+                    "images": Array [
+                      "imgURL-1",
+                      "imgURL-2",
+                    ],
+                    "isFavorite": false,
+                    "isPremium": false,
+                    "location": Object {
+                      "latitude": 52.37854,
+                      "longitude": 4.894976,
+                      "zoom": 16,
+                    },
+                    "preview": "previewURL",
+                    "price": 406,
+                    "rating": 2.2,
+                    "title": "Loft Studio in the Central Area",
+                    "type": "hotel",
+                    "volume": 10,
+                  },
+                ]
               }
             />
           </section>

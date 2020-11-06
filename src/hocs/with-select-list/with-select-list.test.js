@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import renderer from 'react-test-renderer';
+import {shallow} from 'enzyme';
 import PropTypes from 'prop-types';
 
 import withSelectList from './with-select-list';
@@ -24,16 +24,16 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withSelectList(MockComponent);
 
-describe(`with-select-list hoc rendered correctly`, () => {
-  it(`withSelectList rendered correctly`, () => {
-    const tree = renderer.create((
-      <MockComponentWrapped
-        onOptionClick={noop}
-      >
-        <Fragment />
-      </MockComponentWrapped>
-    )).toJSON();
+describe(`with-select-list hoc renders correctly`, () => {
+  it(`withSelectList renders correctly`, () => {
+    const component = shallow(
+        <MockComponentWrapped
+          onOptionClick={noop}
+        >
+          <Fragment />
+        </MockComponentWrapped>
+    );
 
-    expect(tree).toMatchSnapshot();
+    expect(component).toMatchSnapshot();
   });
 });
