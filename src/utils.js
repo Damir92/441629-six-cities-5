@@ -21,6 +21,10 @@ export const sortOffers = (offers, type) => {
 };
 
 export const offersAdapter = (data) => {
+  if (data[0].fake) {
+    return data;
+  }
+
   return data.map((item) => {
     return {
       city: item.city,
@@ -49,6 +53,10 @@ export const offersAdapter = (data) => {
 };
 
 export const reviewAdapter = (data) => {
+  if (data[0].fake) {
+    return data;
+  }
+
   return data.map((item) => {
     const date = new Date(item.date);
 

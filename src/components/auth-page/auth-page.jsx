@@ -2,8 +2,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {Routes} from '../../const';
 import {login} from '../../store/api-actions';
+
+import Header from '../header/header';
 
 import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
@@ -17,39 +18,12 @@ const AuthPage = ({history, email, password, onChange, onSubmit}) => {
     });
   };
 
-  const handleToMainClick = (evt) => {
-    evt.preventDefault();
-
-    history.push(Routes.MAIN);
-  };
-
   return (
     <div className="page page--gray page--login">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a
-                className="header__logo-link"
-                href={Routes.MAIN}
-                onClick={handleToMainClick}
-              >
-                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__login">Sign in</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header
+        history={history}
+      />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">

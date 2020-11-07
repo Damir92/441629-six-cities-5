@@ -1,5 +1,4 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -9,7 +8,7 @@ import {convertRatingToPercent} from '../../utils';
 import {LivingType, Routes} from '../../const';
 import {OfferCardPropTypes} from '../../prop-types';
 
-const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
+const OfferCard = ({offer = {}, history, onCardEnterMouse, isMainPage = true}) => {
 
   const {
     id,
@@ -21,8 +20,6 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
     title,
     type,
   } = offer;
-
-  const history = useHistory();
 
   const handleMouseEnterCard = () => {
     onCardEnterMouse(offer.id);
@@ -52,7 +49,10 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
         </div>
       }
       <div className={`place-card__image-wrapper ${isMainPage ? `cities__image-wrapper` : `near-places__image-wrapper`}`}>
-        <a href="#">
+        <a
+          href={`${Routes.OFFER_LINK}/${id}`}
+          onClick={handleLinkClick}
+        >
           <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
         </a>
       </div>
@@ -97,6 +97,9 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
 
 OfferCard.propTypes = {
   isMainPage: PropTypes.bool.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   offer: PropTypes.shape(OfferCardPropTypes).isRequired,
   onCardEnterMouse: PropTypes.func.isRequired,
 };

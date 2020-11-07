@@ -1,21 +1,16 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {offer, noop} from '../../mocks/tests-data';
+import {history, offer, noop} from '../../mocks/tests-data';
 
 import {OfferCard} from './offer-card';
-
-jest.mock(`react-router-dom`, () => ({
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-}));
 
 describe(`OfferCard renders correctly`, () => {
   it(`It is from main page`, () => {
     const tree = shallow(
         <OfferCard
           isMainPage={true}
+          history={history}
           offer={offer}
           onCardEnterMouse={noop}
         />
@@ -28,6 +23,7 @@ describe(`OfferCard renders correctly`, () => {
     const tree = shallow(
         <OfferCard
           isMainPage={false}
+          history={history}
           offer={offer}
           onCardEnterMouse={noop}
         />

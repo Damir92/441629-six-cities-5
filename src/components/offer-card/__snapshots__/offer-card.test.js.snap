@@ -10,7 +10,8 @@ exports[`OfferCard renders correctly It is from main page 1`] = `
     className="place-card__image-wrapper cities__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer/9"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -111,7 +112,8 @@ exports[`OfferCard renders correctly It is not from main page 1`] = `
     className="place-card__image-wrapper near-places__image-wrapper"
   >
     <a
-      href="#"
+      href="/offer/9"
+      onClick={[Function]}
     >
       <img
         alt="Place image"

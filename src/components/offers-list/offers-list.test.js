@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {cityOffers} from '../../mocks/tests-data';
+import {cityOffers, history} from '../../mocks/tests-data';
 
 import OffersList from './offers-list';
 
@@ -16,6 +16,7 @@ describe(`Offers list renders correctly`, () => {
     const tree = shallow(
         <OffersList
           cityOffers={cityOffers}
+          history={history}
           isMainPage={true}
         />
     );
@@ -27,6 +28,7 @@ describe(`Offers list renders correctly`, () => {
     const tree = shallow(
         <OffersList
           cityOffers={cityOffers}
+          history={history}
           isMainPage={false}
         />
     );

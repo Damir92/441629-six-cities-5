@@ -1,5 +1,9 @@
 export const noop = () => {};
 
+export const history = {
+  push: noop,
+};
+
 export const cityOffers = [
   {
     bedrooms: 1,
