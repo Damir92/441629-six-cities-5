@@ -5,8 +5,8 @@ import {reviews} from '../../mocks/tests-data';
 
 import ReviewsList from './reviews-list';
 
-describe(`ReviewsList renders correctly`, () => {
-  it(`ReviewList component renders`, () => {
+describe(`ReviewsList component`, () => {
+  it(`ReviewList renders correctly`, () => {
     const component = shallow(
         <ReviewsList
           reviews={reviews}

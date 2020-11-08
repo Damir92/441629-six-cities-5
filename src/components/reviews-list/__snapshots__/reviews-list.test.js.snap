@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewsList renders correctly ReviewList component renders 1`] = `
+exports[`ReviewsList component ReviewList renders correctly 1`] = `
 <ul
   className="reviews__list"
 >

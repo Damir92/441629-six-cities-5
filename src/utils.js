@@ -20,35 +20,43 @@ export const sortOffers = (offers, type) => {
   }
 };
 
+export const oneOfferAdapter = (item) => {
+  if (item.fake) {
+    return item;
+  }
+
+  return {
+    city: item.city,
+    preview: item.preview_image,
+    images: item.images,
+    title: item.title,
+    isFavorite: item.is_favorite,
+    isPremium: item.is_premium,
+    rating: item.rating,
+    type: item.type,
+    bedrooms: item.bedrooms,
+    volume: item.max_adults,
+    price: item.price,
+    goods: item.goods,
+    host: {
+      id: item.host.id,
+      name: item.host.name,
+      isPro: item.host.is_pro,
+      avatar: item.host.avatar_url,
+    },
+    description: item.description,
+    location: item.location,
+    id: item.id,
+  };
+};
+
 export const offersAdapter = (data) => {
   if (data[0].fake) {
     return data;
   }
 
   return data.map((item) => {
-    return {
-      city: item.city,
-      preview: item.preview_image,
-      images: item.images,
-      title: item.title,
-      isFavorite: item.is_favorite,
-      isPremium: item.is_premium,
-      rating: item.rating,
-      type: item.type,
-      bedrooms: item.bedrooms,
-      volume: item.max_adults,
-      price: item.price,
-      goods: item.goods,
-      host: {
-        id: item.host.id,
-        name: item.host.name,
-        isPro: item.host.is_pro,
-        avatar: item.host.avatar_url,
-      },
-      description: item.description,
-      location: item.location,
-      id: item.id,
-    };
+    return oneOfferAdapter(item);
   });
 };
 

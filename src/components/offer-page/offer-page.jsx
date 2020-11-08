@@ -9,6 +9,7 @@ import {convertRatingToPercent} from '../../utils';
 import {getCityOffers, getActiveOffer, getReviews} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 import {fetchActiveOffer, fetchReviews, postReview} from '../../store/api-actions';
+import {unsetActiveOfferAction} from '../../store/action';
 
 import Header from '../header/header';
 import ReviewsList from '../reviews-list/reviews-list';
@@ -26,10 +27,17 @@ const OfferPage = (props) => {
     onLoad,
     onSendForm,
     reviews = [],
+    unsetActiveOffer,
   } = props;
 
   const nearestOffers = cityOffers.slice(0, 3);
   const offerId = +match.params.id;
+
+  useEffect(() => {
+    return () => {
+      unsetActiveOffer();
+    };
+  }, []);
 
   useEffect(() => {
     onLoad(offerId);
@@ -61,7 +69,7 @@ const OfferPage = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images && images.map((image) => (
+              {images && images.slice(0, 6).map((image) => (
                 <div
                   key={image}
                   className="property__image-wrapper"
@@ -134,8 +142,8 @@ const OfferPage = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.is_pro ? `property__avatar-wrapper--pro` : ``}`}>
-                    <img className="property__avatar user__avatar" src={host && host.avatar_url} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.isPro ? `property__avatar-wrapper--pro` : ``}`}>
+                    <img className="property__avatar user__avatar" src={host && host.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {host && host.name}
@@ -170,6 +178,7 @@ const OfferPage = (props) => {
 
           <section className="property__map map">
             <OffersMap
+              activeOffer={offer}
               cityOffers={nearestOffers}
             />
           </section>
@@ -210,6 +219,7 @@ OfferPage.propTypes = {
   reviews: PropTypes.arrayOf(
       PropTypes.shape(ReviewPropTypes)
   ).isRequired,
+  unsetActiveOffer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -225,6 +235,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviews(id));
   },
   onSendForm: (reviewData) => dispatch(postReview(reviewData)),
+  unsetActiveOffer: () => dispatch(unsetActiveOfferAction())
 });
 
 export {OfferPage};

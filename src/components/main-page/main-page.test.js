@@ -10,7 +10,7 @@ const history = {
   push: noop,
 };
 
-describe(`MainPage renders correctly`, () => {
+describe(`MainPage component`, () => {
   it(`MainPage renders correctly`, () => {
     const component = shallow(
         <MainPage

@@ -21,9 +21,6 @@ const App = () => {
           path={Routes.FAVORITES}
           render={(props) => <FavoritesPage {...props} />}
         />
-        <Route exact path={Routes.FAVORITES}>
-          <FavoritesPage />
-        </Route>
         <Route
           exact
           path={Routes.OFFER_PAGE}

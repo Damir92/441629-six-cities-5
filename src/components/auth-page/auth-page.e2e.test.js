@@ -2,6 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import {history, noop} from '../../mocks/tests-data';
+import {AuthorizationStatus} from '../../const';
 
 import {AuthPage} from './auth-page';
 
@@ -14,8 +15,10 @@ describe(`AuthPage component tests correctly`, () => {
           history={history}
           email={``}
           password={``}
+          logged={AuthorizationStatus.NO_AUTH}
           onChange={handleChangeInput}
           onSubmit={noop}
+          redirectToMain={noop}
         />
     );
 
@@ -38,8 +41,10 @@ describe(`AuthPage component tests correctly`, () => {
           history={history}
           email={`test@test.js`}
           password={`1234`}
+          logged={AuthorizationStatus.NO_AUTH}
           onChange={noop}
           onSubmit={handleSubmitAction}
+          redirectToMain={noop}
         />
     );
 

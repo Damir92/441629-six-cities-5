@@ -5,7 +5,7 @@ import {reviews} from '../../mocks/tests-data';
 
 import ReviewItem from './review-item';
 
-describe(`ReviewItem renders correctly`, () => {
+describe(`ReviewItem component`, () => {
   it(`ReviewItem renders correctly`, () => {
     const tree = shallow(
         <ReviewItem

@@ -5,7 +5,7 @@ import {noop} from '../../mocks/tests-data';
 
 import {ReviewForm} from './review-form';
 
-describe(`ReviewForm renders correctly`, () => {
+describe(`ReviewForm component`, () => {
   it(`ReviewForm renders correctly`, () => {
     const tree = shallow(
         <ReviewForm

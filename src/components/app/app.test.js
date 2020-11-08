@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 
 import App from './app';
 
-describe(`App renders correctly`, () => {
+describe(`App component`, () => {
   it(`App renders correctly`, () => {
     const tree = shallow(
         <App />

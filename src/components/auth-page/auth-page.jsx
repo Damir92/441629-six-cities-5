@@ -2,13 +2,31 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {AuthorizationStatus, Routes} from '../../const';
+
 import {login} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 
 import Header from '../header/header';
 
 import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
-const AuthPage = ({history, email, password, onChange, onSubmit}) => {
+const AuthPage = (props) => {
+  const {
+    history,
+    email,
+    password,
+    onChange,
+    onSubmit,
+    redirectToMain,
+    logged,
+  } = props;
+
+  if (logged === AuthorizationStatus.AUTH) {
+    redirectToMain();
+  }
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -85,11 +103,21 @@ AuthPage.propTypes = {
   password: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  logged: PropTypes.oneOf([
+    AuthorizationStatus.AUTH,
+    AuthorizationStatus.NO_AUTH
+  ]).isRequired,
+  redirectToMain: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  logged: getAuthorizationStatus(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (authData) => dispatch(login(authData)),
+  redirectToMain: () => dispatch(redirectToRoute(Routes.MAIN)),
 });
 
 export {AuthPage};
-export default connect(null, mapDispatchToProps)(withAuthForm(AuthPage));
+export default connect(mapStateToProps, mapDispatchToProps)(withAuthForm(AuthPage));

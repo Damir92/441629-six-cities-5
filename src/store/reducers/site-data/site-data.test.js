@@ -23,21 +23,9 @@ describe(`Test reducer for site-data`, () => {
       activeCard: null,
       activeOffer: {},
       city: Cities[0],
-      cityOffers: [],
       reviews: [],
       offers: [],
       sortingType: Sorting.POPULAR,
-    });
-  });
-
-  it(`Reducer should get city offers by get offers if city is undefined`, () => {
-    expect(siteData({
-      offers: cityOffers,
-    }, {
-      type: ActionType.GET_OFFERS,
-    })).toEqual({
-      cityOffers: [],
-      offers: cityOffers,
     });
   });
 
@@ -49,7 +37,6 @@ describe(`Test reducer for site-data`, () => {
       type: ActionType.GET_OFFERS,
     })).toEqual({
       city: cityOffers[0].city.name,
-      cityOffers,
       offers: cityOffers,
     });
   });
@@ -126,14 +113,14 @@ describe(`Async operation work correctly`, () => {
 
     apiMock
       .onGet(`${APIRoutes.OFFERS}/${ID}`)
-      .reply(200, [{fake: true}]);
+      .reply(200, {fake: true});
 
     return activeOfferLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_ACTIVE_OFFER,
-          payload: [{fake: true}],
+          payload: {fake: true},
         });
       });
   });

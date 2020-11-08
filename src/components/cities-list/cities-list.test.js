@@ -6,7 +6,7 @@ import {Cities} from '../../const';
 
 import CitiesList from './cities-list';
 
-describe(`CitiesList renders correctly`, () => {
+describe(`CitiesList component`, () => {
   it(`CitiesList renders correctly`, () => {
     const tree = shallow(
         <CitiesList

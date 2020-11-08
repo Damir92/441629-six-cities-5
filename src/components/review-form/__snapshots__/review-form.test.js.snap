@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ReviewForm renders correctly ReviewForm renders correctly 1`] = `
+exports[`ReviewForm component ReviewForm renders correctly 1`] = `
 <form
   action="#"
   className="reviews__form form"

@@ -7,7 +7,7 @@ import {
   loadReviewsAction,
 } from './action';
 
-import {offersAdapter, reviewAdapter} from '../utils';
+import {offersAdapter, oneOfferAdapter, reviewAdapter} from '../utils';
 import {APIRoutes, AuthorizationStatus, Routes} from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
@@ -17,7 +17,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 
 export const fetchActiveOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoutes.OFFERS}/${id}`)
-    .then(({data}) => dispatch(loadActiveOfferAction(data)))
+    .then(({data}) => dispatch(loadActiveOfferAction(oneOfferAdapter(data))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

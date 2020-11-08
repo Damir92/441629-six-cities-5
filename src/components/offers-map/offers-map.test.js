@@ -5,7 +5,7 @@ import {cityOffers} from '../../mocks/tests-data';
 
 import {OffersMap} from './offers-map';
 
-describe(`OffersMap renders correctly`, () => {
+describe(`OffersMap component`, () => {
   it(`OffersMap renders correctly`, () => {
     const tree = shallow(
         <OffersMap
