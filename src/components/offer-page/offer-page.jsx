@@ -20,7 +20,6 @@ import OffersMap from '../offers-map/offers-map';
 const OfferPage = (props) => {
   const {
     cityOffers,
-    history,
     logged,
     match,
     offer = {},
@@ -61,9 +60,7 @@ const OfferPage = (props) => {
   return (
     <div className="page">
 
-      <Header
-        history={history}
-      />
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -189,7 +186,6 @@ const OfferPage = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
             <OffersList
-              history={history}
               cityOffers={nearestOffers}
               isMainPage={false}
             />
@@ -207,9 +203,6 @@ OfferPage.propTypes = {
     PropTypes.shape({}).isRequired
   ]).isRequired,
   match: PropTypes.object.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,

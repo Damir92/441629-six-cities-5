@@ -6,12 +6,11 @@ import {AuthorizationStatus} from '../../const';
 
 import {Header} from './header';
 
-describe(`Header renders correctly`, () => {
-  it(`Render for main page`, () => {
+describe(`Header component`, () => {
+  it(`Authorized header snapshot`, () => {
     const tree = shallow(
         <Header
           history={history}
-          isMainPage={true}
           logged={AuthorizationStatus.AUTH}
           userData={{email: `test@test.js`}}
         />
@@ -20,7 +19,7 @@ describe(`Header renders correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`Render for other pages`, () => {
+  it(`Unauthorized header snapshot`, () => {
     const tree = shallow(
         <Header
           history={history}

@@ -5,11 +5,6 @@ exports[`Offers list renders correctly It is from main page 1`] = `
   className="places__list cities__places-list tabs__content"
 >
   <Connect(OfferCard)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={true}
     key="2"
     offer={
@@ -65,11 +60,6 @@ exports[`Offers list renders correctly It is from main page 1`] = `
     }
   />
   <Connect(OfferCard)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={true}
     key="4"
     offer={
@@ -120,11 +110,6 @@ exports[`Offers list renders correctly It is from main page 1`] = `
     }
   />
   <Connect(OfferCard)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={true}
     key="9"
     offer={
@@ -183,11 +168,6 @@ exports[`Offers list renders correctly It is not from main page 1`] = `
   className="places__list near-places__list"
 >
   <Connect(OfferCard)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={false}
     key="2"
     offer={
@@ -243,11 +223,6 @@ exports[`Offers list renders correctly It is not from main page 1`] = `
     }
   />
   <Connect(OfferCard)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={false}
     key="4"
     offer={
@@ -298,11 +273,6 @@ exports[`Offers list renders correctly It is not from main page 1`] = `
     }
   />
   <Connect(OfferCard)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={false}
     key="9"
     offer={

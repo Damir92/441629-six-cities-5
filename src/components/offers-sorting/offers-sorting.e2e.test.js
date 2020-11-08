@@ -6,8 +6,8 @@ import {SortingTypes} from '../../const';
 
 import {OffersSorting} from './offers-sorting';
 
-describe(`OffersSorting tests correctly`, () => {
-  it(`Click for open options`, () => {
+describe(`OffersSorting component`, () => {
+  it(`Check open options after click`, () => {
     const handleToggle = jest.fn();
 
     const wrapper = shallow(
@@ -25,7 +25,7 @@ describe(`OffersSorting tests correctly`, () => {
     expect(handleToggle).toHaveBeenCalledTimes(1);
   });
 
-  it(`Choose option`, () => {
+  it(`Check correct option select`, () => {
     const handleToggle = jest.fn();
     const handleClick = jest.fn((value) => value);
 
@@ -43,10 +43,10 @@ describe(`OffersSorting tests correctly`, () => {
 
     expect(handleClick).toHaveBeenCalledTimes(1);
     expect(handleToggle).toHaveBeenCalledTimes(1);
-    expect(handleClick.mock.calls[0][0]).toBe(SortingTypes[1]);
+    expect(handleClick).toHaveBeenCalledWith(SortingTypes[1]);
   });
 
-  it(`List opens with chose option`, () => {
+  it(`Check current sort type`, () => {
     const wrapper = shallow(
         <OffersSorting
           toggle={true}

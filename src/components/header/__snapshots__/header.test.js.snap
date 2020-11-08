@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header renders correctly Render for main page 1`] = `
+exports[`Header component Authorized header snapshot 1`] = `
 <header
   className="header"
 >
@@ -13,11 +13,9 @@ exports[`Header renders correctly Render for main page 1`] = `
       <div
         className="header__left"
       >
-        <a
-          className="header__logo-link
-                header__logo-link--active"
-          href="/"
-          onClick={[Function]}
+        <Link
+          className="header__logo-link"
+          to="/"
         >
           <img
             alt="6 cities logo"
@@ -26,7 +24,7 @@ exports[`Header renders correctly Render for main page 1`] = `
             src="/img/logo.svg"
             width="81"
           />
-        </a>
+        </Link>
       </div>
       <nav
         className="header__nav"
@@ -37,10 +35,9 @@ exports[`Header renders correctly Render for main page 1`] = `
           <li
             className="header__nav-item user"
           >
-            <a
+            <Link
               className="header__nav-link header__nav-link--profile"
-              href="/"
-              onClick={[Function]}
+              to="/favorites"
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
@@ -50,7 +47,7 @@ exports[`Header renders correctly Render for main page 1`] = `
               >
                 test@test.js
               </span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -59,7 +56,7 @@ exports[`Header renders correctly Render for main page 1`] = `
 </header>
 `;
 
-exports[`Header renders correctly Render for other pages 1`] = `
+exports[`Header component Unauthorized header snapshot 1`] = `
 <header
   className="header"
 >
@@ -72,11 +69,9 @@ exports[`Header renders correctly Render for other pages 1`] = `
       <div
         className="header__left"
       >
-        <a
-          className="header__logo-link
-                "
-          href="/"
-          onClick={[Function]}
+        <Link
+          className="header__logo-link"
+          to="/"
         >
           <img
             alt="6 cities logo"
@@ -85,7 +80,7 @@ exports[`Header renders correctly Render for other pages 1`] = `
             src="/img/logo.svg"
             width="81"
           />
-        </a>
+        </Link>
       </div>
       <nav
         className="header__nav"
@@ -96,10 +91,9 @@ exports[`Header renders correctly Render for other pages 1`] = `
           <li
             className="header__nav-item user"
           >
-            <a
+            <Link
               className="header__nav-link header__nav-link--profile"
-              href="/"
-              onClick={[Function]}
+              to="/login"
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
@@ -109,7 +103,7 @@ exports[`Header renders correctly Render for other pages 1`] = `
               >
                 Sign in
               </span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

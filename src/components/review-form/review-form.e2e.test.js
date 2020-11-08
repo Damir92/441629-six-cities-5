@@ -1,13 +1,12 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {} from '../../const';
 import {noop} from '../../mocks/tests-data';
 
 import {ReviewForm} from './review-form';
 
-describe(`ReviewForm tests correctly`, () => {
-  it(`Choose rating`, () => {
+describe(`ReviewForm component`, () => {
+  it(`Check rating selection`, () => {
     const handleClick = jest.fn((value) => value);
 
     const wrapper = shallow(
@@ -40,7 +39,7 @@ describe(`ReviewForm tests correctly`, () => {
     expect(thirdStarRating.props().checked).toBe(true);
   });
 
-  it(`Check button without data`, () => {
+  it(`Button state: disabled (review data is absent)`, () => {
     const wrapper = shallow(
         <ReviewForm
           rating={``}
@@ -55,7 +54,7 @@ describe(`ReviewForm tests correctly`, () => {
     expect(submitBtn.props().disabled).toBe(true);
   });
 
-  it(`Check button with data`, () => {
+  it(`Button state: disabled (offer has rating data)`, () => {
     const wrapper = shallow(
         <ReviewForm
           rating={`1`}
@@ -71,8 +70,8 @@ describe(`ReviewForm tests correctly`, () => {
   });
 
   it(`Check submit form`, () => {
-    const handleSubmit = jest.fn();
-    const formSendPrevention = jest.fn();
+    const handleSubmit = jest.fn((value) => value);
+    const mockEvent = {preventDefault: noop};
 
     const wrapper = shallow(
         <ReviewForm
@@ -84,11 +83,9 @@ describe(`ReviewForm tests correctly`, () => {
     );
 
     const form = wrapper.find(`form.reviews__form`);
-    form.simulate(`submit`, {
-      preventDefault: formSendPrevention,
-    });
+    form.simulate(`submit`, mockEvent);
 
     expect(handleSubmit).toHaveBeenCalledTimes(1);
-    expect(formSendPrevention).toHaveBeenCalledTimes(1);
+    expect(handleSubmit).toHaveBeenCalledWith(mockEvent);
   });
 });

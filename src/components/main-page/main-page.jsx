@@ -14,12 +14,11 @@ import OffersMap from '../offers-map/offers-map';
 import CitiesList from '../cities-list/cities-list';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
-const MainPage = ({city, cityOffers = [], history, onCityClick, onOptionClick}) => {
+const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) => {
   return (
     <div className="page page--gray page--main">
 
       <Header
-        history={history}
         isMainPage={true}
       />
 
@@ -57,7 +56,6 @@ const MainPage = ({city, cityOffers = [], history, onCityClick, onOptionClick}) 
 
                 <OffersList
                   cityOffers={cityOffers}
-                  history={history}
                 />
 
               </section>
@@ -82,9 +80,6 @@ MainPage.propTypes = {
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,
 };

@@ -10,7 +10,7 @@ const ID = 10;
 const MockComponent = () => <div />;
 const MockComponentWrapped = withReviewForm(MockComponent);
 
-describe(`withAuthForm HOC, test initialization inputs`, () => {
+describe(`withAuthForm HOC`, () => {
   it(`Inputs should be empty`, () => {
     const wrapper = shallow(<MockComponentWrapped
       id={ID}
@@ -71,20 +71,16 @@ describe(`withAuthForm HOC, test change inputs`, () => {
 describe(`withAuthForm HOC, test submit`, () => {
   it(`Submit form with empty inputs`, () => {
     const handleSubmit = jest.fn((value) => value);
-    const formSendPrevention = jest.fn();
 
     const wrapper = shallow(<MockComponentWrapped
       id={ID}
       onSubmit={handleSubmit}
     />);
 
-    wrapper.props().onSubmit({
-      preventDefault: formSendPrevention,
-    });
+    wrapper.props().onSubmit({preventDefault: noop});
 
     expect(handleSubmit).toHaveBeenCalledTimes(1);
-    expect(formSendPrevention).toHaveBeenCalledTimes(1);
-    expect(handleSubmit.mock.calls[0][0]).toStrictEqual({
+    expect(handleSubmit).toHaveBeenCalledWith({
       id: ID,
       comment: ``,
       rating: ``,
@@ -93,7 +89,6 @@ describe(`withAuthForm HOC, test submit`, () => {
 
   it(`Submit form with changed inputs`, () => {
     const handleSubmit = jest.fn((value) => value);
-    const formSendPrevention = jest.fn();
 
     const wrapper = shallow(<MockComponentWrapped
       id={ID}
@@ -102,13 +97,10 @@ describe(`withAuthForm HOC, test submit`, () => {
       review={`Test review`}
     />);
 
-    wrapper.props().onSubmit({
-      preventDefault: formSendPrevention,
-    });
+    wrapper.props().onSubmit({preventDefault: noop});
 
     expect(handleSubmit).toHaveBeenCalledTimes(1);
-    expect(formSendPrevention).toHaveBeenCalledTimes(1);
-    expect(handleSubmit.mock.calls[0][0]).toStrictEqual({
+    expect(handleSubmit).toHaveBeenCalledWith({
       id: ID,
       comment: `Test review`,
       rating: `3`,

@@ -11,7 +11,7 @@ const history = {
 };
 
 describe(`AuthPage component`, () => {
-  it(`AuthPage renders correctly`, () => {
+  it(`AuthPage snapshot`, () => {
     const tree = shallow(
         <AuthPage
           history={history}

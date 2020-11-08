@@ -5,11 +5,6 @@ exports[`MainPage component MainPage renders correctly 1`] = `
   className="page page--gray page--main"
 >
   <Connect(Header)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
     isMainPage={true}
   />
   <main
@@ -198,11 +193,6 @@ exports[`MainPage component MainPage renders correctly 1`] = `
                   "volume": 10,
                 },
               ]
-            }
-            history={
-              Object {
-                "push": [Function],
-              }
             }
           />
         </section>

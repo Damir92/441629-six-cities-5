@@ -6,41 +6,19 @@ import {AuthorizationStatus} from '../../const';
 
 import {AuthPage} from './auth-page';
 
-describe(`AuthPage component tests correctly`, () => {
-  it(`Change both inputs`, () => {
-    const handleChangeInput = jest.fn();
+describe(`AuthPage component`, () => {
+  it(`Auth form submits correctly`, () => {
+    const handleSubmitAction = jest.fn((value) => value);
+    const testData = {
+      email: `test@test.js`,
+      password: `1234`,
+    };
 
     const wrapper = shallow(
         <AuthPage
           history={history}
-          email={``}
-          password={``}
-          logged={AuthorizationStatus.NO_AUTH}
-          onChange={handleChangeInput}
-          onSubmit={noop}
-          redirectToMain={noop}
-        />
-    );
-
-    const inputEmail = wrapper.find(`.login__input`).at(0);
-    const inputPassword = wrapper.find(`.login__input`).at(1);
-
-    inputEmail.simulate(`change`, {target: {value: `test@test.js`}});
-    expect(handleChangeInput).toHaveBeenCalledTimes(1);
-
-    inputPassword.simulate(`change`, {target: {value: `1234`}});
-    expect(handleChangeInput).toHaveBeenCalledTimes(2);
-  });
-
-  it(`Try send form`, () => {
-    const handleSubmitAction = jest.fn();
-    const formSendPrevention = jest.fn();
-
-    const wrapper = shallow(
-        <AuthPage
-          history={history}
-          email={`test@test.js`}
-          password={`1234`}
+          email={testData.email}
+          password={testData.password}
           logged={AuthorizationStatus.NO_AUTH}
           onChange={noop}
           onSubmit={handleSubmitAction}
@@ -50,10 +28,8 @@ describe(`AuthPage component tests correctly`, () => {
 
     const form = wrapper.find(`.login__form`);
 
-    form.simulate(`submit`, {
-      preventDefault: formSendPrevention,
-    });
+    form.simulate(`submit`, {preventDefault: noop});
     expect(handleSubmitAction).toHaveBeenCalledTimes(1);
-    expect(formSendPrevention).toHaveBeenCalledTimes(1);
+    expect(handleSubmitAction).toHaveBeenCalledWith(testData);
   });
 });

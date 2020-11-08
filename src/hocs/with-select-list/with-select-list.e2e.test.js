@@ -40,7 +40,7 @@ describe(`withSelectList HOC, test choose option`, () => {
 
     wrapper.props().onOptionClick(`testValue`);
     expect(handleOptionClick).toHaveBeenCalledTimes(1);
-    expect(handleOptionClick.mock.calls[0][0]).toBe(`testValue`);
+    expect(handleOptionClick).toHaveBeenCalledWith(`testValue`);
     expect(wrapper.props().openedList).toEqual(false);
   });
 });

@@ -23,7 +23,7 @@ MockComponent.propTypes = {
 
 const MockComponentWrapped = withAuthForm(MockComponent);
 
-describe(`with-auth-form hoc renders correctly`, () => {
+describe(`with-auth-form HOC`, () => {
   it(`withAuthForm without props renders correctly`, () => {
     const component = shallow(
         <MockComponentWrapped>

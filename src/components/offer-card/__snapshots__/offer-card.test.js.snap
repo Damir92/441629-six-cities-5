@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OfferCard renders correctly It is from main page 1`] = `
+exports[`OfferCard component OfferCard inner page snapshot 1`] = `
 <article
   className="place-card cities__place-card"
   onMouseEnter={[Function]}
@@ -9,9 +9,8 @@ exports[`OfferCard renders correctly It is from main page 1`] = `
   <div
     className="place-card__image-wrapper cities__image-wrapper"
   >
-    <a
-      href="/offer/9"
-      onClick={[Function]}
+    <Link
+      to="/offer/9"
     >
       <img
         alt="Place image"
@@ -20,7 +19,7 @@ exports[`OfferCard renders correctly It is from main page 1`] = `
         src="previewURL"
         width="260"
       />
-    </a>
+    </Link>
   </div>
   <div
     className="place-card__info"
@@ -86,12 +85,11 @@ exports[`OfferCard renders correctly It is from main page 1`] = `
     <h2
       className="place-card__name"
     >
-      <a
-        href="/offer/9"
-        onClick={[Function]}
+      <Link
+        to="/offer/9"
       >
         Loft Studio in the Central Area
-      </a>
+      </Link>
     </h2>
     <p
       className="place-card__type"
@@ -102,7 +100,7 @@ exports[`OfferCard renders correctly It is from main page 1`] = `
 </article>
 `;
 
-exports[`OfferCard renders correctly It is not from main page 1`] = `
+exports[`OfferCard component OfferCard main page snapshot 1`] = `
 <article
   className="place-card near-places__card"
   onMouseEnter={[Function]}
@@ -111,9 +109,8 @@ exports[`OfferCard renders correctly It is not from main page 1`] = `
   <div
     className="place-card__image-wrapper near-places__image-wrapper"
   >
-    <a
-      href="/offer/9"
-      onClick={[Function]}
+    <Link
+      to="/offer/9"
     >
       <img
         alt="Place image"
@@ -122,7 +119,7 @@ exports[`OfferCard renders correctly It is not from main page 1`] = `
         src="previewURL"
         width="260"
       />
-    </a>
+    </Link>
   </div>
   <div
     className="place-card__info"
@@ -188,12 +185,11 @@ exports[`OfferCard renders correctly It is not from main page 1`] = `
     <h2
       className="place-card__name"
     >
-      <a
-        href="/offer/9"
-        onClick={[Function]}
+      <Link
+        to="/offer/9"
       >
         Loft Studio in the Central Area
-      </a>
+      </Link>
     </h2>
     <p
       className="place-card__type"

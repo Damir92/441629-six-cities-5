@@ -4,13 +4,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
 <div
   className="page"
 >
-  <Connect(Header)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-  />
+  <Connect(Header) />
   <main
     className="page__main page__main--property"
   >
@@ -623,11 +617,6 @@ exports[`Offer page renders correctly It is not main page 1`] = `
                 "volume": 10,
               },
             ]
-          }
-          history={
-            Object {
-              "push": [Function],
-            }
           }
           isMainPage={false}
         />

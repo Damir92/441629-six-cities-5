@@ -6,7 +6,7 @@ import {reviews} from '../../mocks/tests-data';
 import ReviewsList from './reviews-list';
 
 describe(`ReviewsList component`, () => {
-  it(`ReviewList renders correctly`, () => {
+  it(`ReviewList snapshot`, () => {
     const component = shallow(
         <ReviewsList
           reviews={reviews}

@@ -1,16 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthPage component AuthPage renders correctly 1`] = `
+exports[`AuthPage component AuthPage snapshot 1`] = `
 <div
   className="page page--gray page--login"
 >
-  <Connect(Header)
-    history={
-      Object {
-        "push": [Function],
-      }
-    }
-  />
+  <Connect(Header) />
   <main
     className="page__main page__main--login"
   >

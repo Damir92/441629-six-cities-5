@@ -1,16 +1,15 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {history, offer, noop} from '../../mocks/tests-data';
+import {offer, noop} from '../../mocks/tests-data';
 
 import {OfferCard} from './offer-card';
 
-describe(`OfferCard renders correctly`, () => {
-  it(`It is from main page`, () => {
+describe(`OfferCard component`, () => {
+  it(`OfferCard inner page snapshot`, () => {
     const tree = shallow(
         <OfferCard
           isMainPage={true}
-          history={history}
           offer={offer}
           onCardEnterMouse={noop}
         />
@@ -19,11 +18,10 @@ describe(`OfferCard renders correctly`, () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it(`It is not from main page`, () => {
+  it(`OfferCard main page snapshot`, () => {
     const tree = shallow(
         <OfferCard
           isMainPage={false}
-          history={history}
           offer={offer}
           onCardEnterMouse={noop}
         />

@@ -6,7 +6,7 @@ import withAuthForm from './with-auth-form';
 const MockComponent = () => <div />;
 const MockComponentWrapped = withAuthForm(MockComponent);
 
-describe(`withAuthForm HOC, test change inputs`, () => {
+describe(`withAuthForm HOC`, () => {
   it(`Inputs should be empty after initialization`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
@@ -14,7 +14,7 @@ describe(`withAuthForm HOC, test change inputs`, () => {
     expect(wrapper.props().password).toEqual(``);
   });
 
-  it(`Email input should be shanged`, () => {
+  it(`Email input should be changed`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
     wrapper.props().onChange({
@@ -27,7 +27,7 @@ describe(`withAuthForm HOC, test change inputs`, () => {
     expect(wrapper.props().email).toEqual(`test@test.js`);
   });
 
-  it(`Password input should be shanged`, () => {
+  it(`Password input should be changed`, () => {
     const wrapper = shallow(<MockComponentWrapped />);
 
     wrapper.props().onChange({

@@ -14,7 +14,6 @@ import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
 const AuthPage = (props) => {
   const {
-    history,
     email,
     password,
     onChange,
@@ -39,9 +38,7 @@ const AuthPage = (props) => {
   return (
     <div className="page page--gray page--login">
 
-      <Header
-        history={history}
-      />
+      <Header />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -96,9 +93,6 @@ const AuthPage = (props) => {
 };
 
 AuthPage.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

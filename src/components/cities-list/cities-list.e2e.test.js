@@ -7,24 +7,27 @@ import {noop} from '../../mocks/tests-data';
 import CitiesList from './cities-list';
 
 describe(`CitiesList component tests correctly`, () => {
-  it(`Chosen city contains activeClass`, () => {
+  it(`Active city is highlighted`, () => {
+    const ID = 2;
+
     const wrapper = shallow(
         <CitiesList
-          city={Cities[0]}
+          city={Cities[ID]}
           onCityClick={noop}
         />
     );
 
-    const activeCityLink = wrapper.find(`.locations__item-link`).at(0);
-    const notActiveCityLink = wrapper.find(`.locations__item-link`).at(1);
+    const activeCityLink = wrapper.find(`.locations__item-link.tabs__item--active`);
+    const notActiveCityLink = wrapper.find(`.locations__item-link`).at(0);
 
-    expect(activeCityLink.hasClass(`tabs__item--active`)).toBe(true);
+    expect(activeCityLink.text()).toBe(Cities[ID]);
     expect(notActiveCityLink.hasClass(`tabs__item--active`)).toBe(false);
   });
 
   it(`Click city from list`, () => {
+    const ID1 = 1;
+    const ID2 = 2;
     const handleClick = jest.fn((value) => value);
-    const formSendPrevention = jest.fn();
 
     const wrapper = shallow(
         <CitiesList
@@ -33,14 +36,18 @@ describe(`CitiesList component tests correctly`, () => {
         />
     );
 
-    const secondCityLink = wrapper.find(`.locations__item-link`).at(1);
+    const links = wrapper.find(`.locations__item-link`);
+    const firstCityLink = links.at(ID1);
+    const secondCityLink = links.at(ID2);
 
-    secondCityLink.simulate(`click`, {
-      preventDefault: formSendPrevention,
-    });
+    firstCityLink.simulate(`click`, {preventDefault: noop});
 
     expect(handleClick).toHaveBeenCalledTimes(1);
-    expect(formSendPrevention).toHaveBeenCalledTimes(1);
-    expect(handleClick.mock.calls[0][0]).toBe(Cities[1]);
+    expect(handleClick).toHaveBeenCalledWith(Cities[ID1]);
+
+    secondCityLink.simulate(`click`, {preventDefault: noop});
+
+    expect(handleClick).toHaveBeenCalledTimes(2);
+    expect(handleClick).toHaveBeenCalledWith(Cities[ID2]);
   });
 });

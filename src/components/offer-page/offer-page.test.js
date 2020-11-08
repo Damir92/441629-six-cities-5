@@ -1,7 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {cityOffers, offer, noop, reviews, history} from '../../mocks/tests-data';
+import {cityOffers, offer, noop, reviews} from '../../mocks/tests-data';
 import {AuthorizationStatus} from '../../const';
 
 import {OfferPage} from './offer-page';
@@ -17,7 +17,6 @@ describe(`Offer page renders correctly`, () => {
     const tree = shallow(
         <OfferPage
           cityOffers={cityOffers}
-          history={history}
           logged={AuthorizationStatus.NO_AUTH}
           match={match}
           offer={offer}
