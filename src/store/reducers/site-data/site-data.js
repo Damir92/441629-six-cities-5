@@ -6,7 +6,6 @@ const initialState = {
   activeCard: null,
   activeOffer: {},
   city: Cities[0],
-  cityOffers: [],
   reviews: [],
   offers: [],
   sortingType: Sorting.POPULAR,
@@ -14,11 +13,6 @@ const initialState = {
 
 export const siteData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.GET_OFFERS:
-      return updateObject(state, {
-        cityOffers: state.offers.filter((item) => item.city.name === state.city),
-      });
-
     case ActionType.LOAD_OFFERS:
       return updateObject(state, {
         offers: action.payload,
@@ -47,6 +41,11 @@ export const siteData = (state = initialState, action) => {
     case ActionType.SET_SORTING_TYPE:
       return updateObject(state, {
         sortingType: action.payload,
+      });
+
+    case ActionType.UNSET_ACTIVE_OFFER:
+      return updateObject(state, {
+        activeOffer: {},
       });
   }
 

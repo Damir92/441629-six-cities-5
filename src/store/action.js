@@ -10,6 +10,7 @@ export const ActionType = {
   SET_CITY: `SET_CITY`,
   SET_SORTING_TYPE: `SET_SORTING_TYPE`,
   SET_LOGGED_USER: `SET_LOGGED_USER`,
+  UNSET_ACTIVE_OFFER: `UNSET_ACTIVE_OFFER`,
 };
 
 export const changeCityAction = (city) => ({
@@ -59,4 +60,8 @@ export const setActiveCard = (id) => ({
 export const setLoggedUser = (email) => ({
   type: ActionType.SET_LOGGED_USER,
   payload: email,
+});
+
+export const unsetActiveOfferAction = () => ({
+  type: ActionType.UNSET_ACTIVE_OFFER,
 });

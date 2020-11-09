@@ -5,10 +5,9 @@ import leaflet from 'leaflet';
 
 import {getActiveCard} from '../../store/reducers/site-data/selectors';
 
-import {offerPropTypes} from '../../prop-types';
-import 'leaflet/dist/leaflet.css';
+import {OfferPagePropTypes, offerPropTypes} from '../../prop-types';
 
-const OffersMap = ({cityOffers = [], activeCard}) => {
+const OffersMap = ({cityOffers = [], activeCard, activeOffer = {}}) => {
   const LeafletIcon = leaflet.Icon.extend({
     options: {
       iconSize: [27, 39],
@@ -33,6 +32,26 @@ const OffersMap = ({cityOffers = [], activeCard}) => {
         mapRef.current.removeLayer(marker);
       });
       mapPinsRef.current = [];
+    }
+  };
+
+  const addPins = () => {
+    cityOffers.forEach((offer) => {
+      if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
+        mapPinsRef.current.push(
+            leaflet
+            .marker([offer.location.latitude, offer.location.longitude], {icon: offer.id === activeCard ? activeIcon : regularIcon})
+            .addTo(mapRef.current)
+        );
+      }
+    });
+
+    if (activeOffer.location && activeOffer.location.latitude && activeOffer.location.longitude) {
+      mapPinsRef.current.push(
+          leaflet
+          .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: activeIcon})
+          .addTo(mapRef.current)
+      );
     }
   };
 
@@ -78,29 +97,13 @@ const OffersMap = ({cityOffers = [], activeCard}) => {
 
     removePins();
 
-    cityOffers.forEach((offer) => {
-      if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
-        mapPinsRef.current.push(
-            leaflet
-            .marker([offer.location.latitude, offer.location.longitude], {icon: regularIcon})
-            .addTo(mapRef.current)
-        );
-      }
-    });
+    addPins();
   }, [cityOffers]);
 
   useEffect(() => {
     removePins();
 
-    cityOffers.forEach((offer) => {
-      if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
-        mapPinsRef.current.push(
-            leaflet
-            .marker([offer.location.latitude, offer.location.longitude], {icon: offer.id === activeCard ? activeIcon : regularIcon})
-            .addTo(mapRef.current)
-        );
-      }
-    });
+    addPins();
   }, [activeCard]);
 
   return (
@@ -114,6 +117,10 @@ const OffersMap = ({cityOffers = [], activeCard}) => {
 
 OffersMap.propTypes = {
   activeCard: PropTypes.number,
+  activeOffer: PropTypes.oneOfType([
+    PropTypes.shape(OfferPagePropTypes).isRequired,
+    PropTypes.shape({}).isRequired
+  ]),
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,

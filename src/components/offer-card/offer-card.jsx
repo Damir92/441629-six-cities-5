@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import {setActiveCard} from '../../store/action';
 import {convertRatingToPercent} from '../../utils';
@@ -44,9 +44,9 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
         </div>
       }
       <div className={`place-card__image-wrapper ${isMainPage ? `cities__image-wrapper` : `near-places__image-wrapper`}`}>
-        <a href="#">
+        <Link to={`${Routes.OFFER_LINK}/${id}`}>
           <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -73,10 +73,7 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-
-          <Link
-            to={`${Routes.OFFER_LINK}/${id}`}
-          >
+          <Link to={`${Routes.OFFER_LINK}/${id}`}>
             {title}
           </Link>
         </h2>

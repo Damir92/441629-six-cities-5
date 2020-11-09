@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReviewsList component ReviewList snapshot 1`] = `
+<ul
+  className="reviews__list"
+>
+  <ReviewItem
+    key="1"
+    review={
+      Object {
+        "avatar": "img/avatar-max.jpg",
+        "date": "2019-04-24",
+        "dateHuman": "April 2019",
+        "id": 1,
+        "name": "Max",
+        "rating": 4,
+        "text": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.",
+      }
+    }
+  />
+  <ReviewItem
+    key="2"
+    review={
+      Object {
+        "avatar": "img/avatar-max.jpg",
+        "date": "2019-04-24",
+        "dateHuman": "April 2019",
+        "id": 2,
+        "name": "Max",
+        "rating": 4,
+        "text": "A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.",
+      }
+    }
+  />
+</ul>
+`;

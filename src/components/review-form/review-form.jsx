@@ -6,12 +6,24 @@ import {ReviewLength} from '../../const';
 import withReviewForm from '../../hocs/with-review-form/with-review-form';
 
 const ReviewForm = ({rating, review, onChange, onSubmit}) => {
+  const checkReviewData = () => {
+    return (review.length > ReviewLength.MIN && review.length < ReviewLength.MAX && rating);
+  };
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if (checkReviewData()) {
+      onSubmit(evt);
+    }
+  };
+
   return (
     <form
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -111,7 +123,7 @@ const ReviewForm = ({rating, review, onChange, onSubmit}) => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={(review.length < ReviewLength.MIN || review.length > ReviewLength.MAX) || !rating}
+          disabled={!checkReviewData()}
         >Submit</button>
       </div>
     </form>

@@ -1,13 +1,31 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
+import {AuthorizationStatus, Routes} from '../../const';
+
 import {login} from '../../store/api-actions';
+import {redirectToRoute} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
+
+import Header from '../header/header';
 
 import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
-const AuthPage = ({email, password, onChange, onSubmit}) => {
+const AuthPage = (props) => {
+  const {
+    email,
+    password,
+    onChange,
+    onSubmit,
+    redirectToMain,
+    logged,
+  } = props;
+
+  if (logged === AuthorizationStatus.AUTH) {
+    redirectToMain();
+  }
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
@@ -19,30 +37,8 @@ const AuthPage = ({email, password, onChange, onSubmit}) => {
 
   return (
     <div className="page page--gray page--login">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link
-                className="header__logo-link"
-                to="/"
-              >
-                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__login">Sign in</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">
@@ -101,11 +97,21 @@ AuthPage.propTypes = {
   password: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
+  logged: PropTypes.oneOf([
+    AuthorizationStatus.AUTH,
+    AuthorizationStatus.NO_AUTH
+  ]).isRequired,
+  redirectToMain: PropTypes.func.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  logged: getAuthorizationStatus(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (authData) => dispatch(login(authData)),
+  redirectToMain: () => dispatch(redirectToRoute(Routes.MAIN)),
 });
 
 export {AuthPage};
-export default connect(null, mapDispatchToProps)(withAuthForm(AuthPage));
+export default connect(mapStateToProps, mapDispatchToProps)(withAuthForm(AuthPage));

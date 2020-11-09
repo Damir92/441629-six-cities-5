@@ -1,25 +1,42 @@
 import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {offerPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-types';
-import {AuthorizationStatus, LivingType, Routes} from '../../const';
+import {AuthorizationStatus, LivingType} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
 import {getCityOffers, getActiveOffer, getReviews} from '../../store/reducers/site-data/selectors';
-import {getAuthorizationStatus, getUserData} from '../../store/reducers/user/selectors';
-import {loadActiveOfferAction} from '../../store/action';
+import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 import {fetchActiveOffer, fetchReviews, postReview} from '../../store/api-actions';
+import {unsetActiveOfferAction} from '../../store/action';
 
+import Header from '../header/header';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
 import OffersList from '../offers-list/offers-list';
 import OffersMap from '../offers-map/offers-map';
 
-const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unloadActiveOffer, offer = {}, reviews = []}) => {
+const OfferPage = (props) => {
+  const {
+    cityOffers,
+    logged,
+    match,
+    offer = {},
+    onLoad,
+    onSendForm,
+    reviews = [],
+    unsetActiveOffer,
+  } = props;
+
   const nearestOffers = cityOffers.slice(0, 3);
   const offerId = +match.params.id;
+
+  useEffect(() => {
+    return () => {
+      unsetActiveOffer();
+    };
+  }, []);
 
   useEffect(() => {
     onLoad(offerId);
@@ -42,54 +59,14 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
 
-              <Link
-                className="header__logo-link"
-                to="/"
-                onClick={unloadActiveOffer}
-              >
-                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
-
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link
-                    className="header__nav-link header__nav-link--profile"
-                    to={logged === AuthorizationStatus.AUTH
-                      ?
-                      Routes.FAVORITES
-                      :
-                      Routes.LOGIN
-                    }
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    {logged === AuthorizationStatus.AUTH
-                      ?
-                      <span className="header__user-name user__name">
-                        {userData.email}
-                      </span>
-                      :
-                      <span className="header__login">Sign in</span>
-                    }
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images && images.map((image) => (
+              {images && images.slice(0, 6).map((image) => (
                 <div
                   key={image}
                   className="property__image-wrapper"
@@ -162,8 +139,8 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.is_pro ? `property__avatar-wrapper--pro` : ``}`}>
-                    <img className="property__avatar user__avatar" src={host && host.avatar_url} width="74" height="74" alt="Host avatar" />
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host && host.isPro ? `property__avatar-wrapper--pro` : ``}`}>
+                    <img className="property__avatar user__avatar" src={host && host.avatar} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {host && host.name}
@@ -198,6 +175,7 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
 
           <section className="property__map map">
             <OffersMap
+              activeOffer={offer}
               cityOffers={nearestOffers}
             />
           </section>
@@ -220,21 +198,21 @@ const OfferPage = ({match, cityOffers, logged, userData, onSendForm, onLoad, unl
 };
 
 OfferPage.propTypes = {
-  offer: PropTypes.oneOfType([PropTypes.shape(OfferPagePropTypes).isRequired, PropTypes.shape({}).isRequired]).isRequired,
+  offer: PropTypes.oneOfType([
+    PropTypes.shape(OfferPagePropTypes).isRequired,
+    PropTypes.shape({}).isRequired
+  ]).isRequired,
   match: PropTypes.object.isRequired,
   cityOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
-  userData: PropTypes.oneOfType([PropTypes.shape({
-    email: PropTypes.string,
-  }), null]),
   onLoad: PropTypes.func.isRequired,
   onSendForm: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(
       PropTypes.shape(ReviewPropTypes)
   ).isRequired,
-  unloadActiveOffer: PropTypes.func.isRequired,
+  unsetActiveOffer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -242,7 +220,6 @@ const mapStateToProps = (state) => ({
   logged: getAuthorizationStatus(state),
   offer: getActiveOffer(state),
   reviews: getReviews(state),
-  userData: getUserData(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -250,8 +227,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchActiveOffer(id));
     dispatch(fetchReviews(id));
   },
-  unloadActiveOffer: () => dispatch(loadActiveOfferAction({})),
   onSendForm: (reviewData) => dispatch(postReview(reviewData)),
+  unsetActiveOffer: () => dispatch(unsetActiveOfferAction())
 });
 
 export {OfferPage};
