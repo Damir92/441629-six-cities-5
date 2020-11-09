@@ -7,7 +7,7 @@ import {getActiveCard} from '../../store/reducers/site-data/selectors';
 
 import {OfferPagePropTypes, offerPropTypes} from '../../prop-types';
 
-const OffersMap = ({cityOffers = [], activeCard, activeOffer = {}}) => {
+const OffersMap = ({offers = [], activeCard, activeOffer = {}}) => {
   const LeafletIcon = leaflet.Icon.extend({
     options: {
       iconSize: [27, 39],
@@ -36,7 +36,7 @@ const OffersMap = ({cityOffers = [], activeCard, activeOffer = {}}) => {
   };
 
   const addPins = () => {
-    cityOffers.forEach((offer) => {
+    offers.forEach((offer) => {
       if (offer && offer.location && offer.location.latitude && offer.location.longitude) {
         mapPinsRef.current.push(
             leaflet
@@ -66,11 +66,11 @@ const OffersMap = ({cityOffers = [], activeCard, activeOffer = {}}) => {
   }, []);
 
   useEffect(() => {
-    if (!cityOffers.length) {
+    if (!offers.length) {
       return;
     }
 
-    const cityLocation = cityOffers[0].city.location || null;
+    const cityLocation = offers[0].city.location || null;
 
     if (!cityLocation) {
       return;
@@ -98,13 +98,13 @@ const OffersMap = ({cityOffers = [], activeCard, activeOffer = {}}) => {
     removePins();
 
     addPins();
-  }, [cityOffers]);
+  }, [offers]);
 
   useEffect(() => {
     removePins();
 
     addPins();
-  }, [activeCard]);
+  }, [activeCard, activeOffer]);
 
   return (
     <div
@@ -121,7 +121,7 @@ OffersMap.propTypes = {
     PropTypes.shape(OfferPagePropTypes).isRequired,
     PropTypes.shape({}).isRequired
   ]),
-  cityOffers: PropTypes.arrayOf(
+  offers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
 };

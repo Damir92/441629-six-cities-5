@@ -6,8 +6,9 @@ const initialState = {
   activeCard: null,
   activeOffer: {},
   city: Cities[0],
-  reviews: [],
+  nearbyOffers: [],
   offers: [],
+  reviews: [],
   sortingType: Sorting.POPULAR,
 };
 
@@ -21,6 +22,11 @@ export const siteData = (state = initialState, action) => {
     case ActionType.LOAD_ACTIVE_OFFER:
       return updateObject(state, {
         activeOffer: action.payload,
+      });
+
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return updateObject(state, {
+        nearbyOffers: action.payload,
       });
 
     case ActionType.LOAD_REVIEWS:

@@ -16,7 +16,7 @@ describe(`Offer page renders correctly`, () => {
   it(`It is not main page`, () => {
     const tree = shallow(
         <OfferPage
-          cityOffers={cityOffers}
+          nearbyOffers={cityOffers}
           logged={AuthorizationStatus.NO_AUTH}
           match={match}
           offer={offer}

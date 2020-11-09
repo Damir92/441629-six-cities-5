@@ -3,6 +3,7 @@ import {
   getOffersAction,
   loadOffersAction,
   loadActiveOfferAction,
+  loadNearbyOffersAction,
   loadReviewsAction,
   requireAuthorization,
   redirectToRoute,
@@ -37,6 +38,13 @@ describe(`Action creators work correctly`, () => {
     expect(loadActiveOfferAction({id: 1})).toEqual({
       type: ActionType.LOAD_ACTIVE_OFFER,
       payload: {id: 1},
+    });
+  });
+
+  it(`Action creator for load nearby offers returns action offers payload`, () => {
+    expect(loadNearbyOffersAction([{}, {}, {}])).toEqual({
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: [{}, {}, {}],
     });
   });
 

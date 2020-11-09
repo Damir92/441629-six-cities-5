@@ -9,7 +9,7 @@ describe(`OffersMap component`, () => {
   it(`OffersMap renders correctly`, () => {
     const tree = shallow(
         <OffersMap
-          cityOffers={cityOffers}
+          offers={cityOffers}
         />
     );
 

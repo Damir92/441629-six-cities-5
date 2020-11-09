@@ -11,6 +11,7 @@ import {
   fetchActiveOffer,
   fetchReviews,
   postReview,
+  fetchNearbyOffers,
 } from '../../api-actions';
 
 const ID = 10;
@@ -23,6 +24,7 @@ describe(`Test reducer for site-data`, () => {
       activeCard: null,
       activeOffer: {},
       city: Cities[0],
+      nearbyOffers: [],
       reviews: [],
       offers: [],
       sortingType: Sorting.POPULAR,
@@ -38,6 +40,17 @@ describe(`Test reducer for site-data`, () => {
     })).toEqual({
       city: cityOffers[0].city.name,
       offers: cityOffers,
+    });
+  });
+
+  it(`Reducer should update nearbyOffers by load their`, () => {
+    expect(siteData({
+      nearbyOffers: [],
+    }, {
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: cityOffers,
+    })).toEqual({
+      nearbyOffers: cityOffers,
     });
   });
 
@@ -121,6 +134,25 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_ACTIVE_OFFER,
           payload: {fake: true},
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /offers/:id/nearby`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const nearbyOffersLoader = fetchNearbyOffers(ID);
+
+    apiMock
+      .onGet(`${APIRoutes.OFFERS}/${ID}/nearby`)
+      .reply(200, [{fake: true}]);
+
+    return nearbyOffersLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_NEARBY_OFFERS,
+          payload: [{fake: true}],
         });
       });
   });

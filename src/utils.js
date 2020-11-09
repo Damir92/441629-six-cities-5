@@ -51,7 +51,7 @@ export const oneOfferAdapter = (item) => {
 };
 
 export const offersAdapter = (data) => {
-  if (data[0].fake) {
+  if (data[0] && data[0].fake) {
     return data;
   }
 
@@ -61,7 +61,7 @@ export const offersAdapter = (data) => {
 };
 
 export const reviewAdapter = (data) => {
-  if (data[0].fake) {
+  if (data[0] && data[0].fake) {
     return data;
   }
 

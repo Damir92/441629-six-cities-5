@@ -64,7 +64,7 @@ const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <OffersMap
-                  cityOffers={cityOffers}
+                  offers={cityOffers}
                 />
               </section>
             </div>

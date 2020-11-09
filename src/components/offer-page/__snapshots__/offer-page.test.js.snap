@@ -319,7 +319,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
               "volume": 10,
             }
           }
-          cityOffers={
+          offers={
             Array [
               Object {
                 "bedrooms": 1,

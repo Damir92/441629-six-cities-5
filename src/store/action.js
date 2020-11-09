@@ -3,6 +3,7 @@ export const ActionType = {
   GET_SORTED_OFFERS: `GET_SORTED_OFFERS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_ACTIVE_OFFER: `LOAD_ACTIVE_OFFER`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
@@ -30,6 +31,11 @@ export const loadOffersAction = (offers) => ({
 export const loadActiveOfferAction = (offer) => ({
   type: ActionType.LOAD_ACTIVE_OFFER,
   payload: offer,
+});
+
+export const loadNearbyOffersAction = (offers) => ({
+  type: ActionType.LOAD_NEARBY_OFFERS,
+  payload: offers,
 });
 
 export const loadReviewsAction = (reviews) => ({

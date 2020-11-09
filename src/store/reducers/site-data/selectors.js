@@ -17,6 +17,8 @@ export const getReviews = (state) => state[REDUCER_DATA].reviews.sort((a, b) => 
 
 export const getSortingType = (state) => state[REDUCER_DATA].sortingType;
 
+export const getNearbyOffers = (state) => state[REDUCER_DATA].nearbyOffers;
+
 export const getCityOffers = createSelector(
     getOffers,
     getCity,

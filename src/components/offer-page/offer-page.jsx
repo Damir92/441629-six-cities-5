@@ -6,9 +6,9 @@ import {offerPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-ty
 import {AuthorizationStatus, LivingType} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
-import {getCityOffers, getActiveOffer, getReviews} from '../../store/reducers/site-data/selectors';
+import {getActiveOffer, getReviews, getNearbyOffers} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
-import {fetchActiveOffer, fetchReviews, postReview} from '../../store/api-actions';
+import {fetchActiveOffer, fetchReviews, postReview, fetchNearbyOffers} from '../../store/api-actions';
 import {unsetActiveOfferAction} from '../../store/action';
 
 import Header from '../header/header';
@@ -19,7 +19,7 @@ import OffersMap from '../offers-map/offers-map';
 
 const OfferPage = (props) => {
   const {
-    cityOffers,
+    nearbyOffers,
     logged,
     match,
     offer = {},
@@ -29,7 +29,6 @@ const OfferPage = (props) => {
     unsetActiveOffer,
   } = props;
 
-  const nearestOffers = cityOffers.slice(0, 3);
   const offerId = +match.params.id;
 
   useEffect(() => {
@@ -174,10 +173,16 @@ const OfferPage = (props) => {
           </div>
 
           <section className="property__map map">
-            <OffersMap
-              activeOffer={offer}
-              cityOffers={nearestOffers}
-            />
+
+            {nearbyOffers
+              ?
+              <OffersMap
+                activeOffer={offer}
+                offers={nearbyOffers}
+              />
+              :
+              null}
+
           </section>
 
         </section>
@@ -185,10 +190,14 @@ const OfferPage = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <OffersList
-              cityOffers={nearestOffers}
-              isMainPage={false}
-            />
+            {nearbyOffers
+              ?
+              <OffersList
+                cityOffers={nearbyOffers}
+                isMainPage={false}
+              />
+              :
+              null}
 
           </section>
         </div>
@@ -203,7 +212,7 @@ OfferPage.propTypes = {
     PropTypes.shape({}).isRequired
   ]).isRequired,
   match: PropTypes.object.isRequired,
-  cityOffers: PropTypes.arrayOf(
+  nearbyOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
@@ -216,8 +225,8 @@ OfferPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cityOffers: getCityOffers(state),
   logged: getAuthorizationStatus(state),
+  nearbyOffers: getNearbyOffers(state),
   offer: getActiveOffer(state),
   reviews: getReviews(state),
 });
@@ -226,6 +235,7 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (id) => {
     dispatch(fetchActiveOffer(id));
     dispatch(fetchReviews(id));
+    dispatch(fetchNearbyOffers(id));
   },
   onSendForm: (reviewData) => dispatch(postReview(reviewData)),
   unsetActiveOffer: () => dispatch(unsetActiveOfferAction())
