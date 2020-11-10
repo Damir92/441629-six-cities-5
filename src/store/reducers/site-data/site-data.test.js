@@ -24,9 +24,10 @@ describe(`Test reducer for site-data`, () => {
       activeCard: null,
       activeOffer: {},
       city: Cities[0],
+      favoritesOffers: [],
       nearbyOffers: [],
-      reviews: [],
       offers: [],
+      reviews: [],
       sortingType: Sorting.POPULAR,
     });
   });

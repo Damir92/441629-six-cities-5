@@ -6,6 +6,7 @@ import {
   setLoggedUser,
   loadReviewsAction,
   loadNearbyOffersAction,
+  loadFavoriteOffersAction,
 } from './action';
 
 import {offersAdapter, oneOfferAdapter, reviewAdapter} from '../utils';
@@ -18,12 +19,22 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 
 export const fetchActiveOffer = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoutes.OFFERS}/${id}`)
-    .then(({data}) => dispatch(loadActiveOfferAction(oneOfferAdapter(data))))
+  .then(({data}) => dispatch(loadActiveOfferAction(oneOfferAdapter(data))))
 );
 
 export const fetchNearbyOffers = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoutes.OFFERS}/${id}/nearby`)
     .then(({data}) => dispatch(loadNearbyOffersAction(offersAdapter(data))))
+);
+
+export const fetchFavorite = () => (dispatch, _getState, api) => (
+  api.get(APIRoutes.FAVORITE)
+    .then(({data}) => dispatch(loadFavoriteOffersAction(offersAdapter(data))))
+);
+
+export const updateFavorite = ({id, status}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoutes.FAVORITE}/${id}/${status}`)
+    .then(({data}) => dispatch(loadActiveOfferAction(oneOfferAdapter(data))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

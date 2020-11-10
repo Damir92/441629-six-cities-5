@@ -4,12 +4,22 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import {setActiveCard} from '../../store/action';
-import {convertRatingToPercent} from '../../utils';
+import {fetchFavorite, fetchNearbyOffers, fetchOffersList, updateFavorite} from '../../store/api-actions';
+import {convertRatingToPercent, getArticleClassesForOfferCard, getImageWrapClassesForOfferCard, getCardInfoClassesForOfferCard} from '../../utils';
 
-import {LivingType, Routes} from '../../const';
+import {FavoriteStatus, LivingType, PageTypes, Routes} from '../../const';
 import {OfferCardPropTypes} from '../../prop-types';
 
-const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
+const OfferCard = ({offer = {}, onCardEnterMouse, onFavoriteClick, pageType}) => {
+  const IMAGE_WIDTH = {
+    FAVORITES: 150,
+    OTHER: 260,
+  };
+
+  const IMAGE_HEIGHT = {
+    FAVORITES: 110,
+    OTHER: 200,
+  };
 
   const {
     id,
@@ -30,9 +40,16 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
     onCardEnterMouse(null);
   };
 
+  const handleFavoriteClick = () => {
+    onFavoriteClick({
+      id,
+      status: isFavorite ? FavoriteStatus.IS_NOT_FAVORITE : FavoriteStatus.IS_FAVORITE,
+    }, pageType);
+  };
+
   return (
     <article
-      className={`place-card ${isMainPage ? `cities__place-card` : `near-places__card`}`}
+      className={getArticleClassesForOfferCard(pageType)}
       onMouseEnter={handleMouseEnterCard}
       onMouseLeave={handleMouseLeaveCard}
     >
@@ -43,12 +60,18 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
           <span>Premium</span>
         </div>
       }
-      <div className={`place-card__image-wrapper ${isMainPage ? `cities__image-wrapper` : `near-places__image-wrapper`}`}>
+      <div className={getImageWrapClassesForOfferCard(pageType)}>
         <Link to={`${Routes.OFFER_LINK}/${id}`}>
-          <img className="place-card__image" src={preview} width="260" height="200" alt="Place image" />
+          <img
+            className="place-card__image"
+            src={preview}
+            width={pageType === PageTypes.FAVORITES ? IMAGE_WIDTH.FAVORITES : IMAGE_WIDTH.OTHER}
+            height={pageType === PageTypes.FAVORITES ? IMAGE_HEIGHT.FAVORITES : IMAGE_HEIGHT.OTHER}
+            alt="Place image"
+          />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={getCardInfoClassesForOfferCard(pageType)}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -56,6 +79,7 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
           </div>
           <button
             className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`}
+            onClick={handleFavoriteClick}
             type="button"
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
@@ -84,13 +108,20 @@ const OfferCard = ({offer = {}, onCardEnterMouse, isMainPage = true}) => {
 };
 
 OfferCard.propTypes = {
-  isMainPage: PropTypes.bool.isRequired,
   offer: PropTypes.shape(OfferCardPropTypes).isRequired,
   onCardEnterMouse: PropTypes.func.isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
+  pageType: PropTypes.oneOf([PageTypes.MAIN, PageTypes.OFFER, PageTypes.FAVORITES]).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onCardEnterMouse: (id) => dispatch(setActiveCard(id)),
+  onFavoriteClick: (value, pageType) => {
+    dispatch(updateFavorite(value));
+    pageType === PageTypes.MAIN && dispatch(fetchOffersList());
+    pageType === PageTypes.OFFER && dispatch(fetchNearbyOffers(value.id));
+    pageType === PageTypes.FAVORITES && dispatch(fetchFavorite());
+  },
 });
 
 export {OfferCard};

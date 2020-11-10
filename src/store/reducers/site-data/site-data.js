@@ -6,6 +6,7 @@ const initialState = {
   activeCard: null,
   activeOffer: {},
   city: Cities[0],
+  favoriteOffers: [],
   nearbyOffers: [],
   offers: [],
   reviews: [],
@@ -32,6 +33,11 @@ export const siteData = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return updateObject(state, {
         reviews: action.payload,
+      });
+
+    case ActionType.LOAD_FAVORITE_OFFERS:
+      return updateObject(state, {
+        favoriteOffers: action.payload,
       });
 
     case ActionType.SET_ACTIVE_CARD:

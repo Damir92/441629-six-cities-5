@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import {noop} from '../../mocks/tests-data';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, Cities} from '../../const';
 
 import {AuthPage} from './auth-page';
 
@@ -14,6 +14,7 @@ describe(`AuthPage component`, () => {
   it(`AuthPage snapshot`, () => {
     const tree = shallow(
         <AuthPage
+          city={Cities[0]}
           history={history}
           email={``}
           password={``}

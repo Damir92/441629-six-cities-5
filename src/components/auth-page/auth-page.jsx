@@ -1,11 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {AuthorizationStatus, Routes} from '../../const';
+import {AuthorizationStatus, Cities, Routes} from '../../const';
 
 import {login} from '../../store/api-actions';
 import {redirectToRoute} from '../../store/action';
+import {getCity} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 
 import Header from '../header/header';
@@ -14,6 +16,7 @@ import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
 const AuthPage = (props) => {
   const {
+    city,
     email,
     password,
     onChange,
@@ -81,9 +84,12 @@ const AuthPage = (props) => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                to={Routes.MAIN}
+              >
+                <span>{city}</span>
+              </Link>
             </div>
           </section>
         </div>
@@ -93,6 +99,7 @@ const AuthPage = (props) => {
 };
 
 AuthPage.propTypes = {
+  city: PropTypes.oneOf(Cities).isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
@@ -106,6 +113,7 @@ AuthPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   logged: getAuthorizationStatus(state),
+  city: getCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

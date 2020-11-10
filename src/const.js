@@ -9,14 +9,26 @@ export const Routes = {
 };
 
 export const APIRoutes = {
+  FAVORITE: `/favorite`,
   REVIEWS: `/comments`,
   OFFERS: `/hotels`,
   LOGIN: `/login`,
 };
 
+export const PageTypes = {
+  FAVORITES: `FAVORITES`,
+  OFFER: `OFFER`,
+  MAIN: `MAIN`,
+};
+
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+};
+
+export const FavoriteStatus = {
+  IS_FAVORITE: 1,
+  IS_NOT_FAVORITE: 0,
 };
 
 export const Cities = [

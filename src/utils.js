@@ -1,4 +1,4 @@
-import {PERCENT_PER_POINT_RATING, Sorting, MonthNames} from './const';
+import {PERCENT_PER_POINT_RATING, Sorting, MonthNames, PageTypes} from './const';
 
 export const convertRatingToPercent = (value) => `${Math.round(value) * PERCENT_PER_POINT_RATING}%`;
 
@@ -79,3 +79,35 @@ export const reviewAdapter = (data) => {
     };
   });
 };
+
+export const getArticleClassesForOfferCard = (pageType) => {
+  switch (pageType) {
+    case PageTypes.MAIN:
+      return `place-card cities__place-card`;
+    case PageTypes.OFFER:
+      return `place-card near-places__card`;
+    case PageTypes.FAVORITES:
+      return `place-card favorites__card`;
+    default: `place-card`;
+  };
+};
+
+export const getImageWrapClassesForOfferCard = (pageType) => {
+  switch (pageType) {
+    case PageTypes.MAIN:
+      return `place-card__image-wrapper cities__image-wrapper`;
+    case PageTypes.OFFER:
+      return `place-card__image-wrapper near-places__image-wrapper`;
+    case PageTypes.FAVORITES:
+      return `place-card__image-wrapper favorites__image-wrapper`;
+    default: `place-card__image-wrapper`;
+  };
+};
+
+export const getCardInfoClassesForOfferCard = (pageType) => {
+  switch (pageType) {
+    case PageTypes.FAVORITES:
+      return `place-card__info favorites__card-info`;
+    default: `place-card__info`;
+  }
+}

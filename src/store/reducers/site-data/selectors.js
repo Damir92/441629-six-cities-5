@@ -13,6 +13,8 @@ export const getActiveCard = (state) => state[REDUCER_DATA].activeCard;
 
 export const getActiveOffer = (state) => state[REDUCER_DATA].activeOffer;
 
+export const getFavoriteOffers = (state) => state[REDUCER_DATA].favoriteOffers;
+
 export const getReviews = (state) => state[REDUCER_DATA].reviews.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
 export const getSortingType = (state) => state[REDUCER_DATA].sortingType;

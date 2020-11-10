@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {offerPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-types';
-import {AuthorizationStatus, LivingType} from '../../const';
+import {AuthorizationStatus, FavoriteStatus, LivingType, PageTypes, Routes} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
 import {getActiveOffer, getReviews, getNearbyOffers} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
-import {fetchActiveOffer, fetchReviews, postReview, fetchNearbyOffers} from '../../store/api-actions';
+import {fetchActiveOffer, fetchReviews, postReview, fetchNearbyOffers, updateFavorite} from '../../store/api-actions';
 import {unsetActiveOfferAction} from '../../store/action';
 
 import Header from '../header/header';
@@ -23,6 +23,7 @@ const OfferPage = (props) => {
     logged,
     match,
     offer = {},
+    onFavoriteClick,
     onLoad,
     onSendForm,
     reviews = [],
@@ -55,6 +56,17 @@ const OfferPage = (props) => {
     title,
     type,
   } = offer;
+
+  const handleFavoriteClick = () => {
+    if (logged === AuthorizationStatus.NO_AUTH) {
+      history.push(Routes.LOGIN);
+    } else {
+      onFavoriteClick({
+        id: offerId,
+        status: isFavorite ? FavoriteStatus.IS_NOT_FAVORITE : FavoriteStatus.IS_FAVORITE,
+      });
+    }
+  };
 
   return (
     <div className="page">
@@ -91,8 +103,9 @@ const OfferPage = (props) => {
                 <button
                   className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`}
                   type="button"
+                  onClick={handleFavoriteClick}
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">
@@ -194,7 +207,7 @@ const OfferPage = (props) => {
               ?
               <OffersList
                 cityOffers={nearbyOffers}
-                isMainPage={false}
+                pageType={PageTypes.OFFER}
               />
               :
               null}
@@ -237,8 +250,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviews(id));
     dispatch(fetchNearbyOffers(id));
   },
+  onFavoriteClick: (value) => dispatch(updateFavorite(value)),
   onSendForm: (reviewData) => dispatch(postReview(reviewData)),
-  unsetActiveOffer: () => dispatch(unsetActiveOfferAction())
+  unsetActiveOffer: () => dispatch(unsetActiveOfferAction()),
 });
 
 export {OfferPage};

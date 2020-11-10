@@ -55,6 +55,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
             </h1>
             <button
               className="property__bookmark-button button "
+              onClick={[Function]}
               type="button"
             >
               <svg

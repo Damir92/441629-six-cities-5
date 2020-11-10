@@ -98,13 +98,7 @@ const OffersMap = ({offers = [], activeCard, activeOffer = {}}) => {
     removePins();
 
     addPins();
-  }, [offers]);
-
-  useEffect(() => {
-    removePins();
-
-    addPins();
-  }, [activeCard, activeOffer]);
+  }, [offers, activeCard, activeOffer]);
 
   return (
     <div
