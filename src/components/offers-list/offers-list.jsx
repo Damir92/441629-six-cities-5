@@ -16,9 +16,10 @@ const OffersList = ({cityOffers = [], pageType}) => {
         return `places__list near-places__list`;
       case PageTypes.FAVORITES:
         return `favorites__places`;
-      default: `places__list`
     }
-  }
+
+    return `places__list`;
+  };
 
   return (
     <div className={getClassesByPageType()}>

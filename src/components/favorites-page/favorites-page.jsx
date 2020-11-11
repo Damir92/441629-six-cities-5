@@ -19,7 +19,7 @@ const FavoritesPage = ({favoriteOffers = [], onLoad, onCityClick}) => {
   }, []);
 
   const getCityOffers = (city) => {
-    return favoriteOffers.filter((item) => item.city && item.city.name === city)
+    return favoriteOffers.filter((item) => item.city && item.city.name === city);
   };
 
   return (
@@ -45,28 +45,28 @@ const FavoritesPage = ({favoriteOffers = [], onLoad, onCityClick}) => {
 
                 {Cities.map((city) => (
                   getCityOffers(city).length
-                  ?
-                  <li key={city} className="favorites__locations-items">
-                    <div className="favorites__locations locations locations--current">
-                      <div className="locations__item">
-                        <Link
-                          className="locations__item-link"
-                          to={Routes.MAIN}
-                          onClick={() => {
-                            onCityClick(city)
-                          }}
-                        >
-                          <span>{city}</span>
-                        </Link>
+                    ?
+                    <li key={city} className="favorites__locations-items">
+                      <div className="favorites__locations locations locations--current">
+                        <div className="locations__item">
+                          <Link
+                            className="locations__item-link"
+                            to={Routes.MAIN}
+                            onClick={() => {
+                              onCityClick(city);
+                            }}
+                          >
+                            <span>{city}</span>
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                    <OffersList
-                      cityOffers={getCityOffers(city)}
-                      pageType={PageTypes.FAVORITES}
-                    />
-                  </li>
-                  :
-                  ``
+                      <OffersList
+                        cityOffers={getCityOffers(city)}
+                        pageType={PageTypes.FAVORITES}
+                      />
+                    </li>
+                    :
+                    ``
                 ))}
 
               </ul>
@@ -87,10 +87,15 @@ const FavoritesPage = ({favoriteOffers = [], onLoad, onCityClick}) => {
 };
 
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.arrayOf(
-      PropTypes.shape(offerPropTypes).isRequired
-  ).isRequired,
-}
+  favoriteOffers: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+        PropTypes.shape(offerPropTypes).isRequired
+    ).isRequired,
+    PropTypes.array
+  ]).isRequired,
+  onLoad: PropTypes.func.isRequired,
+  onCityClick: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   favoriteOffers: getFavoriteOffers(state),
@@ -101,4 +106,5 @@ const mapDispatchToProps = (dispatch) => ({
   onCityClick: (city) => dispatch(changeCityAction(city)),
 });
 
+export {FavoritesPage};
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);

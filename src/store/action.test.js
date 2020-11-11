@@ -11,6 +11,8 @@ import {
   setActiveCard,
   setLoggedUser,
   ActionType,
+  loadFavoriteOffersAction,
+  unsetActiveOfferAction,
 } from './action';
 
 describe(`Action creators work correctly`, () => {
@@ -55,6 +57,13 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for load favorite offers returns action offers payload`, () => {
+    expect(loadFavoriteOffersAction([{}, {}, {}])).toEqual({
+      type: ActionType.LOAD_FAVORITE_OFFERS,
+      payload: [{}, {}, {}],
+    });
+  });
+
   it(`Action creator for require auth returns action status payload`, () => {
     expect(requireAuthorization(`AUTH`)).toEqual({
       type: ActionType.REQUIRED_AUTHORIZATION,
@@ -87,6 +96,12 @@ describe(`Action creators work correctly`, () => {
     expect(setLoggedUser(`test@email.ru`)).toEqual({
       type: ActionType.SET_LOGGED_USER,
       payload: `test@email.ru`,
+    });
+  });
+
+  it(`Action creator for unset active offer returns correct action`, () => {
+    expect(unsetActiveOfferAction(`test@email.ru`)).toEqual({
+      type: ActionType.UNSET_ACTIVE_OFFER,
     });
   });
 });

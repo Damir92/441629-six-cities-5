@@ -194,6 +194,7 @@ exports[`MainPage component MainPage renders correctly 1`] = `
                 },
               ]
             }
+            pageType="MAIN"
           />
         </section>
         <div

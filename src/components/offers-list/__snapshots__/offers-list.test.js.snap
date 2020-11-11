@@ -1,11 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Offers list renders correctly It is from main page 1`] = `
+exports[`OffersList component Snapshot for favorites page 1`] = `
 <div
-  className="places__list cities__places-list tabs__content"
+  className="favorites__places"
 >
   <Connect(OfferCard)
-    isMainPage={true}
     key="2"
     offer={
       Object {
@@ -58,9 +57,9 @@ exports[`Offers list renders correctly It is from main page 1`] = `
         "volume": 1,
       }
     }
+    pageType="FAVORITES"
   />
   <Connect(OfferCard)
-    isMainPage={true}
     key="4"
     offer={
       Object {
@@ -108,9 +107,9 @@ exports[`Offers list renders correctly It is from main page 1`] = `
         "volume": 2,
       }
     }
+    pageType="FAVORITES"
   />
   <Connect(OfferCard)
-    isMainPage={true}
     key="9"
     offer={
       Object {
@@ -159,16 +158,16 @@ exports[`Offers list renders correctly It is from main page 1`] = `
         "volume": 10,
       }
     }
+    pageType="FAVORITES"
   />
 </div>
 `;
 
-exports[`Offers list renders correctly It is not from main page 1`] = `
+exports[`OffersList component Snapshot for main page 1`] = `
 <div
-  className="places__list near-places__list"
+  className="places__list cities__places-list tabs__content"
 >
   <Connect(OfferCard)
-    isMainPage={false}
     key="2"
     offer={
       Object {
@@ -221,9 +220,9 @@ exports[`Offers list renders correctly It is not from main page 1`] = `
         "volume": 1,
       }
     }
+    pageType="MAIN"
   />
   <Connect(OfferCard)
-    isMainPage={false}
     key="4"
     offer={
       Object {
@@ -271,9 +270,9 @@ exports[`Offers list renders correctly It is not from main page 1`] = `
         "volume": 2,
       }
     }
+    pageType="MAIN"
   />
   <Connect(OfferCard)
-    isMainPage={false}
     key="9"
     offer={
       Object {
@@ -322,6 +321,170 @@ exports[`Offers list renders correctly It is not from main page 1`] = `
         "volume": 10,
       }
     }
+    pageType="MAIN"
+  />
+</div>
+`;
+
+exports[`OffersList component Snapshot for offer page 1`] = `
+<div
+  className="places__list near-places__list"
+>
+  <Connect(OfferCard)
+    key="2"
+    offer={
+      Object {
+        "bedrooms": 1,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "I am happy to welcome you to my apartment in the city center! Three words: location, cosy and chic!",
+        "goods": Array [
+          "Fridge",
+          "Washer",
+          "Coffee machine",
+          "Washing machine",
+          "Dishwasher",
+          "Laptop friendly workspace",
+          "Cable TV",
+          "Air conditioning",
+          "Baby seat",
+          "Towels",
+          "Breakfast",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 2,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.37454,
+          "longitude": 4.881976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 111,
+        "rating": 3.3,
+        "title": "Wood and stone place",
+        "type": "room",
+        "volume": 1,
+      }
+    }
+    pageType="OFFER"
+  />
+  <Connect(OfferCard)
+    key="4"
+    offer={
+      Object {
+        "bedrooms": 1,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.",
+        "goods": Array [
+          "Laptop friendly workspace",
+          "Baby seat",
+          "Towels",
+          "Air conditioning",
+          "Breakfast",
+          "Washer",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 4,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": true,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.35054,
+          "longitude": 4.908976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 294,
+        "rating": 3.8,
+        "title": "Loft Studio in the Central Area",
+        "type": "hotel",
+        "volume": 2,
+      }
+    }
+    pageType="OFFER"
+  />
+  <Connect(OfferCard)
+    key="9"
+    offer={
+      Object {
+        "bedrooms": 4,
+        "city": Object {
+          "location": Object {
+            "latitude": 52.37454,
+            "longitude": 4.897976,
+            "zoom": 13,
+          },
+          "name": "Amsterdam",
+        },
+        "description": "This is a place for dreamers to reset, reflect, and create. Designed with a \\"slow\\" pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.",
+        "goods": Array [
+          "Air conditioning",
+          "Baby seat",
+          "Fridge",
+          "Towels",
+          "Breakfast",
+          "Washer",
+          "Laptop friendly workspace",
+        ],
+        "host": Object {
+          "avatar": "img/avatar-angelina.jpg",
+          "id": 25,
+          "isPro": true,
+          "name": "Angelina",
+        },
+        "id": 9,
+        "images": Array [
+          "imgURL-1",
+          "imgURL-2",
+        ],
+        "isFavorite": false,
+        "isPremium": false,
+        "location": Object {
+          "latitude": 52.37854,
+          "longitude": 4.894976,
+          "zoom": 16,
+        },
+        "preview": "previewURL",
+        "price": 406,
+        "rating": 2.2,
+        "title": "Loft Studio in the Central Area",
+        "type": "hotel",
+        "volume": 10,
+      }
+    }
+    pageType="OFFER"
   />
 </div>
 `;

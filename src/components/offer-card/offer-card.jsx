@@ -1,16 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
+
+import {convertRatingToPercent, getArticleClassesForOfferCard, getImageWrapClassesForOfferCard, getCardInfoClassesForOfferCard} from '../../utils';
+import {FavoriteStatus, LivingType, PageTypes, Routes, AuthorizationStatus} from '../../const';
+import {OfferCardPropTypes} from '../../prop-types';
 
 import {setActiveCard} from '../../store/action';
 import {fetchFavorite, fetchNearbyOffers, fetchOffersList, updateFavorite} from '../../store/api-actions';
-import {convertRatingToPercent, getArticleClassesForOfferCard, getImageWrapClassesForOfferCard, getCardInfoClassesForOfferCard} from '../../utils';
+import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 
-import {FavoriteStatus, LivingType, PageTypes, Routes} from '../../const';
-import {OfferCardPropTypes} from '../../prop-types';
+const getFunction = (pageType, id) => {
+  let func = () => {};
+  switch (pageType) {
+    case PageTypes.MAIN:
+      func = fetchOffersList();
+      break;
+    case PageTypes.OFFER:
+      func = fetchNearbyOffers(id);
+      break;
+    case PageTypes.FAVORITES:
+      func = fetchFavorite();
+      break;
+  }
 
-const OfferCard = ({offer = {}, onCardEnterMouse, onFavoriteClick, pageType}) => {
+  return func;
+};
+
+const OfferCard = ({logged, offer = {}, onCardEnterMouse, onFavoriteClick, pageType}) => {
   const IMAGE_WIDTH = {
     FAVORITES: 150,
     OTHER: 260,
@@ -32,6 +50,8 @@ const OfferCard = ({offer = {}, onCardEnterMouse, onFavoriteClick, pageType}) =>
     type,
   } = offer;
 
+  const history = useHistory();
+
   const handleMouseEnterCard = () => {
     onCardEnterMouse(offer.id);
   };
@@ -41,10 +61,14 @@ const OfferCard = ({offer = {}, onCardEnterMouse, onFavoriteClick, pageType}) =>
   };
 
   const handleFavoriteClick = () => {
-    onFavoriteClick({
-      id,
-      status: isFavorite ? FavoriteStatus.IS_NOT_FAVORITE : FavoriteStatus.IS_FAVORITE,
-    }, pageType);
+    if (logged === AuthorizationStatus.NO_AUTH) {
+      history.push(Routes.LOGIN);
+    } else {
+      onFavoriteClick({
+        id,
+        status: isFavorite ? FavoriteStatus.IS_NOT_FAVORITE : FavoriteStatus.IS_FAVORITE,
+      }, pageType);
+    }
   };
 
   return (
@@ -108,21 +132,24 @@ const OfferCard = ({offer = {}, onCardEnterMouse, onFavoriteClick, pageType}) =>
 };
 
 OfferCard.propTypes = {
+  logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   offer: PropTypes.shape(OfferCardPropTypes).isRequired,
   onCardEnterMouse: PropTypes.func.isRequired,
   onFavoriteClick: PropTypes.func.isRequired,
   pageType: PropTypes.oneOf([PageTypes.MAIN, PageTypes.OFFER, PageTypes.FAVORITES]).isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  logged: getAuthorizationStatus(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onCardEnterMouse: (id) => dispatch(setActiveCard(id)),
   onFavoriteClick: (value, pageType) => {
     dispatch(updateFavorite(value));
-    pageType === PageTypes.MAIN && dispatch(fetchOffersList());
-    pageType === PageTypes.OFFER && dispatch(fetchNearbyOffers(value.id));
-    pageType === PageTypes.FAVORITES && dispatch(fetchFavorite());
+    dispatch(getFunction(pageType, value.id));
   },
 });
 
 export {OfferCard};
-export default connect(null, mapDispatchToProps)(OfferCard);
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);

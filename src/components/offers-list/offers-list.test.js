@@ -1,35 +1,39 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {cityOffers, history} from '../../mocks/tests-data';
+import {PageTypes} from '../../const';
+import {cityOffers} from '../../mocks/tests-data';
 
 import OffersList from './offers-list';
 
-jest.mock(`react-router-dom`, () => ({
-  useHistory: () => ({
-    push: jest.fn(),
-  }),
-}));
-
-describe(`Offers list renders correctly`, () => {
-  it(`It is from main page`, () => {
+describe(`OffersList component`, () => {
+  it(`Snapshot for main page`, () => {
     const tree = shallow(
         <OffersList
           cityOffers={cityOffers}
-          history={history}
-          isMainPage={true}
+          pageType={PageTypes.MAIN}
         />
     );
 
     expect(tree).toMatchSnapshot();
   });
 
-  it(`It is not from main page`, () => {
+  it(`Snapshot for offer page`, () => {
     const tree = shallow(
         <OffersList
           cityOffers={cityOffers}
-          history={history}
-          isMainPage={false}
+          pageType={PageTypes.OFFER}
+        />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Snapshot for favorites page`, () => {
+    const tree = shallow(
+        <OffersList
+          cityOffers={cityOffers}
+          pageType={PageTypes.FAVORITES}
         />
     );
 

@@ -21,6 +21,7 @@ const OfferPage = (props) => {
   const {
     nearbyOffers,
     logged,
+    history,
     match,
     offer = {},
     onFavoriteClick,
@@ -224,11 +225,15 @@ OfferPage.propTypes = {
     PropTypes.shape(OfferPagePropTypes).isRequired,
     PropTypes.shape({}).isRequired
   ]).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   match: PropTypes.object.isRequired,
   nearbyOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
   onLoad: PropTypes.func.isRequired,
   onSendForm: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(

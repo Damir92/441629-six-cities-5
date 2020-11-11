@@ -2,7 +2,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 
 import {noop} from '../../mocks/tests-data';
-import {AuthorizationStatus, Cities} from '../../const';
+import {Cities} from '../../const';
 
 import {AuthPage} from './auth-page';
 
@@ -19,10 +19,8 @@ describe(`AuthPage component`, () => {
           city={Cities[0]}
           email={testData.email}
           password={testData.password}
-          logged={AuthorizationStatus.NO_AUTH}
           onChange={noop}
           onSubmit={handleSubmitAction}
-          redirectToMain={noop}
         />
     );
 

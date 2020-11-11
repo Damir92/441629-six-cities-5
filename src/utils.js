@@ -88,8 +88,9 @@ export const getArticleClassesForOfferCard = (pageType) => {
       return `place-card near-places__card`;
     case PageTypes.FAVORITES:
       return `place-card favorites__card`;
-    default: `place-card`;
-  };
+  }
+
+  return `place-card`;
 };
 
 export const getImageWrapClassesForOfferCard = (pageType) => {
@@ -100,14 +101,16 @@ export const getImageWrapClassesForOfferCard = (pageType) => {
       return `place-card__image-wrapper near-places__image-wrapper`;
     case PageTypes.FAVORITES:
       return `place-card__image-wrapper favorites__image-wrapper`;
-    default: `place-card__image-wrapper`;
-  };
+  }
+
+  return `place-card__image-wrapper`;
 };
 
 export const getCardInfoClassesForOfferCard = (pageType) => {
   switch (pageType) {
     case PageTypes.FAVORITES:
       return `place-card__info favorites__card-info`;
-    default: `place-card__info`;
   }
-}
+
+  return `place-card__info`;
+};

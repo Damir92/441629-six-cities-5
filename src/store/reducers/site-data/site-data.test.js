@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 
 import {APIRoutes, Cities, Sorting, SortingTypes} from '../../../const';
-import {cityOffers, reviews} from '../../../mocks/tests-data';
+import {cityOffers, offer, reviews} from '../../../mocks/tests-data';
 
 import {siteData} from './site-data';
 import {createAPI} from '../../../services/api';
@@ -12,9 +12,12 @@ import {
   fetchReviews,
   postReview,
   fetchNearbyOffers,
+  fetchFavorite,
+  updateFavorite,
 } from '../../api-actions';
 
 const ID = 10;
+const FAVORITE_STATUS = 1;
 
 const api = createAPI(() => {});
 
@@ -24,7 +27,7 @@ describe(`Test reducer for site-data`, () => {
       activeCard: null,
       activeOffer: {},
       city: Cities[0],
-      favoritesOffers: [],
+      favoriteOffers: [],
       nearbyOffers: [],
       offers: [],
       reviews: [],
@@ -32,15 +35,23 @@ describe(`Test reducer for site-data`, () => {
     });
   });
 
-  it(`Reducer should get city offers by get offers if city set`, () => {
+  it(`Reducer should load offers`, () => {
     expect(siteData({
-      offers: cityOffers,
-      city: cityOffers[0].city.name,
     }, {
-      type: ActionType.GET_OFFERS,
+      type: ActionType.LOAD_OFFERS,
+      payload: cityOffers,
     })).toEqual({
-      city: cityOffers[0].city.name,
       offers: cityOffers,
+    });
+  });
+
+  it(`Reducer should load active offer`, () => {
+    expect(siteData({
+    }, {
+      type: ActionType.LOAD_ACTIVE_OFFER,
+      payload: offer,
+    })).toEqual({
+      activeOffer: offer,
     });
   });
 
@@ -63,6 +74,16 @@ describe(`Test reducer for site-data`, () => {
       payload: reviews,
     })).toEqual({
       reviews,
+    });
+  });
+
+  it(`Reducer should load favorite offers`, () => {
+    expect(siteData({
+    }, {
+      type: ActionType.LOAD_FAVORITE_OFFERS,
+      payload: cityOffers,
+    })).toEqual({
+      favoriteOffers: cityOffers,
     });
   });
 
@@ -96,6 +117,17 @@ describe(`Test reducer for site-data`, () => {
       payload: SortingTypes[1],
     })).toEqual({
       sortingType: SortingTypes[1],
+    });
+  });
+
+  it(`Reducer should unset activeOffer`, () => {
+    expect(siteData({
+      activeOffer: offer,
+    }, {
+      type: ActionType.UNSET_ACTIVE_OFFER,
+      payload: {},
+    })).toEqual({
+      activeOffer: {},
     });
   });
 });
@@ -196,6 +228,47 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_REVIEWS,
           payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const offersLoader = fetchFavorite();
+
+    apiMock
+      .onGet(APIRoutes.FAVORITE)
+      .reply(200, [{fake: true}]);
+
+    return offersLoader(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITE_OFFERS,
+          payload: [{fake: true}],
+        });
+      });
+  });
+
+  it(`Should make a correct API POST call to /favorite/:id/:status`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const offersUpdate = updateFavorite({
+      id: ID,
+      status: FAVORITE_STATUS,
+    });
+
+    apiMock
+      .onPost(`${APIRoutes.FAVORITE}/${ID}/${FAVORITE_STATUS}`)
+      .reply(200, {fake: true});
+
+    return offersUpdate(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_ACTIVE_OFFER,
+          payload: {fake: true},
         });
       });
   });

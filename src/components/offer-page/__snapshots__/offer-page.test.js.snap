@@ -59,7 +59,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
               type="button"
             >
               <svg
-                className="property__bookmark-icon"
+                className="property__bookmark-icon place-card__bookmark-icon"
                 height="33"
                 width="31"
               >
@@ -619,7 +619,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
               },
             ]
           }
-          isMainPage={false}
+          pageType="OFFER"
         />
       </section>
     </div>
