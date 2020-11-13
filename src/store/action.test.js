@@ -3,6 +3,7 @@ import {
   getOffersAction,
   loadOffersAction,
   loadActiveOfferAction,
+  loadNearbyOffersAction,
   loadReviewsAction,
   requireAuthorization,
   redirectToRoute,
@@ -10,6 +11,8 @@ import {
   setActiveCard,
   setLoggedUser,
   ActionType,
+  loadFavoriteOffersAction,
+  unsetActiveOfferAction,
 } from './action';
 
 describe(`Action creators work correctly`, () => {
@@ -40,9 +43,23 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
+  it(`Action creator for load nearby offers returns action offers payload`, () => {
+    expect(loadNearbyOffersAction([{}, {}, {}])).toEqual({
+      type: ActionType.LOAD_NEARBY_OFFERS,
+      payload: [{}, {}, {}],
+    });
+  });
+
   it(`Action creator for load reviews returns action reviews payload`, () => {
     expect(loadReviewsAction([{}, {}, {}])).toEqual({
       type: ActionType.LOAD_REVIEWS,
+      payload: [{}, {}, {}],
+    });
+  });
+
+  it(`Action creator for load favorite offers returns action offers payload`, () => {
+    expect(loadFavoriteOffersAction([{}, {}, {}])).toEqual({
+      type: ActionType.LOAD_FAVORITE_OFFERS,
       payload: [{}, {}, {}],
     });
   });
@@ -79,6 +96,12 @@ describe(`Action creators work correctly`, () => {
     expect(setLoggedUser(`test@email.ru`)).toEqual({
       type: ActionType.SET_LOGGED_USER,
       payload: `test@email.ru`,
+    });
+  });
+
+  it(`Action creator for unset active offer returns correct action`, () => {
+    expect(unsetActiveOfferAction(`test@email.ru`)).toEqual({
+      type: ActionType.UNSET_ACTIVE_OFFER,
     });
   });
 });

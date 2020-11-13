@@ -37,21 +37,16 @@ exports[`App component App renders correctly 1`] = `
       exact={true}
       path="/"
     />
-    <Route
-      component={
-        Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "displayName": "Connect(WithAuthForm)",
-          "type": [Function],
-        }
-      }
-      exact={true}
-      path="/login"
+    <Connect(PrivateRoute)
+      conditionValue="AUTH"
+      path="/favorites"
+      redirectTo="/login"
+      render={[Function]}
     />
     <Connect(PrivateRoute)
-      path="/favorites"
+      conditionValue="NO_AUTH"
+      path="/login"
+      redirectTo="/"
       render={[Function]}
     />
     <Route

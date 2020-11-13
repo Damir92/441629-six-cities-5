@@ -3,7 +3,9 @@ export const ActionType = {
   GET_SORTED_OFFERS: `GET_SORTED_OFFERS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_ACTIVE_OFFER: `LOAD_ACTIVE_OFFER`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   SET_ACTIVE_CARD: `SET_ACTIVE_CARD`,
@@ -32,9 +34,19 @@ export const loadActiveOfferAction = (offer) => ({
   payload: offer,
 });
 
+export const loadNearbyOffersAction = (offers) => ({
+  type: ActionType.LOAD_NEARBY_OFFERS,
+  payload: offers,
+});
+
 export const loadReviewsAction = (reviews) => ({
   type: ActionType.LOAD_REVIEWS,
   payload: reviews,
+});
+
+export const loadFavoriteOffersAction = (offers) => ({
+  type: ActionType.LOAD_FAVORITE_OFFERS,
+  payload: offers,
 });
 
 export const requireAuthorization = (status) => ({

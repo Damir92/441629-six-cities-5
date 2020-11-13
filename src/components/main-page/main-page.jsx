@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {changeCityAction, setSortingTypeAction} from '../../store/action';
 import {getCity, getSortedOffers} from '../../store/reducers/site-data/selectors';
 
-import {Cities} from '../../const';
+import {Cities, PageTypes} from '../../const';
 import {offerPropTypes} from '../../prop-types';
 
 import Header from '../header/header';
@@ -56,6 +56,7 @@ const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) => {
 
                 <OffersList
                   cityOffers={cityOffers}
+                  pageType={PageTypes.MAIN}
                 />
 
               </section>
@@ -64,7 +65,7 @@ const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) => {
             <div className="cities__right-section">
               <section className="cities__map map">
                 <OffersMap
-                  cityOffers={cityOffers}
+                  offers={cityOffers}
                 />
               </section>
             </div>

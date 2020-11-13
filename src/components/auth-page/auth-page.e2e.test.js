@@ -1,8 +1,8 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 
-import {history, noop} from '../../mocks/tests-data';
-import {AuthorizationStatus} from '../../const';
+import {noop} from '../../mocks/tests-data';
+import {Cities} from '../../const';
 
 import {AuthPage} from './auth-page';
 
@@ -16,13 +16,11 @@ describe(`AuthPage component`, () => {
 
     const wrapper = shallow(
         <AuthPage
-          history={history}
+          city={Cities[0]}
           email={testData.email}
           password={testData.password}
-          logged={AuthorizationStatus.NO_AUTH}
           onChange={noop}
           onSubmit={handleSubmitAction}
-          redirectToMain={noop}
         />
     );
 

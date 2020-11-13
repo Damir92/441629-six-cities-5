@@ -55,10 +55,11 @@ exports[`Offer page renders correctly It is not main page 1`] = `
             </h1>
             <button
               className="property__bookmark-button button "
+              onClick={[Function]}
               type="button"
             >
               <svg
-                className="property__bookmark-icon"
+                className="property__bookmark-icon place-card__bookmark-icon"
                 height="33"
                 width="31"
               >
@@ -319,7 +320,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
               "volume": 10,
             }
           }
-          cityOffers={
+          offers={
             Array [
               Object {
                 "bedrooms": 1,
@@ -618,7 +619,7 @@ exports[`Offer page renders correctly It is not main page 1`] = `
               },
             ]
           }
-          isMainPage={false}
+          pageType="OFFER"
         />
       </section>
     </div>

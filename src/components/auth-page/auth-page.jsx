@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {AuthorizationStatus, Routes} from '../../const';
+import {Cities, Routes} from '../../const';
 
 import {login} from '../../store/api-actions';
-import {redirectToRoute} from '../../store/action';
-import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
+import {getCity} from '../../store/reducers/site-data/selectors';
 
 import Header from '../header/header';
 
@@ -14,17 +14,12 @@ import withAuthForm from '../../hocs/with-auth-form/with-auth-form';
 
 const AuthPage = (props) => {
   const {
+    city,
     email,
     password,
     onChange,
     onSubmit,
-    redirectToMain,
-    logged,
   } = props;
-
-  if (logged === AuthorizationStatus.AUTH) {
-    redirectToMain();
-  }
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -81,9 +76,12 @@ const AuthPage = (props) => {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link
+                className="locations__item-link"
+                to={Routes.MAIN}
+              >
+                <span>{city}</span>
+              </Link>
             </div>
           </section>
         </div>
@@ -93,24 +91,19 @@ const AuthPage = (props) => {
 };
 
 AuthPage.propTypes = {
+  city: PropTypes.oneOf(Cities).isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  logged: PropTypes.oneOf([
-    AuthorizationStatus.AUTH,
-    AuthorizationStatus.NO_AUTH
-  ]).isRequired,
-  redirectToMain: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  logged: getAuthorizationStatus(state),
+  city: getCity(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (authData) => dispatch(login(authData)),
-  redirectToMain: () => dispatch(redirectToRoute(Routes.MAIN)),
 });
 
 export {AuthPage};

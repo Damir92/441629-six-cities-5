@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch, Route, Router} from 'react-router-dom';
 
-import {Routes} from '../../const';
+import {Routes, AuthorizationStatus} from '../../const';
 
 import AuthPage from '../auth-page/auth-page';
 import FavoritesPage from '../favorites-page/favorites-page';
@@ -16,10 +16,17 @@ const App = () => {
     <Router history={browserHistory}>
       <Switch>
         <Route exact path={Routes.MAIN} component={MainPage} />
-        <Route exact path={Routes.LOGIN} component={AuthPage} />
         <PrivateRoute
           path={Routes.FAVORITES}
           render={(props) => <FavoritesPage {...props} />}
+          redirectTo={Routes.LOGIN}
+          conditionValue={AuthorizationStatus.AUTH}
+        />
+        <PrivateRoute
+          path={Routes.LOGIN}
+          render={(props) => <AuthPage {...props} />}
+          redirectTo={Routes.MAIN}
+          conditionValue={AuthorizationStatus.NO_AUTH}
         />
         <Route
           exact

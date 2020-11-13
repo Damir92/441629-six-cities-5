@@ -3,18 +3,17 @@ import {connect} from 'react-redux';
 import {Route, Redirect} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {AuthorizationStatus, Routes} from '../../const';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 
-const PrivateRoute = ({render, path, authorizationStatus}) => {
+const PrivateRoute = ({conditionValue, path, render, redirectTo, authorizationStatus}) => {
   return (
     <Route
       path={path}
       render={(routeProps) => {
         return (
-          authorizationStatus === AuthorizationStatus.AUTH
+          authorizationStatus === conditionValue
             ? render(routeProps)
-            : <Redirect to={Routes.LOGIN} />
+            : <Redirect to={redirectTo} />
         );
       }}
     />
@@ -23,8 +22,10 @@ const PrivateRoute = ({render, path, authorizationStatus}) => {
 
 PrivateRoute.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  conditionValue: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
+  redirectTo: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({

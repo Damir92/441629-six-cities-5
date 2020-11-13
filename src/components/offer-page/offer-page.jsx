@@ -3,12 +3,12 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import {offerPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-types';
-import {AuthorizationStatus, LivingType} from '../../const';
+import {AuthorizationStatus, FavoriteStatus, LivingType, PageTypes, Routes} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
-import {getCityOffers, getActiveOffer, getReviews} from '../../store/reducers/site-data/selectors';
+import {getActiveOffer, getReviews, getNearbyOffers} from '../../store/reducers/site-data/selectors';
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
-import {fetchActiveOffer, fetchReviews, postReview} from '../../store/api-actions';
+import {fetchActiveOffer, fetchReviews, postReview, fetchNearbyOffers, updateFavorite} from '../../store/api-actions';
 import {unsetActiveOfferAction} from '../../store/action';
 
 import Header from '../header/header';
@@ -19,17 +19,18 @@ import OffersMap from '../offers-map/offers-map';
 
 const OfferPage = (props) => {
   const {
-    cityOffers,
+    nearbyOffers,
     logged,
+    history,
     match,
     offer = {},
+    onFavoriteClick,
     onLoad,
     onSendForm,
     reviews = [],
     unsetActiveOffer,
   } = props;
 
-  const nearestOffers = cityOffers.slice(0, 3);
   const offerId = +match.params.id;
 
   useEffect(() => {
@@ -56,6 +57,17 @@ const OfferPage = (props) => {
     title,
     type,
   } = offer;
+
+  const handleFavoriteClick = () => {
+    if (logged === AuthorizationStatus.NO_AUTH) {
+      history.push(Routes.LOGIN);
+    } else {
+      onFavoriteClick({
+        id: offerId,
+        status: isFavorite ? FavoriteStatus.IS_NOT_FAVORITE : FavoriteStatus.IS_FAVORITE,
+      });
+    }
+  };
 
   return (
     <div className="page">
@@ -92,8 +104,9 @@ const OfferPage = (props) => {
                 <button
                   className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}`}
                   type="button"
+                  onClick={handleFavoriteClick}
                 >
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg className="property__bookmark-icon place-card__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">
@@ -174,10 +187,16 @@ const OfferPage = (props) => {
           </div>
 
           <section className="property__map map">
-            <OffersMap
-              activeOffer={offer}
-              cityOffers={nearestOffers}
-            />
+
+            {nearbyOffers
+              ?
+              <OffersMap
+                activeOffer={offer}
+                offers={nearbyOffers}
+              />
+              :
+              null}
+
           </section>
 
         </section>
@@ -185,10 +204,14 @@ const OfferPage = (props) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-            <OffersList
-              cityOffers={nearestOffers}
-              isMainPage={false}
-            />
+            {nearbyOffers
+              ?
+              <OffersList
+                cityOffers={nearbyOffers}
+                pageType={PageTypes.OFFER}
+              />
+              :
+              null}
 
           </section>
         </div>
@@ -202,11 +225,15 @@ OfferPage.propTypes = {
     PropTypes.shape(OfferPagePropTypes).isRequired,
     PropTypes.shape({}).isRequired
   ]).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   match: PropTypes.object.isRequired,
-  cityOffers: PropTypes.arrayOf(
+  nearbyOffers: PropTypes.arrayOf(
       PropTypes.shape(offerPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
   onLoad: PropTypes.func.isRequired,
   onSendForm: PropTypes.func.isRequired,
   reviews: PropTypes.arrayOf(
@@ -216,8 +243,8 @@ OfferPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cityOffers: getCityOffers(state),
   logged: getAuthorizationStatus(state),
+  nearbyOffers: getNearbyOffers(state),
   offer: getActiveOffer(state),
   reviews: getReviews(state),
 });
@@ -226,9 +253,11 @@ const mapDispatchToProps = (dispatch) => ({
   onLoad: (id) => {
     dispatch(fetchActiveOffer(id));
     dispatch(fetchReviews(id));
+    dispatch(fetchNearbyOffers(id));
   },
+  onFavoriteClick: (value) => dispatch(updateFavorite(value)),
   onSendForm: (reviewData) => dispatch(postReview(reviewData)),
-  unsetActiveOffer: () => dispatch(unsetActiveOfferAction())
+  unsetActiveOffer: () => dispatch(unsetActiveOfferAction()),
 });
 
 export {OfferPage};

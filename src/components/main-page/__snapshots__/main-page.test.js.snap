@@ -194,6 +194,7 @@ exports[`MainPage component MainPage renders correctly 1`] = `
                 },
               ]
             }
+            pageType="MAIN"
           />
         </section>
         <div
@@ -203,7 +204,7 @@ exports[`MainPage component MainPage renders correctly 1`] = `
             className="cities__map map"
           >
             <Connect(OffersMap)
-              cityOffers={
+              offers={
                 Array [
                   Object {
                     "bedrooms": 1,
