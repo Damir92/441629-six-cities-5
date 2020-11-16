@@ -66,7 +66,7 @@ exports[`OffersSorting renders correctly Render with toggle is false 1`] = `
   <select
     className="places__sorting-type visually-hidden"
     id="places-sorting"
-    onChange={[Function]}
+    readOnly={true}
     value="popular"
   >
     <option
@@ -167,7 +167,7 @@ exports[`OffersSorting renders correctly Render with toggle is true 1`] = `
   <select
     className="places__sorting-type visually-hidden"
     id="places-sorting"
-    onChange={[Function]}
+    readOnly={true}
     value="to-high"
   >
     <option

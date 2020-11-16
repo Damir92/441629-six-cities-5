@@ -6,7 +6,7 @@ import {changeCityAction, setSortingTypeAction} from '../../store/action';
 import {getCity, getSortedOffers} from '../../store/reducers/site-data/selectors';
 
 import {Cities, PageTypes} from '../../const';
-import {offerPropTypes} from '../../prop-types';
+import {OfferPropTypes} from '../../prop-types';
 
 import Header from '../header/header';
 import OffersList from '../offers-list/offers-list';
@@ -14,72 +14,69 @@ import OffersMap from '../offers-map/offers-map';
 import CitiesList from '../cities-list/cities-list';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
-const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) => {
-  return (
-    <div className="page page--gray page--main">
+const MainPage = ({city, cityOffers = [], onCityClick, onOptionClick}) =>
+  <div className="page page--gray page--main">
 
-      <Header
-        isMainPage={true}
-      />
+    <Header
+      isMainPage={true}
+    />
 
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
+    <main className="page__main page__main--index">
+      <h1 className="visually-hidden">Cities</h1>
+      <div className="tabs">
+        <section className="locations container">
 
-            <CitiesList
-              city={city}
-              onCityClick={onCityClick}
-            />
+          <CitiesList
+            city={city}
+            onCityClick={onCityClick}
+          />
 
-          </section>
-        </div>
-        <div className="cities">
-          <div className={`cities__places-container container ${cityOffers.length === 0 ? `cities__places-container--empty` : ``}`}>
+        </section>
+      </div>
+      <div className="cities">
+        <div className={`cities__places-container container ${cityOffers.length === 0 ? `cities__places-container--empty` : ``}`}>
 
-            {cityOffers.length === 0
-              ?
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property available at the moment in {city}</p>
-                </div>
-              </section>
-              :
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{cityOffers.length} places to stay in {city}</b>
+          {cityOffers.length === 0
+            ?
+            <section className="cities__no-places">
+              <div className="cities__status-wrapper tabs__content">
+                <b className="cities__status">No places to stay available</b>
+                <p className="cities__status-description">We could not find any property available at the moment in {city}</p>
+              </div>
+            </section>
+            :
+            <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">{cityOffers.length} places to stay in {city}</b>
 
-                <OffersSorting
-                  onOptionClick={onOptionClick}
-                />
+              <OffersSorting
+                onOptionClick={onOptionClick}
+              />
 
-                <OffersList
-                  cityOffers={cityOffers}
-                  pageType={PageTypes.MAIN}
-                />
+              <OffersList
+                cityOffers={cityOffers}
+                pageType={PageTypes.MAIN}
+              />
 
-              </section>
-            }
+            </section>
+          }
 
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <OffersMap
-                  offers={cityOffers}
-                />
-              </section>
-            </div>
+          <div className="cities__right-section">
+            <section className="cities__map map">
+              <OffersMap
+                offers={cityOffers}
+              />
+            </section>
           </div>
         </div>
-      </main>
-    </div>
-  );
-};
+      </div>
+    </main>
+  </div>;
 
 MainPage.propTypes = {
   city: PropTypes.oneOf(Cities).isRequired,
   cityOffers: PropTypes.arrayOf(
-      PropTypes.shape(offerPropTypes).isRequired
+      PropTypes.shape(OfferPropTypes).isRequired
   ).isRequired,
   onCityClick: PropTypes.func.isRequired,
   onOptionClick: PropTypes.func.isRequired,

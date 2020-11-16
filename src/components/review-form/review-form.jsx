@@ -6,9 +6,12 @@ import {ReviewLength} from '../../const';
 import withReviewForm from '../../hocs/with-review-form/with-review-form';
 
 const ReviewForm = ({rating, review, onChange, onSubmit}) => {
-  const checkReviewData = () => {
-    return (review.length > ReviewLength.MIN && review.length < ReviewLength.MAX && rating);
-  };
+  const checkReviewData = () =>
+    review.length > ReviewLength.MIN
+    &&
+    review.length < ReviewLength.MAX
+    &&
+    rating;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();

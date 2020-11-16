@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import {Cities} from '../../const';
 
 const CitiesList = ({city, onCityClick}) => {
+  const handleCityClick = (evt) => {
+    evt.preventDefault();
+    onCityClick(evt.currentTarget.textContent);
+  };
+
   return (
     <ul className="locations__list tabs__list">
       {Cities.map((item) => (
@@ -14,10 +19,7 @@ const CitiesList = ({city, onCityClick}) => {
           <a
             className={`locations__item-link tabs__item ${city === item ? `tabs__item--active` : ``}`}
             href="#"
-            onClick={(evt) => {
-              evt.preventDefault();
-              onCityClick(item);
-            }}
+            onClick={handleCityClick}
           >
             <span>{item}</span>
           </a>

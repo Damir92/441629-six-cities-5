@@ -44,7 +44,7 @@ const OffersSorting = ({toggle, onOptionClick, onToggleClick, sortingType}) => {
         className="places__sorting-type visually-hidden"
         id="places-sorting"
         value={sortingType}
-        onChange={() => {}}
+        readOnly
       >
         {SortingTypes.map((item) => (
           <option

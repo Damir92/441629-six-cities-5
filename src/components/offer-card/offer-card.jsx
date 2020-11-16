@@ -52,13 +52,9 @@ const OfferCard = ({logged, offer = {}, onCardEnterMouse, onFavoriteClick, pageT
 
   const history = useHistory();
 
-  const handleMouseEnterCard = () => {
-    onCardEnterMouse(offer.id);
-  };
+  const handleMouseEnterCard = () => onCardEnterMouse(offer.id);
 
-  const handleMouseLeaveCard = () => {
-    onCardEnterMouse(null);
-  };
+  const handleMouseLeaveCard = () => onCardEnterMouse(null);
 
   const handleFavoriteClick = () => {
     if (logged === AuthorizationStatus.NO_AUTH) {

@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import {Cities, PageTypes, Routes} from '../../const';
-import {offerPropTypes} from '../../prop-types';
+import {OfferPropTypes} from '../../prop-types';
 
 import {fetchFavorite} from '../../store/api-actions';
 import {changeCityAction} from '../../store/action';
@@ -18,9 +18,7 @@ const FavoritesPage = ({favoriteOffers = [], onLoad, onCityClick}) => {
     onLoad();
   }, []);
 
-  const getCityOffers = (city) => {
-    return favoriteOffers.filter((item) => item.city && item.city.name === city);
-  };
+  const getCityOffers = (city) => favoriteOffers.filter((item) => item.city && item.city.name === city);
 
   return (
     <div className="page">
@@ -89,7 +87,7 @@ const FavoritesPage = ({favoriteOffers = [], onLoad, onCityClick}) => {
 FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.oneOfType([
     PropTypes.arrayOf(
-        PropTypes.shape(offerPropTypes).isRequired
+        PropTypes.shape(OfferPropTypes).isRequired
     ).isRequired,
     PropTypes.array
   ]).isRequired,

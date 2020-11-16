@@ -5,20 +5,17 @@ import PropTypes from 'prop-types';
 
 import {getAuthorizationStatus} from '../../store/reducers/user/selectors';
 
-const PrivateRoute = ({conditionValue, path, render, redirectTo, authorizationStatus}) => {
-  return (
-    <Route
-      path={path}
-      render={(routeProps) => {
-        return (
-          authorizationStatus === conditionValue
-            ? render(routeProps)
-            : <Redirect to={redirectTo} />
-        );
-      }}
-    />
-  );
-};
+const PrivateRoute = ({conditionValue, path, render, redirectTo, authorizationStatus}) =>
+  <Route
+    path={path}
+    render={(routeProps) => {
+      return (
+        authorizationStatus === conditionValue
+          ? render(routeProps)
+          : <Redirect to={redirectTo} />
+      );
+    }}
+  />;
 
 PrivateRoute.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
