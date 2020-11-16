@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import {Cities} from '../../const';
 import {noop} from '../../mocks/tests-data';
@@ -10,7 +10,7 @@ describe(`CitiesList component tests correctly`, () => {
   it(`Active city is highlighted`, () => {
     const ID = 2;
 
-    const wrapper = shallow(
+    const wrapper = mount(
         <CitiesList
           city={Cities[ID]}
           onCityClick={noop}
@@ -29,7 +29,7 @@ describe(`CitiesList component tests correctly`, () => {
     const ID2 = 2;
     const handleClick = jest.fn((value) => value);
 
-    const wrapper = shallow(
+    const wrapper = mount(
         <CitiesList
           city={Cities[0]}
           onCityClick={handleClick}

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import {offerPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-types';
+import {OfferPropTypes, OfferPagePropTypes, ReviewPropTypes} from '../../prop-types';
 import {AuthorizationStatus, FavoriteStatus, LivingType, PageTypes, Routes} from '../../const';
 import {convertRatingToPercent} from '../../utils';
 
@@ -33,15 +33,9 @@ const OfferPage = (props) => {
 
   const offerId = +match.params.id;
 
-  useEffect(() => {
-    return () => {
-      unsetActiveOffer();
-    };
-  }, []);
+  useEffect(() => () => unsetActiveOffer(), []);
 
-  useEffect(() => {
-    onLoad(offerId);
-  }, [match.params.id]);
+  useEffect(() => onLoad(offerId), [match.params.id]);
 
   const {
     bedrooms,
@@ -230,7 +224,7 @@ OfferPage.propTypes = {
   }).isRequired,
   match: PropTypes.object.isRequired,
   nearbyOffers: PropTypes.arrayOf(
-      PropTypes.shape(offerPropTypes).isRequired
+      PropTypes.shape(OfferPropTypes).isRequired
   ).isRequired,
   logged: PropTypes.oneOf([AuthorizationStatus.AUTH, AuthorizationStatus.NO_AUTH]).isRequired,
   onFavoriteClick: PropTypes.func.isRequired,

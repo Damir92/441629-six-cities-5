@@ -5,7 +5,7 @@ import leaflet from 'leaflet';
 
 import {getActiveCard} from '../../store/reducers/site-data/selectors';
 
-import {OfferPagePropTypes, offerPropTypes} from '../../prop-types';
+import {OfferPagePropTypes, OfferPropTypes} from '../../prop-types';
 
 const OffersMap = ({offers = [], activeCard, activeOffer = {}}) => {
   const LeafletIcon = leaflet.Icon.extend({
@@ -55,7 +55,7 @@ const OffersMap = ({offers = [], activeCard, activeOffer = {}}) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (mapRef.current) {
         mapRef.current.off();
@@ -116,7 +116,7 @@ OffersMap.propTypes = {
     PropTypes.shape({}).isRequired
   ]),
   offers: PropTypes.arrayOf(
-      PropTypes.shape(offerPropTypes).isRequired
+      PropTypes.shape(OfferPropTypes).isRequired
   ).isRequired,
 };
 

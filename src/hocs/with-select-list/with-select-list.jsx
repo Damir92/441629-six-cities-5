@@ -9,9 +9,7 @@ const withSelectList = (Component) => {
 
     const [openedList, setOpenedList] = useState(false);
 
-    const handleOpenList = () => {
-      setOpenedList((prev) => !prev);
-    };
+    const handleOpenList = () => setOpenedList((prev) => !prev);
 
     const handleOptionClick = (value) => {
       onOptionClick(value);

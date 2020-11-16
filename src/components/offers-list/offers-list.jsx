@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {PageTypes} from '../../const';
 
-import {offerPropTypes} from '../../prop-types';
+import {OfferPropTypes} from '../../prop-types';
 
 import OfferCard from '../offer-card/offer-card';
 
@@ -36,7 +36,7 @@ const OffersList = ({cityOffers = [], pageType}) => {
 
 OffersList.propTypes = {
   cityOffers: PropTypes.arrayOf(
-      PropTypes.shape(offerPropTypes).isRequired
+      PropTypes.shape(OfferPropTypes).isRequired
   ).isRequired,
   pageType: PropTypes.oneOf([PageTypes.MAIN, PageTypes.OFFER, PageTypes.FAVORITES]).isRequired,
 };

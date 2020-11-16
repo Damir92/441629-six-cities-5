@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import {Cities, LivingType} from './const';
 
-export const offerPropTypes = {
+export const OfferPropTypes = {
   bedrooms: PropTypes.number.isRequired,
   city: PropTypes.shape({
     name: PropTypes.oneOf(Cities).isRequired,

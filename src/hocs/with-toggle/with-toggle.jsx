@@ -9,9 +9,7 @@ const withToggle = (Component) => {
 
     const [toggle, setToggle] = useState(toggleState);
 
-    const handleToggleClick = () => {
-      setToggle((prev) => !prev);
-    };
+    const handleToggleClick = () => setToggle((prev) => !prev);
 
     return (
       <Component

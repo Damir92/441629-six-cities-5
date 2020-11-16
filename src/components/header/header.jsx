@@ -7,63 +7,60 @@ import {getAuthorizationStatus, getUserData} from '../../store/reducers/user/sel
 
 import {Routes, AuthorizationStatus} from '../../const';
 
-const Header = ({logged, isMainPage, userData}) => {
-  return (
-    <header className="header">
-      <div className="container">
-        <div className="header__wrapper">
-          <div className="header__left">
+const Header = ({logged, isMainPage, userData}) =>
+  <header className="header">
+    <div className="container">
+      <div className="header__wrapper">
+        <div className="header__left">
 
-            {isMainPage
-              ?
-              <a
-                className="header__logo-link header__logo-link--active"
-              >
-                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
-              :
-              <Link
-                className="header__logo-link"
-                to={Routes.MAIN}
-              >
-                <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </Link>
-            }
+          {isMainPage
+            ?
+            <a
+              className="header__logo-link header__logo-link--active"
+            >
+              <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
+            </a>
+            :
+            <Link
+              className="header__logo-link"
+              to={Routes.MAIN}
+            >
+              <img className="header__logo" src="/img/logo.svg" alt="6 cities logo" width="81" height="41" />
+            </Link>
+          }
 
-          </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-
-                <Link
-                  className="header__nav-link header__nav-link--profile"
-                  to={
-                    logged === AuthorizationStatus.AUTH
-                      ?
-                      Routes.FAVORITES
-                      :
-                      Routes.LOGIN
-                  }
-                >
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  {logged === AuthorizationStatus.AUTH
-                    ?
-                    <span className="header__user-name user__name">
-                      {userData && userData.email}
-                    </span>
-                    :
-                    <span className="header__login">Sign in</span>
-                  }
-                </Link>
-
-              </li>
-            </ul>
-          </nav>
         </div>
+        <nav className="header__nav">
+          <ul className="header__nav-list">
+            <li className="header__nav-item user">
+
+              <Link
+                className="header__nav-link header__nav-link--profile"
+                to={
+                  logged === AuthorizationStatus.AUTH
+                    ?
+                    Routes.FAVORITES
+                    :
+                    Routes.LOGIN
+                }
+              >
+                <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                {logged === AuthorizationStatus.AUTH
+                  ?
+                  <span className="header__user-name user__name">
+                    {userData && userData.email}
+                  </span>
+                  :
+                  <span className="header__login">Sign in</span>
+                }
+              </Link>
+
+            </li>
+          </ul>
+        </nav>
       </div>
-    </header>
-  );
-};
+    </div>
+  </header>;
 
 Header.propTypes = {
   isMainPage: PropTypes.bool,

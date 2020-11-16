@@ -11,31 +11,28 @@ import PrivateRoute from '../private-route/private-route';
 
 import browserHistory from '../../browser-history';
 
-const App = () => {
-  return (
-    <Router history={browserHistory}>
-      <Switch>
-        <Route exact path={Routes.MAIN} component={MainPage} />
-        <PrivateRoute
-          path={Routes.FAVORITES}
-          render={(props) => <FavoritesPage {...props} />}
-          redirectTo={Routes.LOGIN}
-          conditionValue={AuthorizationStatus.AUTH}
-        />
-        <PrivateRoute
-          path={Routes.LOGIN}
-          render={(props) => <AuthPage {...props} />}
-          redirectTo={Routes.MAIN}
-          conditionValue={AuthorizationStatus.NO_AUTH}
-        />
-        <Route
-          exact
-          path={Routes.OFFER_PAGE}
-          component={OfferPage}
-        />
-      </Switch>
-    </Router>
-  );
-};
+const App = () =>
+  <Router history={browserHistory}>
+    <Switch>
+      <Route exact path={Routes.MAIN} component={MainPage} />
+      <PrivateRoute
+        path={Routes.FAVORITES}
+        render={(props) => <FavoritesPage {...props} />}
+        redirectTo={Routes.LOGIN}
+        conditionValue={AuthorizationStatus.AUTH}
+      />
+      <PrivateRoute
+        path={Routes.LOGIN}
+        render={(props) => <AuthPage {...props} />}
+        redirectTo={Routes.MAIN}
+        conditionValue={AuthorizationStatus.NO_AUTH}
+      />
+      <Route
+        exact
+        path={Routes.OFFER_PAGE}
+        component={OfferPage}
+      />
+    </Switch>
+  </Router>;
 
 export default App;

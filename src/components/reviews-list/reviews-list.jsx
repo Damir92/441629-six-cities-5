@@ -5,18 +5,15 @@ import {ReviewPropTypes} from '../../prop-types';
 
 import ReviewItem from '../review-item/review-item';
 
-const ReviewsList = ({reviews = []}) => {
-  return (
-    <ul className="reviews__list">
-      {reviews.map((item) => (
-        <ReviewItem
-          key={item.id}
-          review={item}
-        />
-      ))}
-    </ul>
-  );
-};
+const ReviewsList = ({reviews = []}) =>
+  <ul className="reviews__list">
+    {reviews.map((item) => (
+      <ReviewItem
+        key={item.id}
+        review={item}
+      />
+    ))}
+  </ul>;
 
 ReviewsList.propTypes = {
   reviews: PropTypes.arrayOf(
